@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
+using STIVE.ViewModels;
 
 namespace STIVE
 {
@@ -13,5 +15,22 @@ namespace STIVE
 	/// </summary>
 	public partial class App : Application
 	{
+		protected override void OnStartup(StartupEventArgs e)
+		{
+			IServiceProvider serviceProvider = CreateServiceProvider();
+
+			Window window = serviceProvider.GetRequiredService<MainWindow>();
+			window.Show();
+			base.OnStartup(e);
+		}
+		private IServiceProvider CreateServiceProvider()
+		{
+			IServiceCollection services = new ServiceCollection();
+
+			services.AddScoped<MainWindowViewModel>();
+			services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainWindowViewModel>()));
+
+			return services.BuildServiceProvider();
+		}
 	}
 }

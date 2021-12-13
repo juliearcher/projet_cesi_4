@@ -1,8 +1,7 @@
 ﻿<Application x:Class="STIVE.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:STIVE"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:STIVE">
     <Application.Resources>
          
     </Application.Resources>
