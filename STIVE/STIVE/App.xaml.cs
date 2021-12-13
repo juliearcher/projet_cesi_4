@@ -40,6 +40,7 @@ namespace STIVE
 			services.AddSingleton<IApiServicesCollection, ApiServicesCollection>();
 
 			services.AddScoped<IViewModelTabFactory<CustomerTabViewModel>, CustomerTabViewModelFactory>();
+			services.AddScoped<IViewModelListFactory<CustomerListViewModel>, CustomerListViewModelFactory>();
 			services.AddScoped<IViewModelTabFactory<SupplierTabViewModel>, SupplierTabViewModelFactory>();
 			services.AddScoped<IViewModelAbstractFactory, ViewModelAbstractFactory>();
 

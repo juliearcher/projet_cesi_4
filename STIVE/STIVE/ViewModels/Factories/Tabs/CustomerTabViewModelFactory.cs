@@ -9,9 +9,16 @@ namespace STIVE.ViewModels.Factories
 {
 	public class CustomerTabViewModelFactory : IViewModelTabFactory<CustomerTabViewModel>
 	{
+		private IViewModelListFactory<CustomerListViewModel> _customerListViewModelFactory;
+
+		public CustomerTabViewModelFactory(IViewModelListFactory<CustomerListViewModel> customerListViewModelFactory)
+		{
+			_customerListViewModelFactory = customerListViewModelFactory;
+		}
+
 		public CustomerTabViewModel CreateViewModel(IViewModelAbstractFactory factory)
 		{
-			return new CustomerTabViewModel();
+			return new CustomerTabViewModel(_customerListViewModelFactory.CreateViewModel(factory));
 		}
 	}
 }
