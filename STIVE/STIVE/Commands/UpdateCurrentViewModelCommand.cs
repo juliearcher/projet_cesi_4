@@ -1,4 +1,5 @@
 ﻿using STIVE.Navigators;
+using STIVE.ViewModels.Factories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace STIVE.Commands
 		public event EventHandler CanExecuteChanged;
 
 		private INavigator _navigator;
+		private readonly IViewModelAbstractFactory _viewModelFactory;
 
-		public UpdateCurrentViewModelCommand(INavigator navigator)
+		public UpdateCurrentViewModelCommand(INavigator navigator, IViewModelAbstractFactory viewModelFactory)
 		{
 			_navigator = navigator;
+			_viewModelFactory = viewModelFactory;
 		}
 
 		public bool CanExecute(object parameter)
@@ -29,7 +32,7 @@ namespace STIVE.Commands
 			if (parameter is ViewType)
 			{
 				ViewType viewType = (ViewType)parameter;
-				// TODO change _navigator.CurrentViewModel;
+				_navigator.CurrentViewModel = _viewModelFactory.CreateTabViewModel(viewType);
 			}
 		}
 	}

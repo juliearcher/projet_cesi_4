@@ -1,6 +1,7 @@
 ﻿using STIVE.Commands;
 using STIVE.Models;
 using STIVE.ViewModels;
+using STIVE.ViewModels.Factories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,9 +29,9 @@ namespace STIVE.Navigators
 
 		public ICommand UpdateCurrentViewModelCommand { get; set; }
 
-		public Navigator()
+		public Navigator(IViewModelAbstractFactory viewModelFactory)
 		{
-			UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(this);
+			UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(this, viewModelFactory);
 		}
 	}
 }

@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using STIVE.Navigators;
 using STIVE.PrepAPI.Services;
 using STIVE.ViewModels;
+using STIVE.ViewModels.Factories;
 
 namespace STIVE
 {
@@ -36,6 +37,11 @@ namespace STIVE
 			services.AddSingleton<IOrderService, OrderService>();
 			services.AddSingleton<IPurchaseOrderService, PurchaseOrderService>();
 			services.AddSingleton<ISupplierService, SupplierService>();
+			services.AddSingleton<IApiServicesCollection, ApiServicesCollection>();
+
+			services.AddScoped<IViewModelTabFactory<CustomerTabViewModel>, CustomerTabViewModelFactory>();
+			services.AddScoped<IViewModelTabFactory<SupplierTabViewModel>, SupplierTabViewModelFactory>();
+			services.AddScoped<IViewModelAbstractFactory, ViewModelAbstractFactory>();
 
 			services.AddScoped<INavigator, Navigator>();
 			services.AddScoped<MainWindowViewModel>();

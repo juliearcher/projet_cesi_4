@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:STIVE.Controls"
 			 xmlns:nav="clr-namespace:STIVE.Navigators"
+			 xmlns:viewmodels="clr-namespace:STIVE.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+	
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>
@@ -25,7 +27,7 @@
 			</Grid.ColumnDefinitions>
 
 			<RadioButton Grid.Column="0" Content="Clients"
-						  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.CustomerTab}"/>
+						 Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.CustomerTab}"/>
 			<RadioButton Grid.Column="1" Content="Commandes client"
 						  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.OrderTab}"/>
 
