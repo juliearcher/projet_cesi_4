@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:STIVE"
+		xmlns:controls="clr-namespace:STIVE.Controls"
         mc:Ignorable="d"
         Title="STIVE" Height="450" Width="800">
-    <Grid>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
 
-    </Grid>
+		<controls:NavigationBar Grid.Row="0"  DataContext="{Binding Navigator}"/>
+	</Grid>
 </Window>

@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Navigators\" />
-    <Folder Include="Commands\" />
-    <Folder Include="Controls\" />
     <Folder Include="Styles\" />
     <Folder Include="Views\" />
   </ItemGroup>

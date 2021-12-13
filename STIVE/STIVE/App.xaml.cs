@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using STIVE.Navigators;
 using STIVE.ViewModels;
 
 namespace STIVE
@@ -27,6 +28,8 @@ namespace STIVE
 		{
 			IServiceCollection services = new ServiceCollection();
 
+
+			services.AddScoped<INavigator, Navigator>();
 			services.AddScoped<MainWindowViewModel>();
 			services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainWindowViewModel>()));
 
