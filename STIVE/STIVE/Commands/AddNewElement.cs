@@ -29,6 +29,7 @@ namespace STIVE.Commands
 		public void Execute(object parameter)
 		{
 			Window window = new Window();
+			
 			if (_viewModel is CustomerListViewModel)
 				window.Content = _viewModel.ViewModelFactory.CreateFormViewModel(_viewModel, FormViewType.CustomerForm, _viewModel.SelectedItem);
 			else

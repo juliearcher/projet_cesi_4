@@ -13,8 +13,8 @@ namespace STIVE.Profiles
 	{
 		public DataErrorProfile()
 		{
-			CreateMap<ApiModelBase, DataErrorModelBase>();
-			CreateMap<Customer, CustomerDataError>();
+			CreateMap<ApiModelBase, DataErrorModelBase>().ReverseMap();
+			CreateMap<Customer, CustomerDataError>().ReverseMap();
 		}
 	}
 }

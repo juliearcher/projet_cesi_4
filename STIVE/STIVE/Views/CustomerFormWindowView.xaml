@@ -7,78 +7,138 @@
 			 xmlns:controls="clr-namespace:STIVE.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-		<TextBlock Grid.Row="0" Text="Formulaire nouveau client" FontWeight="Bold" FontSize="18"
+
+	<UserControl.Resources>
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+	</UserControl.Resources>
+
+
+	<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<TextBlock Grid.Row="0" Text="Formulaire nouveau client" FontWeight="Bold" FontSize="18"
                    HorizontalAlignment="Center" VerticalAlignment="Center" />
-		<controls:SaveAndCloseButtons Grid.Row="0"/>
-		<DockPanel Grid.Row="1">
-			<Label Content="Code : " DockPanel.Dock="Left" />
-			<TextBox Text="{Binding NewElem.Code, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"  TextChanged="TextBox_TextChanged"  />
-		</DockPanel>
-		<DockPanel Grid.Row="2">
-			<Label Content="Nom : " DockPanel.Dock="Left" />
-			<TextBox Text="{Binding NewElem.Name, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
-		</DockPanel>
-		<DockPanel Grid.Row="3">
-			<Label Content="Civilité : " DockPanel.Dock="Left" />
-			<TextBox Text="{Binding NewElem.Civility, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
-		</DockPanel>
+			<controls:SaveAndCloseButtons Grid.Row="0"/>
+			<DockPanel Grid.Row="1">
+				<Label Content="Code : " DockPanel.Dock="Left" />
+				<TextBox Text="{Binding NewElem.Code, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"  TextChanged="TextBox_TextChanged"  />
+			</DockPanel>
+			<DockPanel Grid.Row="2">
+				<Label Content="Nom : " DockPanel.Dock="Left" />
+				<TextBox Text="{Binding NewElem.Name, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+			</DockPanel>
+			<DockPanel Grid.Row="3">
+				<Label Content="Civilité : " DockPanel.Dock="Left" />
+				<TextBox Text="{Binding NewElem.Civility, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+			</DockPanel>
 
-		<DockPanel Grid.Row="4">
-			<Label Content="Notes : " DockPanel.Dock="Left" />
-			<TextBox MinLines="3" Text="{Binding NewElem.Notes, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
-		</DockPanel>
+			<DockPanel Grid.Row="4">
+				<Label Content="Notes : " DockPanel.Dock="Left" />
+				<TextBox MinLines="3" Text="{Binding NewElem.Notes, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+			</DockPanel>
 
-		<DockPanel Grid.Row="5">
-			<Label Content="Adresse de facturation : " DockPanel.Dock="Left" />
-			<TextBox Text="{Binding NewElem.InvoicingAddress_Address1, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
-		</DockPanel>
+			<DockPanel Grid.Row="5">
+				<Label Content="Nom (facturation) : " DockPanel.Dock="Left" />
+				<TextBox Text="{Binding NewElem.InvoicingContact_Name, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+			</DockPanel>
+			<DockPanel Grid.Row="6">
+				<Label Content="Prénom (facturation) : " DockPanel.Dock="Left" />
+				<TextBox Text="{Binding NewElem.InvoicingContact_FirstName, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+			</DockPanel>
+			<DockPanel Grid.Row="7">
+				<Label Content="Adresse (facturation) : " DockPanel.Dock="Left" />
+				<TextBox Text="{Binding NewElem.InvoicingAddress_Address1, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+			</DockPanel>
+			<DockPanel Grid.Row="8">
+				<Label Content="Ville (facturation) : " DockPanel.Dock="Left" />
+				<TextBox Text="{Binding NewElem.InvoicingAddress_City, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+			</DockPanel>
+			<DockPanel Grid.Row="9">
+				<Label Content="Code Postal (facturation) : " DockPanel.Dock="Left" />
+				<TextBox Text="{Binding NewElem.InvoicingAddress_ZipCode, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+			</DockPanel>
+			<DockPanel Grid.Row="10">
+				<Label Content="Téléphone fixe (facturation) : " DockPanel.Dock="Left" />
+				<TextBox Text="{Binding NewElem.InvoicingContact_Phone, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+			</DockPanel>
+			<DockPanel Grid.Row="11">
+				<Label Content="Téléphone portable (facturation) : " DockPanel.Dock="Left" />
+				<TextBox Text="{Binding NewElem.InvoicingContact_CellPhone, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+			</DockPanel>
+			<DockPanel Grid.Row="12">
+				<Label Content="E-mail (facturation) : " DockPanel.Dock="Left" />
+				<TextBox Text="{Binding NewElem.InvoicingContact_Email, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+			</DockPanel>
 
-		<DockPanel Grid.Row="6">
-			<Label Content="Ville de facturation : " DockPanel.Dock="Left" />
-			<TextBox Text="{Binding NewElem.InvoicingAddress_City, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
-		</DockPanel>
+			<DockPanel Grid.Row="13">
+				<Label Content="Informations de livraison identiques aux informations de facturation: " DockPanel.Dock="Left" />
+				<CheckBox IsChecked="{Binding DeliverySameAsInvoicing}" />
+			</DockPanel>
 
-		<DockPanel Grid.Row="7">
-			<Label Content="Code Postal de facturation : " DockPanel.Dock="Left" />
-			<TextBox Text="{Binding NewElem.InvoicingAddress_ZipCode, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
-		</DockPanel>
+			<Grid Grid.Row="14"  Visibility="{Binding ShowDeliveryInfos, Converter={StaticResource BooleanToVisibilityConverter}}" >
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
 
-		<DockPanel Grid.Row="8">
-			<Label Content="Nom (facturation) : " DockPanel.Dock="Left" />
-			<TextBox Text="{Binding NewElem.InvoicingContact_Name, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
-		</DockPanel>
-		<DockPanel Grid.Row="9">
-			<Label Content="Prénom (facturation) : " DockPanel.Dock="Left" />
-			<TextBox Text="{Binding NewElem.InvoicingContact_FirstName, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
-		</DockPanel>
-		<DockPanel Grid.Row="10">
-			<Label Content="Téléphone fixe (facturation) : " DockPanel.Dock="Left" />
-			<TextBox Text="{Binding NewElem.InvoicingContact_Phone, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
-		</DockPanel>
-		<DockPanel Grid.Row="11">
-			<Label Content="Téléphone portable (facturation) : " DockPanel.Dock="Left" />
-			<TextBox Text="{Binding NewElem.InvoicingContact_CellPhone, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
-		</DockPanel>
-		<DockPanel Grid.Row="12">
-			<Label Content="E-mail (facturation) : " DockPanel.Dock="Left" />
-			<TextBox Text="{Binding NewElem.InvoicingContact_Email, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
-		</DockPanel>
-	</Grid>
+				<DockPanel Grid.Row="0">
+					<Label Content="Nom (livraison) : " DockPanel.Dock="Left" />
+					<TextBox Text="{Binding NewElem.DeliveryContact_Name, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+				</DockPanel>
+				<DockPanel Grid.Row="1">
+					<Label Content="Prénom (livraison) : " DockPanel.Dock="Left" />
+					<TextBox Text="{Binding NewElem.DeliveryContact_FirstName, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+				</DockPanel>
+				<DockPanel Grid.Row="2">
+					<Label Content="Adresse (livraison) : " DockPanel.Dock="Left" />
+					<TextBox Text="{Binding NewElem.DeliveryAddress_Address1, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+				</DockPanel>
+
+				<DockPanel Grid.Row="3">
+					<Label Content="Ville (livraison) : " DockPanel.Dock="Left" />
+					<TextBox Text="{Binding NewElem.DeliveryAddress_City, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+				</DockPanel>
+				<DockPanel Grid.Row="4">
+					<Label Content="Code Postal (livraison) : " DockPanel.Dock="Left" />
+					<TextBox Text="{Binding NewElem.DeliveryAddress_ZipCode, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+				</DockPanel>
+				<DockPanel Grid.Row="5">
+					<Label Content="Téléphone fixe (livraison) : " DockPanel.Dock="Left" />
+					<TextBox Text="{Binding NewElem.DeliveryContact_Phone, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+				</DockPanel>
+				<DockPanel Grid.Row="6">
+					<Label Content="Téléphone portable (livraison) : " DockPanel.Dock="Left" />
+					<TextBox Text="{Binding NewElem.DeliveryContact_CellPhone, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+				</DockPanel>
+				<DockPanel Grid.Row="7">
+					<Label Content="E-mail (livraison) : " DockPanel.Dock="Left" />
+					<TextBox Text="{Binding NewElem.DeliveryContact_Email, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+				</DockPanel>
+			</Grid>
+		</Grid>
+	</ScrollViewer>
 </UserControl>

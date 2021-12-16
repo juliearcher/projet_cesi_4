@@ -19,7 +19,6 @@ namespace STIVE.ViewModels
 		protected EditMode _mode = EditMode.UPDATE;
 
 		protected IApiServicesCollection _apiServicesCollection;
-		protected ListViewModelBase _listViewModel;
 		protected IMapper _mapper;
 
 		protected ApiModelBase _oldElem;

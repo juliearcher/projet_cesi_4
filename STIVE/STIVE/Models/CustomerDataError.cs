@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -450,5 +451,35 @@ namespace STIVE.Models
 		public DateTime SysModifiedDate { get; set; }
 		public string CreatedUser { get; set; }
 		public string ModifiedUser { get; set; }
+
+		public CustomerDataError(Customer customer = null)
+		{
+			if (customer != null)
+			{
+				Code = customer.Code;
+				Name = customer.Name;
+				Civility = customer.Civility;
+				Notes = customer.Notes;
+				NotesClear = customer.NotesClear;
+				InvoicingAddress_Address1 = customer.InvoicingAddress_Address1;
+				InvoicingAddress_City = customer.InvoicingAddress_City;
+				InvoicingAddress_ZipCode = customer.InvoicingAddress_ZipCode;
+				InvoicingContact_Civility = customer.InvoicingContact_Civility;
+				InvoicingContact_Name = customer.InvoicingContact_Name;
+				InvoicingContact_FirstName = customer.InvoicingContact_FirstName;
+				InvoicingContact_Email = customer.InvoicingContact_Email;
+				InvoicingContact_Phone = customer.InvoicingContact_Phone;
+				InvoicingContact_CellPhone = customer.InvoicingContact_CellPhone;
+				DeliveryAddress_Address1 = customer.DeliveryAddress_Address1;
+				DeliveryAddress_City = customer.DeliveryAddress_City;
+				DeliveryAddress_ZipCode = customer.DeliveryAddress_ZipCode;
+				DeliveryContact_Civility = customer.DeliveryContact_Civility;
+				DeliveryContact_Name = customer.DeliveryContact_Name;
+				DeliveryContact_FirstName = customer.DeliveryContact_FirstName;
+				DeliveryContact_Email = customer.DeliveryContact_Email;
+				DeliveryContact_Phone = customer.DeliveryContact_Phone;
+				DeliveryContact_CellPhone = customer.DeliveryContact_CellPhone;
+			}
+		}
 	}
 }
