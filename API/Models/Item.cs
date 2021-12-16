@@ -47,7 +47,8 @@ namespace API.Models
 		public System.Nullable<int> ItemFamilyId { get; set; }
 		public virtual ItemFamily ItemFamily { get; set; }
 
-		public System.Nullable<int> SupplierId { get; set; }
+		[Required]
+		public int SupplierId { get; set; }
 		public virtual Supplier Supplier { get; set; }
 
 		[ForeignKey("ItemId")]

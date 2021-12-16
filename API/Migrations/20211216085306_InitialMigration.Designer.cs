@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20211209102505_InitialMigration")]
+    [Migration("20211216085306_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -306,7 +306,7 @@ namespace API.Migrations
                         .HasColumnType("money")
                         .HasDefaultValue(0m);
 
-                    b.Property<int?>("SupplierId")
+                    b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("SysCreatedDate")
@@ -882,7 +882,9 @@ namespace API.Migrations
 
                     b.HasOne("API.Models.Supplier", "Supplier")
                         .WithMany("Items")
-                        .HasForeignKey("SupplierId");
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ItemFamily");
 

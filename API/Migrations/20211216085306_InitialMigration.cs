@@ -184,7 +184,7 @@ namespace API.Migrations
                     PurchasePrice = table.Column<decimal>(type: "money", nullable: false, defaultValue: 0m),
                     Vat = table.Column<float>(type: "real", nullable: false),
                     ItemFamilyId = table.Column<int>(type: "int", nullable: true),
-                    SupplierId = table.Column<int>(type: "int", nullable: true),
+                    SupplierId = table.Column<int>(type: "int", nullable: false),
                     SysCreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SysModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedUser = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
@@ -204,7 +204,7 @@ namespace API.Migrations
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
