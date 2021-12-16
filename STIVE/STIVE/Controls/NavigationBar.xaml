@@ -33,7 +33,7 @@
 
 			<RadioButton Grid.Column="3" Content="Articles"
 						 Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.ItemTab}"/>
-			<RadioButton Grid.Column="4" Content="Familles Suppr ou pas ?"/>
+			<RadioButton Grid.Column="4" Content="Familles Article"/>
 			<RadioButton Grid.Column="5" Content="Inventaires"
 						 Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.InventoryTab}"/>
 
