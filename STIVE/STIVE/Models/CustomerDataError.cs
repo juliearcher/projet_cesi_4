@@ -479,6 +479,11 @@ namespace STIVE.Models
 				DeliveryContact_Email = customer.DeliveryContact_Email;
 				DeliveryContact_Phone = customer.DeliveryContact_Phone;
 				DeliveryContact_CellPhone = customer.DeliveryContact_CellPhone;
+				Id = customer.Id;
+				SysCreatedDate = customer.SysCreatedDate;
+				SysModifiedDate = customer.SysModifiedDate;
+				CreatedUser = customer.CreatedUser;
+				ModifiedUser = customer.ModifiedUser;
 			}
 		}
 	}

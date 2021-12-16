@@ -56,16 +56,9 @@ namespace STIVE.ViewModels
 			}
 		}
 
-		public ICommand AddNewElement
-		{
-			get
-			{
-				SelectedItem = null;
-				return new AddNewElement(this);
-			}
-		}
+		public ICommand AddNewElement => new AddNewElement(this, Commands.AddNewElement.Mode.CREATE);
 
-		public ICommand UpdateElement => new AddNewElement(this);
+		public ICommand UpdateElement => new AddNewElement(this, Commands.AddNewElement.Mode.UPDATE);
 
 		public ICommand DeleteElement => new DeleteElement(this);
 
