@@ -49,7 +49,8 @@ namespace STIVE.ViewModels
 				if (_searchFilter != value)
 				{
 					_searchFilter = value.ToLower();
-					ElementsList = _initialList.Where(Predicate);
+					if (ElementsList != null && _initialList != null & Predicate != null)
+						ElementsList = _initialList.Where(Predicate);
 					OnPropertyChanged(nameof(SearchFilter));
 				}
 			}

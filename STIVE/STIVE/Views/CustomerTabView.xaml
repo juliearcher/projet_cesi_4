@@ -10,9 +10,11 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<controls:AddUpdateDeleteButtons Grid.Row="0" DataContext="{Binding CustomerListViewModel}"/>
-		<controls:CustomerList Grid.Row="1" DataContext="{Binding CustomerListViewModel}"/>
+		<controls:SearchBox Grid.Row="1" DataContext="{Binding CustomerListViewModel}"/>
+		<controls:CustomerList Grid.Row="2" DataContext="{Binding CustomerListViewModel}"/>
 	</Grid>
 </UserControl>
