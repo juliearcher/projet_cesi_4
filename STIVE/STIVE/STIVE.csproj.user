@@ -28,6 +28,18 @@
     <Compile Update="Views\CustomerTabView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\InventoryTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ItemFamilyTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OrderTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\PurchaseOrderTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\SupplierTabView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -55,6 +67,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CustomerTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\InventoryTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ItemFamilyTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OrderTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\PurchaseOrderTabView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SupplierTabView.xaml">

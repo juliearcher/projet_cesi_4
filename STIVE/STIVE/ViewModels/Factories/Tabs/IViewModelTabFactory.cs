@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace STIVE.ViewModels.Factories
 {
-	public interface IViewModelTabFactory<T> where T : ViewModelBase
+	public interface IViewModelTabFactory<T> where T : TabViewModelBase
 	{
 		T CreateViewModel(IViewModelAbstractFactory factory);
 	}

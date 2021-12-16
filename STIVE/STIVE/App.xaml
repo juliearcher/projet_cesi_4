@@ -9,9 +9,23 @@
 		<DataTemplate DataType="{x:Type viewmodels:CustomerTabViewModel}">
 			<views:CustomerTabView/>
 		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:InventoryTabViewModel}">
+			<views:InventoryTabView/>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:ItemFamilyTabViewModel}">
+			<views:ItemFamilyTabView/>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:OrderTabViewModel}">
+			<views:OrderTabView/>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:PurchaseOrderTabViewModel}">
+			<views:PurchaseOrderTabView/>
+		</DataTemplate>
 		<DataTemplate DataType="{x:Type viewmodels:SupplierTabViewModel}">
 			<views:SupplierTabView/>
 		</DataTemplate>
+		
+		
 		<DataTemplate DataType="{x:Type viewmodels:CustomerFormViewModel}">
 			<views:CustomerFormWindowView/>
 		</DataTemplate>
