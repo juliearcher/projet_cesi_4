@@ -45,6 +45,7 @@ namespace API.Controllers
 			// TODO check if infos are valid
 			var orderModel = _mapper.Map<Order>(orderCreateDto);
 			_unitOfWork.OrderRepository.Add(orderModel);
+			UpdateItemStock(orderModel.OrderLines, orderModel.DocumentState);
 			_unitOfWork.SaveChanges();
 			var orderReadDto = _mapper.Map<OrderReadDto>(orderModel);
 			return CreatedAtRoute(nameof(GetOrderById), new { Id = orderReadDto.Id }, orderReadDto);
@@ -58,8 +59,10 @@ namespace API.Controllers
 			var order = _unitOfWork.OrderRepository.GetSingle(id);
 			if (order == null)
 				return NotFound();
+			RemoveItemStock(order.OrderLines, order.DocumentState);
 			_mapper.Map(orderUpdateDto, order);
 			_unitOfWork.OrderRepository.Update(order);
+			UpdateItemStock(order.OrderLines, order.DocumentState);
 			_unitOfWork.SaveChanges();
 			return NoContent();
 		}
@@ -72,12 +75,14 @@ namespace API.Controllers
 			var order = _unitOfWork.OrderRepository.GetSingle(id);
 			if (order == null)
 				return NotFound();
+			RemoveItemStock(order.OrderLines, order.DocumentState);
 			var orderUpdateDto = _mapper.Map<OrderUpdateDto>(order);
 			patchDocument.ApplyTo(orderUpdateDto, ModelState);
 			if (!TryValidateModel(orderUpdateDto))
 				return ValidationProblem(ModelState);
 			_mapper.Map(orderUpdateDto, order);
 			_unitOfWork.OrderRepository.Update(order);
+			UpdateItemStock(order.OrderLines, order.DocumentState);
 			_unitOfWork.SaveChanges();
 			return NoContent();
 		}
@@ -93,6 +98,33 @@ namespace API.Controllers
 			_unitOfWork.OrderRepository.Delete(order);
 			_unitOfWork.SaveChanges();
 			return NoContent();
+		}
+
+		private void UpdateItemStock(IEnumerable<OrderLine> orderLines, int state)
+		{
+			foreach (OrderLine line in orderLines)
+			{
+				if (line.ItemId == null || line.Quantity <= 0) continue;
+				var item = _unitOfWork.ItemRepository.GetSingle((int)line.ItemId);
+				if (state == (int)Order.OrderState.Delivered)
+					item.RealStock += line.Quantity;
+				else
+					item.VirtualStock += line.Quantity;
+				_unitOfWork.ItemRepository.Update(item);
+			}
+		}
+		private void RemoveItemStock(IEnumerable<OrderLine> orderLines, int state)
+		{
+			foreach (OrderLine line in orderLines)
+			{
+				if (line.ItemId == null || line.Quantity <= 0) continue;
+				var item = _unitOfWork.ItemRepository.GetSingle((int)line.ItemId);
+				if (state == (int)Order.OrderState.Delivered)
+					item.RealStock -= line.Quantity;
+				else
+					item.VirtualStock -= line.Quantity;
+				_unitOfWork.ItemRepository.Update(item);
+			}
 		}
 	}
 }

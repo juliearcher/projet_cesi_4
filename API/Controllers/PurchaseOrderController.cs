@@ -45,6 +45,7 @@ namespace API.Controllers
 			// TODO check if infos are valid
 			var purchaseOrderModel = _mapper.Map<PurchaseOrder>(purchaseOrderCreateDto);
 			_unitOfWork.PurchaseOrderRepository.Add(purchaseOrderModel);
+			RemoveItemStock(purchaseOrderModel.PurchaseOrderLines, purchaseOrderModel.DocumentState);
 			_unitOfWork.SaveChanges();
 			var purchaseOrderReadDto = _mapper.Map<PurchaseOrderReadDto>(purchaseOrderModel);
 			return CreatedAtRoute(nameof(GetPurchaseOrderById), new { Id = purchaseOrderReadDto.Id }, purchaseOrderReadDto);
@@ -58,8 +59,10 @@ namespace API.Controllers
 			var purchaseOrder = _unitOfWork.PurchaseOrderRepository.GetSingle(id);
 			if (purchaseOrder == null)
 				return NotFound();
+			UpdateItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
 			_mapper.Map(purchaseOrderUpdateDto, purchaseOrder);
 			_unitOfWork.PurchaseOrderRepository.Update(purchaseOrder);
+			RemoveItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
 			_unitOfWork.SaveChanges();
 			return NoContent();
 		}
@@ -72,12 +75,14 @@ namespace API.Controllers
 			var purchaseOrder = _unitOfWork.PurchaseOrderRepository.GetSingle(id);
 			if (purchaseOrder == null)
 				return NotFound();
+			UpdateItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
 			var purchaseOrderUpdateDto = _mapper.Map<PurchaseOrderUpdateDto>(purchaseOrder);
 			patchDocument.ApplyTo(purchaseOrderUpdateDto, ModelState);
 			if (!TryValidateModel(purchaseOrderUpdateDto))
 				return ValidationProblem(ModelState);
 			_mapper.Map(purchaseOrderUpdateDto, purchaseOrder);
 			_unitOfWork.PurchaseOrderRepository.Update(purchaseOrder);
+			RemoveItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
 			_unitOfWork.SaveChanges();
 			return NoContent();
 		}
@@ -94,5 +99,32 @@ namespace API.Controllers
 			_unitOfWork.SaveChanges();
 			return NoContent();
 		}
+		private void UpdateItemStock(IEnumerable<PurchaseOrderLine> orderLines, int state)
+		{
+			foreach (PurchaseOrderLine line in orderLines)
+			{
+				if (line.ItemId == null || line.Quantity <= 0) continue;
+				var item = _unitOfWork.ItemRepository.GetSingle((int)line.ItemId);
+				if (state == (int)Order.OrderState.Delivered)
+					item.RealStock += line.Quantity;
+				else
+					item.VirtualStock += line.Quantity;
+				_unitOfWork.ItemRepository.Update(item);
+			}
+		}
+		private void RemoveItemStock(IEnumerable<PurchaseOrderLine> orderLines, int state)
+		{
+			foreach (PurchaseOrderLine line in orderLines)
+			{
+				if (line.ItemId == null || line.Quantity <= 0) continue;
+				var item = _unitOfWork.ItemRepository.GetSingle((int)line.ItemId);
+				if (state == (int)PurchaseOrder.PurchaseOrderState.Received)
+					item.RealStock -= line.Quantity;
+				else
+					item.VirtualStock -= line.Quantity;
+				_unitOfWork.ItemRepository.Update(item);
+			}
+		}
+
 	}
 }

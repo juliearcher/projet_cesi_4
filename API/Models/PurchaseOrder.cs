@@ -7,6 +7,12 @@ namespace API.Models
 {
 	public class PurchaseOrder : BaseModel
 	{
+		public enum PurchaseOrderState
+		{
+			NotReceived,
+			Received
+		}
+
 		[Required]
 		[MaxLength(16)]
 		public string DocumentNumber { get; set; }
