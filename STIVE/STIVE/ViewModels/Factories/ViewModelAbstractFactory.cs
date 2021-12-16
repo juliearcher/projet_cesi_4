@@ -1,4 +1,5 @@
 ﻿using STIVE.Navigators;
+using STIVE.PrepAPI.Models;
 using STIVE.PrepAPI.Services;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,27 @@ namespace STIVE.ViewModels.Factories
 {
 	public class ViewModelAbstractFactory : IViewModelAbstractFactory
 	{
-		IViewModelTabFactory<CustomerTabViewModel> _customerTabViewModel;
-		IViewModelTabFactory<SupplierTabViewModel> _supplierTabViewModel;
+		private IViewModelTabFactory<CustomerTabViewModel> _customerTabViewModel;
+		private IViewModelTabFactory<SupplierTabViewModel> _supplierTabViewModel;
 
-		public ViewModelAbstractFactory(IViewModelTabFactory<CustomerTabViewModel> customerTabViewModel, IViewModelTabFactory<SupplierTabViewModel> supplierTabViewModel)
+		private IViewModelFormFactory<CustomerFormViewModel> _customerFormView;
+
+		public ViewModelAbstractFactory(IViewModelTabFactory<CustomerTabViewModel> customerTabViewModel, IViewModelTabFactory<SupplierTabViewModel> supplierTabViewModel, IViewModelFormFactory<CustomerFormViewModel> customerFormView)
 		{
 			_customerTabViewModel = customerTabViewModel;
 			_supplierTabViewModel = supplierTabViewModel;
+			_customerFormView = customerFormView;
+		}
+
+		public FormViewModelBase CreateFormViewModel(ListViewModelBase viewmodel, FormViewType viewType, ApiModelBase elem)
+		{
+			switch (viewType)
+			{
+				case FormViewType.CustomerForm:
+					return _customerFormView.CreateViewModel(viewmodel, elem);
+				default:
+					throw new ArgumentException("Invalid ViewType : .", "viewType");
+			}
 		}
 
 		public ViewModelBase CreateTabViewModel(ViewType viewType)
@@ -30,7 +45,6 @@ namespace STIVE.ViewModels.Factories
 				default:
 					throw new ArgumentException("Invalid ViewType : .", "viewType");
 			}
-			throw new NotImplementedException();
 		}
 	}
 }

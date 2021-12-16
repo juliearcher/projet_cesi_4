@@ -1,4 +1,5 @@
-﻿using STIVE.ViewModels;
+﻿using STIVE.Navigators;
+using STIVE.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,16 +28,12 @@ namespace STIVE.Commands
 
 		public void Execute(object parameter)
 		{
-			/*Window window = new Window();
-			if (_viewModel is SiteListViewModel)
-				window.Content = _viewModel.ViewModelFactory.CreateFormViewModel(_viewModel, ViewType.SiteForm, _viewModel.SelectedItem);
-			else if (_viewModel is DepartmentListViewModel)
-				window.Content = _viewModel.ViewModelFactory.CreateFormViewModel(_viewModel, ViewType.DepartmentForm, _viewModel.SelectedItem);
-			else if (_viewModel is EmployeeListViewModel)
-				window.Content = _viewModel.ViewModelFactory.CreateFormViewModel(_viewModel, ViewType.EmployeeForm, _viewModel.SelectedItem);
+			Window window = new Window();
+			if (_viewModel is CustomerListViewModel)
+				window.Content = _viewModel.ViewModelFactory.CreateFormViewModel(_viewModel, FormViewType.CustomerForm, _viewModel.SelectedItem);
 			else
 				return;
-			window.Show();*/
+			window.Show();
 		}
 	}
 }

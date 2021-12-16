@@ -12,5 +12,8 @@
 		<DataTemplate DataType="{x:Type viewmodels:SupplierTabViewModel}">
 			<views:SupplierTabView/>
 		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:CustomerFormViewModel}">
+			<views:CustomerFormWindowView/>
+		</DataTemplate>
 	</Application.Resources>
 </Application>

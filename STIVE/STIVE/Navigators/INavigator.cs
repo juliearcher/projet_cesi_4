@@ -8,16 +8,20 @@ using System.Windows.Input;
 
 namespace STIVE.Navigators
 {
-
 	public enum ViewType
 	{
 		CustomerTab,
 		InventoryTab,
 		ItemTab,
-		//ItemFamilyTab, 
+		ItemFamilyTab, 
 		OrderTab,
 		PurchaseOrderTab,
 		SupplierTab
+	};
+
+	public enum FormViewType
+	{
+		CustomerForm
 	};
 
 	public interface INavigator

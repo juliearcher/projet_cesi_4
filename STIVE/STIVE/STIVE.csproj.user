@@ -16,7 +16,13 @@
     <Compile Update="Controls\NavigationBar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\SaveAndCloseButtons.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\SearchBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CustomerFormWindowView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\CustomerTabView.xaml.cs">
@@ -36,10 +42,16 @@
     <Page Update="Controls\NavigationBar.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Controls\SaveAndCloseButtons.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Controls\SearchBox.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CustomerFormWindowView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CustomerTabView.xaml">

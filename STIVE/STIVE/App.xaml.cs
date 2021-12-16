@@ -41,8 +41,13 @@ namespace STIVE
 
 			services.AddScoped<IViewModelTabFactory<CustomerTabViewModel>, CustomerTabViewModelFactory>();
 			services.AddScoped<IViewModelListFactory<CustomerListViewModel>, CustomerListViewModelFactory>();
+			services.AddScoped<IViewModelFormFactory<CustomerFormViewModel>, CustomerFormViewModelFactory>();
+
 			services.AddScoped<IViewModelTabFactory<SupplierTabViewModel>, SupplierTabViewModelFactory>();
+
 			services.AddScoped<IViewModelAbstractFactory, ViewModelAbstractFactory>();
+
+			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 			services.AddScoped<INavigator, Navigator>();
 			services.AddScoped<MainWindowViewModel>();
