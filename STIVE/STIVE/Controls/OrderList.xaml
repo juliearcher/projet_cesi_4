@@ -6,8 +6,23 @@
              xmlns:local="clr-namespace:STIVE.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-		<TextBlock Text="OrderList" />
-
-	</Grid>
+  <ListView Grid.Row="1" ItemsSource="{Binding ElementsList}" SelectedItem="{Binding SelectedItem}">
+		<ListView.View>
+			<GridView>
+				<GridViewColumn Header="Code du document" DisplayMemberBinding="{Binding DocumentNumber}"/>
+				<GridViewColumn Header="Date du document" DisplayMemberBinding="{Binding DocumentDate}"/>
+				<GridViewColumn Header="Date de livraison" DisplayMemberBinding="{Binding DeliveryDate}"/>
+				<GridViewColumn Header="Etat du document" DisplayMemberBinding="{Binding DocumentState}"/>
+				<GridViewColumn Header="Taux de réduction" DisplayMemberBinding="{Binding DiscountRate}"/>
+        <GridViewColumn Header="TVA" DisplayMemberBinding="{Binding VatAmount}"/>
+        <GridViewColumn Header="Adresse de facturation" DisplayMemberBinding="{Binding InvoicingAddress_Address1}"/>
+        <GridViewColumn Header="Code de facturation" DisplayMemberBinding="{Binding InvoicingAddress_ZipCode}"/>
+        <GridViewColumn Header="Adresse de livraison" DisplayMemberBinding="{Binding DeliveryAddress_Address1}"/>
+        <GridViewColumn Header="Code de livraison" DisplayMemberBinding="{Binding DeliveryAddress_ZipCode}"/>
+        <GridViewColumn Header="Prenom du contact" DisplayMemberBinding="{Binding DeliveryContact_Name}"/>
+        <GridViewColumn Header="Nom du contact" DisplayMemberBinding="{Binding DeliveryContact_Firstname}"/>
+        <GridViewColumn Header="Email du contact" DisplayMemberBinding="{Binding DeliveryContact_Email}"/>
+			</GridView>
+		</ListView.View>
+	</ListView>
 </UserControl>

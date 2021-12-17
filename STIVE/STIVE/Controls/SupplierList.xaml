@@ -6,8 +6,15 @@
              xmlns:local="clr-namespace:STIVE.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-		<TextBlock Text="SupplierList" />
-
-	</Grid>
+  <ListView Grid.Row="1" ItemsSource="{Binding ElementsList}" SelectedItem="{Binding SelectedItem}">
+		<ListView.View>
+			<GridView>
+				<GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}"/>
+				<GridViewColumn Header="Prenom" DisplayMemberBinding="{Binding Name}"/>
+				<GridViewColumn Header="Civilité" DisplayMemberBinding="{Binding Civility}"/>
+        <GridViewColumn Header="Adresse de facturation" DisplayMemberBinding="{Binding InvoicingAddress_Address1}"/>
+        <GridViewColumn Header="Code de facturation" DisplayMemberBinding="{Binding InvoicingAddress_ZipCode}"/>
+			</GridView>
+		</ListView.View>
+	</ListView>
 </UserControl>

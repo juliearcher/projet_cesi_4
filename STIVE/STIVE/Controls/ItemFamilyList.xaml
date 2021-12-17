@@ -6,8 +6,12 @@
              xmlns:local="clr-namespace:STIVE.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-		<TextBlock Text="ItemFamilyList" />
-
-	</Grid>
+  <ListView Grid.Row="1" ItemsSource="{Binding ElementsList}" SelectedItem="{Binding SelectedItem}">
+		<ListView.View>
+			<GridView>
+				<GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}"/>
+				<GridViewColumn Header="Designation" DisplayMemberBinding="{Binding Designation}"/>
+			</GridView>
+		</ListView.View>
+	</ListView>
 </UserControl>
