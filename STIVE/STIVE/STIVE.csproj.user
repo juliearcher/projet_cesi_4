@@ -7,7 +7,123 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Controls\AddUpdateDeleteButtons.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\CustomerList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\InventoryList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\ItemFamilyList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\ItemList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\NavigationBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\OrderList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\PurchaseOrderList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\SaveAndCloseButtons.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\SearchBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\SupplierList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CustomerFormWindowView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CustomerTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\InventoryTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ItemFamilyTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ItemTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OrderTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\PurchaseOrderTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SupplierTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\AddUpdateDeleteButtons.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\CustomerList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\InventoryList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\ItemFamilyList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\ItemList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\NavigationBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\OrderList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\PurchaseOrderList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\SaveAndCloseButtons.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\SearchBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\SupplierList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CustomerFormWindowView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CustomerTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\InventoryTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ItemFamilyTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ItemTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OrderTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\PurchaseOrderTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SupplierTabView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

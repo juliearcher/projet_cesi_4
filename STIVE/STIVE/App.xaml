@@ -2,8 +2,35 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:STIVE"
-             StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
+			 xmlns:viewmodels="clr-namespace:STIVE.ViewModels"
+			 xmlns:views="clr-namespace:STIVE.Views">
+	<Application.Resources>
+		<!-- Link Views to their ViewModel -->
+		<DataTemplate DataType="{x:Type viewmodels:CustomerTabViewModel}">
+			<views:CustomerTabView/>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:InventoryTabViewModel}">
+			<views:InventoryTabView/>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:ItemTabViewModel}">
+			<views:ItemTabView/>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:ItemFamilyTabViewModel}">
+			<views:ItemFamilyTabView/>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:OrderTabViewModel}">
+			<views:OrderTabView/>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:PurchaseOrderTabViewModel}">
+			<views:PurchaseOrderTabView/>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:SupplierTabViewModel}">
+			<views:SupplierTabView/>
+		</DataTemplate>
+		
+		
+		<DataTemplate DataType="{x:Type viewmodels:CustomerFormViewModel}">
+			<views:CustomerFormWindowView/>
+		</DataTemplate>
+	</Application.Resources>
 </Application>
