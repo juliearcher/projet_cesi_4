@@ -8,5 +8,11 @@ namespace STIVE.ViewModels
 {
 	public class OrderTabViewModel : TabViewModelBase
 	{
+		public OrderListViewModel OrderListViewModel { get; set; }
+
+		public OrderTabViewModel(OrderListViewModel orderListViewModel)
+		{
+			OrderListViewModel = orderListViewModel;
+		}
 	}
 }

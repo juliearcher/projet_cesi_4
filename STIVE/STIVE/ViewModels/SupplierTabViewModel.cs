@@ -8,5 +8,11 @@ namespace STIVE.ViewModels
 {
 	public class SupplierTabViewModel : TabViewModelBase
 	{
+		public SupplierListViewModel SupplierListViewModel { get; set; }
+
+		public SupplierTabViewModel(SupplierListViewModel supplierListViewModel)
+		{
+			SupplierListViewModel = supplierListViewModel;
+		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using STIVE.PrepAPI.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,16 @@ namespace STIVE.ViewModels.Factories
 {
 	public class ItemFamilyTabViewModelFactory : IViewModelTabFactory<ItemFamilyTabViewModel>
 	{
+		private IViewModelListFactory<ItemFamilyListViewModel> _itemFamilyListViewModelFactory;
+
+		public ItemFamilyTabViewModelFactory(IViewModelListFactory<ItemFamilyListViewModel> itemFamilyListViewModelFactory)
+		{
+			_itemFamilyListViewModelFactory = itemFamilyListViewModelFactory;
+		}
+
 		public ItemFamilyTabViewModel CreateViewModel(IViewModelAbstractFactory factory)
 		{
-			return new ItemFamilyTabViewModel();
+			return new ItemFamilyTabViewModel(_itemFamilyListViewModelFactory.CreateViewModel(factory));
 		}
 	}
 }

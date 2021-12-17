@@ -8,6 +8,11 @@ namespace STIVE.ViewModels
 {
 	public class ItemTabViewModel : TabViewModelBase
 	{
+		public ItemListViewModel ItemListViewModel { get; set; }
 
+		public ItemTabViewModel(ItemListViewModel itemListViewModel)
+		{
+			ItemListViewModel = itemListViewModel;
+		}
 	}
 }

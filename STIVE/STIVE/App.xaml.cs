@@ -40,15 +40,22 @@ namespace STIVE
 			services.AddSingleton<IApiServicesCollection, ApiServicesCollection>();
 
 			services.AddScoped<IViewModelTabFactory<CustomerTabViewModel>, CustomerTabViewModelFactory>();
-			services.AddScoped<IViewModelListFactory<CustomerListViewModel>, CustomerListViewModelFactory>();
-			services.AddScoped<IViewModelFormFactory<CustomerFormViewModel>, CustomerFormViewModelFactory>();
 			services.AddScoped<IViewModelTabFactory<InventoryTabViewModel>, InventoryTabViewModelFactory>();
 			services.AddScoped<IViewModelTabFactory<ItemTabViewModel>, ItemTabViewModelFactory>();
 			services.AddScoped<IViewModelTabFactory<ItemFamilyTabViewModel>,ItemFamilyTabViewModelFactory>();
 			services.AddScoped<IViewModelTabFactory<OrderTabViewModel>, OrderTabViewModelFactory>();
 			services.AddScoped<IViewModelTabFactory<PurchaseOrderTabViewModel>, PurchaseOrderTabViewModelFactory>();
-
 			services.AddScoped<IViewModelTabFactory<SupplierTabViewModel>, SupplierTabViewModelFactory>();
+
+			services.AddScoped<IViewModelListFactory<CustomerListViewModel>, CustomerListViewModelFactory>();
+			services.AddScoped<IViewModelListFactory<InventoryListViewModel>, InventoryListViewModelFactory>();
+			services.AddScoped<IViewModelListFactory<ItemListViewModel>, ItemListViewModelFactory>();
+			services.AddScoped<IViewModelListFactory<ItemFamilyListViewModel>, ItemFamilyListViewModelFactory>();
+			services.AddScoped<IViewModelListFactory<OrderListViewModel>, OrderListViewModelFactory>();
+			services.AddScoped<IViewModelListFactory<PurchaseOrderListViewModel>, PurchaseOrderListViewModelFactory>();
+			services.AddScoped<IViewModelListFactory<SupplierListViewModel>, SupplierListViewModelFactory>();
+
+			services.AddScoped<IViewModelFormFactory<CustomerFormViewModel>, CustomerFormViewModelFactory>();
 
 			services.AddScoped<IViewModelAbstractFactory, ViewModelAbstractFactory>();
 
