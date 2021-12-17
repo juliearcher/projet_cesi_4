@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+
 
 namespace STIVE.Models
 {
+
 	public class CustomerDataError : DataErrorModelBase, ICustomer
 	{
 		private string _code;
@@ -39,10 +41,10 @@ namespace STIVE.Models
 			{
 				_name = value;
 				ClearErrors(nameof(Name));
-				/*if (...)
+				if (_name == null || _code?.Trim().Length == 0)
 				{
-					AddError(nameof(Name), "...");
-				}*/
+					AddError(nameof(Name), "Champ obligatoire");
+				}
 				OnPropertyChanged(nameof(Name));
 			}
 		}
@@ -58,10 +60,10 @@ namespace STIVE.Models
 			{
 				_civility = value;
 				ClearErrors(nameof(Civility));
-				/*if (...)
+				if (useRegex(_civility, false) == false)
 				{
-					AddError(nameof(Civility), "...");
-				}*/
+					AddError(nameof(Civility), "Les caractères spéciaux ne sont pas acceptés");
+				}
 				OnPropertyChanged(nameof(Civility));
 			}
 		}
@@ -77,10 +79,6 @@ namespace STIVE.Models
 			{
 				_notes = value;
 				ClearErrors(nameof(Notes));
-				/*if (...)
-				{
-					AddError(nameof(Notes), "...");
-				}*/
 				OnPropertyChanged(nameof(Notes));
 			}
 		}
@@ -96,10 +94,6 @@ namespace STIVE.Models
 			{
 				_notesClear = value;
 				ClearErrors(nameof(NotesClear));
-				/*if (...)
-				{
-					AddError(nameof(NotesClear), "...");
-				}*/
 				OnPropertyChanged(nameof(NotesClear));
 			}
 		}
@@ -115,10 +109,12 @@ namespace STIVE.Models
 			{
 				_invoicingAddress_Address1 = value;
 				ClearErrors(nameof(InvoicingAddress_Address1));
-				/*if (...)
+				if (_invoicingAddress_Address1 == null || _invoicingAddress_Address1?.Trim().Length == 0)
 				{
-					AddError(nameof(InvoicingAddress_Address1), "...");
-				}*/
+					AddError(nameof(InvoicingAddress_Address1), "Champ obligatoire");
+				} else if (useRegex(_invoicingAddress_Address1, false) == false) {
+					AddError(nameof(InvoicingAddress_Address1), "Ce champ ne peux pas contenir de nombre");
+				}
 				OnPropertyChanged(nameof(InvoicingAddress_Address1));
 			}
 		}
@@ -134,10 +130,14 @@ namespace STIVE.Models
 			{
 				_invoicingAddress_City = value;
 				ClearErrors(nameof(InvoicingAddress_City));
-				/*if (...)
+				if (_invoicingAddress_City == null || _invoicingAddress_City?.Trim().Length == 0)
 				{
-					AddError(nameof(InvoicingAddress_City), "...");
-				}*/
+					AddError(nameof(InvoicingAddress_City), "Champ obligatoire");
+				}
+				else if (useRegex(_invoicingAddress_City, false) == false)
+				{
+					AddError(nameof(InvoicingAddress_Address1), "Ce champ ne peux pas contenir de nombre");
+				}
 				OnPropertyChanged(nameof(InvoicingAddress_City));
 			}
 		}
@@ -153,10 +153,10 @@ namespace STIVE.Models
 			{
 				_invoicingAddress_ZipCode = value;
 				ClearErrors(nameof(InvoicingAddress_ZipCode));
-				/*if (...)
+				if (_invoicingAddress_City == null || _invoicingAddress_City?.Trim().Length == 0)
 				{
-					AddError(nameof(InvoicingAddress_ZipCode), "...");
-				}*/
+					AddError(nameof(InvoicingAddress_ZipCode), "Champ obligatoire");
+				} //else if () { }
 				OnPropertyChanged(nameof(InvoicingAddress_ZipCode));
 			}
 		}
@@ -172,10 +172,10 @@ namespace STIVE.Models
 			{
 				_invoicingContact_Civility = value;
 				ClearErrors(nameof(InvoicingContact_Civility));
-				/*if (...)
+				if (useRegex(_invoicingContact_Civility, false) == false)
 				{
-					AddError(nameof(InvoicingContact_Civility), "...");
-				}*/
+					AddError(nameof(InvoicingContact_Civility), "Les caractères spéciaux ne sont pas acceptés");
+				}
 				OnPropertyChanged(nameof(InvoicingContact_Civility));
 			}
 		}
@@ -191,10 +191,10 @@ namespace STIVE.Models
 			{
 				_invoicingContact_Name = value;
 				ClearErrors(nameof(InvoicingContact_Name));
-				/*if (...)
+				if (useRegex(_invoicingContact_Name, false) == false)
 				{
-					AddError(nameof(InvoicingContact_Name), "...");
-				}*/
+					AddError(nameof(InvoicingContact_Name), "Les caractères spéciaux ne sont pas acceptés");
+				}
 				OnPropertyChanged(nameof(InvoicingContact_Name));
 			}
 		}
@@ -446,45 +446,32 @@ namespace STIVE.Models
 			}
 		}
 
+		public static bool useRegex(String input, bool digits)
+		{
+			string pattern = "[a-zA-Z]+\\s+";
+			string pattern2 = "[a-zA-Z]+\\s+[0-9]+";
+			Match m;
+
+			if (digits == true)
+			{
+				 m = Regex.Match(input, pattern2, RegexOptions.IgnoreCase);
+            }else {
+				 m = Regex.Match(input, pattern, RegexOptions.IgnoreCase);
+            }
+
+			if (m.Success)
+			{
+				return true;
+			}else {
+				return false;
+			}
+		}
+
 		public int Id { get; set; }
 		public DateTime SysCreatedDate { get; set; }
 		public DateTime SysModifiedDate { get; set; }
 		public string CreatedUser { get; set; }
 		public string ModifiedUser { get; set; }
 
-		public CustomerDataError(Customer customer = null)
-		{
-			if (customer != null)
-			{
-				Code = customer.Code;
-				Name = customer.Name;
-				Civility = customer.Civility;
-				Notes = customer.Notes;
-				NotesClear = customer.NotesClear;
-				InvoicingAddress_Address1 = customer.InvoicingAddress_Address1;
-				InvoicingAddress_City = customer.InvoicingAddress_City;
-				InvoicingAddress_ZipCode = customer.InvoicingAddress_ZipCode;
-				InvoicingContact_Civility = customer.InvoicingContact_Civility;
-				InvoicingContact_Name = customer.InvoicingContact_Name;
-				InvoicingContact_FirstName = customer.InvoicingContact_FirstName;
-				InvoicingContact_Email = customer.InvoicingContact_Email;
-				InvoicingContact_Phone = customer.InvoicingContact_Phone;
-				InvoicingContact_CellPhone = customer.InvoicingContact_CellPhone;
-				DeliveryAddress_Address1 = customer.DeliveryAddress_Address1;
-				DeliveryAddress_City = customer.DeliveryAddress_City;
-				DeliveryAddress_ZipCode = customer.DeliveryAddress_ZipCode;
-				DeliveryContact_Civility = customer.DeliveryContact_Civility;
-				DeliveryContact_Name = customer.DeliveryContact_Name;
-				DeliveryContact_FirstName = customer.DeliveryContact_FirstName;
-				DeliveryContact_Email = customer.DeliveryContact_Email;
-				DeliveryContact_Phone = customer.DeliveryContact_Phone;
-				DeliveryContact_CellPhone = customer.DeliveryContact_CellPhone;
-				Id = customer.Id;
-				SysCreatedDate = customer.SysCreatedDate;
-				SysModifiedDate = customer.SysModifiedDate;
-				CreatedUser = customer.CreatedUser;
-				ModifiedUser = customer.ModifiedUser;
-			}
-		}
 	}
 }
