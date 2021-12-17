@@ -12,6 +12,9 @@
 		<DataTemplate DataType="{x:Type viewmodels:InventoryTabViewModel}">
 			<views:InventoryTabView/>
 		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:ItemTabViewModel}">
+			<views:ItemTabView/>
+		</DataTemplate>
 		<DataTemplate DataType="{x:Type viewmodels:ItemFamilyTabViewModel}">
 			<views:ItemFamilyTabView/>
 		</DataTemplate>

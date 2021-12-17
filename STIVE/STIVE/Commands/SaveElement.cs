@@ -1,4 +1,5 @@
-﻿using STIVE.ViewModels;
+﻿using STIVE.PrepAPI;
+using STIVE.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,14 @@ namespace STIVE.Commands
 			{
 				if (_save)
 				{
-					await _viewModel.SendToAPI();
+					try
+					{
+						await _viewModel.SendToAPI();
+					}
+					catch(ApiException e)
+					{
+						MessageBox.Show(e.Message, e.Title);
+					}
 					_viewModel.ListViewModelBase.LoadList();
 				}
 				if (parameter is Window && _closeWindow)
