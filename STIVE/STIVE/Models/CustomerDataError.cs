@@ -136,7 +136,7 @@ namespace STIVE.Models
 				}
 				else if (useRegex(_invoicingAddress_City, false) == false)
 				{
-					AddError(nameof(InvoicingAddress_Address1), "Ce champ ne peux pas contenir de nombre");
+					AddError(nameof(InvoicingAddress_City), "Ce champ ne peux pas contenir de nombre");
 				}
 				OnPropertyChanged(nameof(InvoicingAddress_City));
 			}
@@ -153,7 +153,7 @@ namespace STIVE.Models
 			{
 				_invoicingAddress_ZipCode = value;
 				ClearErrors(nameof(InvoicingAddress_ZipCode));
-				if (_invoicingAddress_City == null || _invoicingAddress_City?.Trim().Length == 0)
+				if (InvoicingAddress_ZipCode == null || InvoicingAddress_ZipCode?.Trim().Length == 0)
 				{
 					AddError(nameof(InvoicingAddress_ZipCode), "Champ obligatoire");
 				} //else if () { }
@@ -452,17 +452,24 @@ namespace STIVE.Models
 			string pattern2 = "[a-zA-Z]+\\s+[0-9]+";
 			Match m;
 
+			if (input == null)
+				return true;
+
 			if (digits == true)
 			{
 				 m = Regex.Match(input, pattern2, RegexOptions.IgnoreCase);
-            }else {
+            }
+			else
+			{
 				 m = Regex.Match(input, pattern, RegexOptions.IgnoreCase);
             }
 
 			if (m.Success)
 			{
 				return true;
-			}else {
+			}
+			else
+			{
 				return false;
 			}
 		}
@@ -473,5 +480,39 @@ namespace STIVE.Models
 		public string CreatedUser { get; set; }
 		public string ModifiedUser { get; set; }
 
+		public CustomerDataError(Customer customer = null)
+		{
+			if (customer != null)
+			{
+				Code = customer.Code;
+				Name = customer.Name;
+				Civility = customer.Civility;
+				Notes = customer.Notes;
+				NotesClear = customer.NotesClear;
+				InvoicingAddress_Address1 = customer.InvoicingAddress_Address1;
+				InvoicingAddress_City = customer.InvoicingAddress_City;
+				InvoicingAddress_ZipCode = customer.InvoicingAddress_ZipCode;
+				InvoicingContact_Civility = customer.InvoicingContact_Civility;
+				InvoicingContact_Name = customer.InvoicingContact_Name;
+				InvoicingContact_FirstName = customer.InvoicingContact_FirstName;
+				InvoicingContact_Email = customer.InvoicingContact_Email;
+				InvoicingContact_Phone = customer.InvoicingContact_Phone;
+				InvoicingContact_CellPhone = customer.InvoicingContact_CellPhone;
+				DeliveryAddress_Address1 = customer.DeliveryAddress_Address1;
+				DeliveryAddress_City = customer.DeliveryAddress_City;
+				DeliveryAddress_ZipCode = customer.DeliveryAddress_ZipCode;
+				DeliveryContact_Civility = customer.DeliveryContact_Civility;
+				DeliveryContact_Name = customer.DeliveryContact_Name;
+				DeliveryContact_FirstName = customer.DeliveryContact_FirstName;
+				DeliveryContact_Email = customer.DeliveryContact_Email;
+				DeliveryContact_Phone = customer.DeliveryContact_Phone;
+				DeliveryContact_CellPhone = customer.DeliveryContact_CellPhone;
+				Id = customer.Id;
+				SysCreatedDate = customer.SysCreatedDate;
+				SysModifiedDate = customer.SysModifiedDate;
+				CreatedUser = customer.CreatedUser;
+				ModifiedUser = customer.ModifiedUser;
+			}
+		}
 	}
 }
