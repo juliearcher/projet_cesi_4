@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace API.Controllers
@@ -45,7 +46,14 @@ namespace API.Controllers
 			// TODO check if infos are valid
 			var itemFamilyModel = _mapper.Map<ItemFamily>(itemFamilyCreateDto);
 			_unitOfWork.ItemFamilyRepository.Add(itemFamilyModel);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			var itemFamilyReadDto = _mapper.Map<ItemFamilyReadDto>(itemFamilyModel);
 			return CreatedAtRoute(nameof(GetItemFamilyById), new { Id = itemFamilyReadDto.Id }, itemFamilyReadDto);
 		}
@@ -60,7 +68,14 @@ namespace API.Controllers
 				return NotFound();
 			_mapper.Map(itemFamilyUpdateDto, itemFamily);
 			_unitOfWork.ItemFamilyRepository.Update(itemFamily);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 
@@ -78,7 +93,14 @@ namespace API.Controllers
 				return ValidationProblem(ModelState);
 			_mapper.Map(itemFamilyUpdateDto, itemFamily);
 			_unitOfWork.ItemFamilyRepository.Update(itemFamily);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 
@@ -91,7 +113,14 @@ namespace API.Controllers
 			if (itemFamily == null)
 				return NotFound();
 			_unitOfWork.ItemFamilyRepository.Delete(itemFamily);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 	}

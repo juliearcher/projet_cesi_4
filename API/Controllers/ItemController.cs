@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace API.Controllers
@@ -45,7 +46,14 @@ namespace API.Controllers
 			// TODO check if infos are valid
 			var itemModel = _mapper.Map<Item>(itemCreateDto);
 			_unitOfWork.ItemRepository.Add(itemModel);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			var itemReadDto = _mapper.Map<ItemReadDto>(itemModel);
 			return CreatedAtRoute(nameof(GetItemById), new { Id = itemReadDto.Id }, itemReadDto);
 		}
@@ -60,7 +68,14 @@ namespace API.Controllers
 				return NotFound();
 			_mapper.Map(itemUpdateDto, item);
 			_unitOfWork.ItemRepository.Update(item);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 
@@ -78,7 +93,14 @@ namespace API.Controllers
 				return ValidationProblem(ModelState);
 			_mapper.Map(itemUpdateDto, item);
 			_unitOfWork.ItemRepository.Update(item);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 
@@ -91,7 +113,14 @@ namespace API.Controllers
 			if (item == null)
 				return NotFound();
 			_unitOfWork.ItemRepository.Delete(item);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 	}

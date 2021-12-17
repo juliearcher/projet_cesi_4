@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace API.Controllers
@@ -45,7 +46,14 @@ namespace API.Controllers
 			// TODO check if infos are valid
 			var inventoryModel = _mapper.Map<Inventory>(inventoryCreateDto);
 			_unitOfWork.InventoryRepository.Add(inventoryModel);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			var inventoryReadDto = _mapper.Map<InventoryReadDto>(inventoryModel);
 			return CreatedAtRoute(nameof(GetInventoryById), new { Id = inventoryReadDto.Id }, inventoryReadDto);
 		}
@@ -60,7 +68,14 @@ namespace API.Controllers
 				return NotFound();
 			_mapper.Map(inventoryUpdateDto, inventory);
 			_unitOfWork.InventoryRepository.Update(inventory);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 
@@ -78,7 +93,14 @@ namespace API.Controllers
 				return ValidationProblem(ModelState);
 			_mapper.Map(inventoryUpdateDto, inventory);
 			_unitOfWork.InventoryRepository.Update(inventory);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 
@@ -91,7 +113,14 @@ namespace API.Controllers
 			if (inventory == null)
 				return NotFound();
 			_unitOfWork.InventoryRepository.Delete(inventory);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 	}

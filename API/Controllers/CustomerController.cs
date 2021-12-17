@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace API.Controllers
@@ -45,7 +46,14 @@ namespace API.Controllers
 			// TODO check if infos are valid
 			var customerModel = _mapper.Map<Customer>(customerCreateDto);
 			_unitOfWork.CustomerRepository.Add(customerModel);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			var customerReadDto = _mapper.Map<CustomerReadDto>(customerModel);
 			return CreatedAtRoute(nameof(GetCustomerById), new { Id = customerReadDto.Id }, customerReadDto);
 		}
@@ -60,7 +68,14 @@ namespace API.Controllers
 				return NotFound();
 			_mapper.Map(customerUpdateDto, customer);
 			_unitOfWork.CustomerRepository.Update(customer);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 
@@ -78,7 +93,14 @@ namespace API.Controllers
 				return ValidationProblem(ModelState);
 			_mapper.Map(customerUpdateDto, customer);
 			_unitOfWork.CustomerRepository.Update(customer);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 
@@ -91,7 +113,14 @@ namespace API.Controllers
 			if (customer == null)
 				return NotFound();
 			_unitOfWork.CustomerRepository.Delete(customer);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 	}

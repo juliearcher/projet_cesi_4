@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace API.Controllers
@@ -46,7 +47,14 @@ namespace API.Controllers
 			var orderModel = _mapper.Map<Order>(orderCreateDto);
 			_unitOfWork.OrderRepository.Add(orderModel);
 			UpdateItemStock(orderModel.OrderLines, orderModel.DocumentState);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			var orderReadDto = _mapper.Map<OrderReadDto>(orderModel);
 			return CreatedAtRoute(nameof(GetOrderById), new { Id = orderReadDto.Id }, orderReadDto);
 		}
@@ -63,7 +71,14 @@ namespace API.Controllers
 			_mapper.Map(orderUpdateDto, order);
 			_unitOfWork.OrderRepository.Update(order);
 			UpdateItemStock(order.OrderLines, order.DocumentState);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new { title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 
@@ -83,7 +98,14 @@ namespace API.Controllers
 			_mapper.Map(orderUpdateDto, order);
 			_unitOfWork.OrderRepository.Update(order);
 			UpdateItemStock(order.OrderLines, order.DocumentState);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 
@@ -96,7 +118,14 @@ namespace API.Controllers
 			if (order == null)
 				return NotFound();
 			_unitOfWork.OrderRepository.Delete(order);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 

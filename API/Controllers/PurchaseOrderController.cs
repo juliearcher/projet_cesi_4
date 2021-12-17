@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace API.Controllers
@@ -46,7 +47,14 @@ namespace API.Controllers
 			var purchaseOrderModel = _mapper.Map<PurchaseOrder>(purchaseOrderCreateDto);
 			_unitOfWork.PurchaseOrderRepository.Add(purchaseOrderModel);
 			RemoveItemStock(purchaseOrderModel.PurchaseOrderLines, purchaseOrderModel.DocumentState);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			var purchaseOrderReadDto = _mapper.Map<PurchaseOrderReadDto>(purchaseOrderModel);
 			return CreatedAtRoute(nameof(GetPurchaseOrderById), new { Id = purchaseOrderReadDto.Id }, purchaseOrderReadDto);
 		}
@@ -63,7 +71,14 @@ namespace API.Controllers
 			_mapper.Map(purchaseOrderUpdateDto, purchaseOrder);
 			_unitOfWork.PurchaseOrderRepository.Update(purchaseOrder);
 			RemoveItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 
@@ -83,7 +98,14 @@ namespace API.Controllers
 			_mapper.Map(purchaseOrderUpdateDto, purchaseOrder);
 			_unitOfWork.PurchaseOrderRepository.Update(purchaseOrder);
 			RemoveItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 
@@ -96,7 +118,14 @@ namespace API.Controllers
 			if (purchaseOrder == null)
 				return NotFound();
 			_unitOfWork.PurchaseOrderRepository.Delete(purchaseOrder);
-			_unitOfWork.SaveChanges();
+			try
+			{
+				_unitOfWork.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
+			}
 			return NoContent();
 		}
 		private void UpdateItemStock(IEnumerable<PurchaseOrderLine> orderLines, int state)
