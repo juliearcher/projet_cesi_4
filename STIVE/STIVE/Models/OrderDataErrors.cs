@@ -24,7 +24,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DocumentNumber), "...");
 				}*/
-				OnPropertyChanged(DocumentNumber);
+				OnPropertyChanged(nameof(DocumentNumber));
 			}
 		}
 
@@ -40,7 +40,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DocumentDate), "...");
 				}*/
-				OnPropertyChanged(DocumentDate);
+				OnPropertyChanged(nameof(DocumentDate));
 			}
 		}
 
@@ -56,7 +56,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DeliveryDate), "...");
 				}*/
-				OnPropertyChanged(DeliveryDate);
+				OnPropertyChanged(nameof(DeliveryDate));
 			}
 		}
 
@@ -72,7 +72,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DocumentState), "...");
 				}*/
-				OnPropertyChanged(DocumentState);
+				OnPropertyChanged(nameof(DocumentState));
 			}
 		}
 
@@ -88,7 +88,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DiscountRate), "...");
 				}*/
-				OnPropertyChanged(DiscountRate);
+				OnPropertyChanged(nameof(DiscountRate));
 			}
 		}
 
@@ -104,7 +104,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(AmountVatExcluded), "...");
 				}*/
-				OnPropertyChanged(AmountVatExcluded);
+				OnPropertyChanged(nameof(AmountVatExcluded));
 			}
 		}
 
@@ -120,7 +120,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(AmountVatExcludedWithDiscount), "...");
 				}*/
-				OnPropertyChanged(AmountVatExcludedWithDiscount);
+				OnPropertyChanged(nameof(AmountVatExcludedWithDiscount));
 			}
 		}
 
@@ -136,7 +136,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(AmountVatIncluded), "...");
 				}*/
-				OnPropertyChanged(AmountVatIncluded);
+				OnPropertyChanged(nameof(AmountVatIncluded));
 			}
 		}
 
@@ -152,7 +152,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(VatAmount), "...");
 				}*/
-				OnPropertyChanged(VatAmount);
+				OnPropertyChanged(nameof(VatAmount));
 			}
 		}
 
@@ -172,19 +172,19 @@ namespace STIVE.Models
 			}
 		}
 
-		private string NotesClear;
+		private string _notesClear;
 		public string NotesClear
 		{
-			get => NotesClear;
+			get => _notesClear;
 			set
 			{
-				NotesClear = value;
+				_notesClear = value;
 				ClearErrors(nameof(NotesClear));
 				/*if (...)
 				{
 					AddError(nameof(NotesClear), "...");
 				}*/
-				OnPropertyChanged(NotesClear);
+				OnPropertyChanged(nameof(NotesClear));
 			}
 		}
 
@@ -200,7 +200,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(InvoicingAddress_Address1), "...");
 				}*/
-				OnPropertyChanged(InvoicingAddress_Address1);
+				OnPropertyChanged(nameof(InvoicingAddress_Address1));
 			}
 		}
 
@@ -216,23 +216,23 @@ namespace STIVE.Models
 				{
 					AddError(nameof(InvoicingAddress_City), "...");
 				}*/
-				OnPropertyChanged(InvoicingAddress_City);
+				OnPropertyChanged(nameof(InvoicingAddress_City));
 			}
 		}
 
 		private string _invoicingAddress_ZipCode;
-		public string InvoicingAdress_ZipCode
+		public string InvoicingAddress_ZipCode
 		{
 			get => _invoicingAddress_ZipCode;
 			set
 			{
 				_invoicingAddress_ZipCode = value;
-				ClearErrors(nameof(InvoicingAdress_ZipCode));
+				ClearErrors(nameof(InvoicingAddress_ZipCode));
 				/*if (...)
 				{
 					AddError(nameof(InvoicingAdress_ZipCode), "...");
 				}*/
-				OnPropertyChanged(InvoicingAdress_ZipCode);
+				OnPropertyChanged(nameof(InvoicingAddress_ZipCode));
 			}
 		}
 
@@ -248,7 +248,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(InvoicingContact_Civility), "...");
 				}*/
-				OnPropertyChanged(InvoicingContact_Civility);
+				OnPropertyChanged(nameof(InvoicingContact_Civility));
 			}
 		}
 
@@ -264,7 +264,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(InvoicingContact_Name), "...");
 				}*/
-				OnPropertyChanged(InvoicingContact_Name);
+				OnPropertyChanged(nameof(InvoicingContact_Name));
 			}
 		}
 
@@ -280,7 +280,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(InvoicingContact_FirstName), "...");
 				}*/
-				OnPropertyChanged(InvoicingContact_FirstName;
+				OnPropertyChanged(nameof(InvoicingContact_FirstName));
 			}
 		}
 
@@ -296,7 +296,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(InvoicingContact_Email), "...");
 				}*/
-				OnPropertyChanged(InvoicingContact_Email);
+				OnPropertyChanged(nameof(InvoicingContact_Email));
 			}
 		}
 
@@ -307,12 +307,12 @@ namespace STIVE.Models
 			set
 			{
 				_invoicingContact_Phone = value;
-				ClearErrors(nameof(InvoicingContact_Phone);
+				ClearErrors(nameof(InvoicingContact_Phone));
 				/*if (...)
 				{
 					AddError(nameof(InvoicingContact_Phone), "...");
 				}*/
-				OnPropertyChanged(InvoicingContact_Phone);
+				OnPropertyChanged(nameof(InvoicingContact_Phone));
 			}
 		}
 
@@ -328,7 +328,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(InvoicingContact_CellPhone), "...");
 				}*/
-				OnPropertyChanged(InvoicingContact_CellPhone);
+				OnPropertyChanged(nameof(InvoicingContact_CellPhone));
 			}
 		}
 
@@ -344,7 +344,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DeliveryAddress_Address1), "...");
 				}*/
-				OnPropertyChanged(DeliveryAddress_Address1);
+				OnPropertyChanged(nameof(DeliveryAddress_Address1));
 			}
 		}
 
@@ -360,7 +360,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DeliveryAddress_City), "...");
 				}*/
-				OnPropertyChanged(DeliveryAddress_City);
+				OnPropertyChanged(nameof(DeliveryAddress_City));
 			}
 		}
 
@@ -376,7 +376,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DeliveryAddress_ZipCode), "...");
 				}*/
-				OnPropertyChanged(DeliveryAddress_ZipCode);
+				OnPropertyChanged(nameof(DeliveryAddress_ZipCode));
 			}
 		}
 
@@ -392,7 +392,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DeliveryContact_Civility), "...");
 				}*/
-				OnPropertyChanged(DeliveryContact_Civility);
+				OnPropertyChanged(nameof(DeliveryContact_Civility));
 			}
 		}
 
@@ -408,13 +408,13 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DeliveryContact_Name), "...");
 				}*/
-				OnPropertyChanged(DeliveryContact_Name);
+				OnPropertyChanged(nameof(DeliveryContact_Name));
 			}
 		}
 
 		private string _deliveryContact_FirstName;
 		public string DeliveryContact_FirstName
-		{FirstName
+		{
 			get => _deliveryContact_FirstName;
 			set
 			{
@@ -424,7 +424,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DeliveryContact_FirstName), "...");
 				}*/
-				OnPropertyChanged(DeliveryContact_FirstName);
+				OnPropertyChanged(nameof(DeliveryContact_FirstName));
 			}
 		}
 
@@ -440,7 +440,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DeliveryContact_Email), "...");
 				}*/
-				OnPropertyChanged(DeliveryContact_Email);
+				OnPropertyChanged(nameof(DeliveryContact_Email));
 			}
 		}
 
@@ -456,7 +456,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DeliveryContact_Phone), "...");
 				}*/
-				OnPropertyChanged(DeliveryContact_Phone);
+				OnPropertyChanged(nameof(DeliveryContact_Phone));
 			}
 		}
 
@@ -472,86 +472,72 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DeliveryContact_CellPhone), "...");
 				}*/
-				OnPropertyChanged(DeliveryContact_CellPhone);
+				OnPropertyChanged(nameof(DeliveryContact_CellPhone));
 			}
 		}
 
-		public string DocumentNumber { get; set; }
-		public DateTime DocumentDate { get; set; }
-		public DateTime DeliveryDate { get; set; }
-		public int DocumentState { get; set; }
-		public float DiscountRate { get; set; }
-		public decimal AmountVatExcluded { get; set; }
-		public decimal AmountVatExcludedWithDiscount { get; set; }
-		public decimal AmountVatIncluded { get; set; }
-		public decimal VatAmount { get; set; }
-		public string Notes { get; set; }
-		public string NotesClear { get; set; }
-
-		#region Informations de facturation
-
-		public string InvoicingAddress_Address1 { get; set; }
-		public string InvoicingAddress_City { get; set; }
-		public string InvoicingAddress_ZipCode { get; set; }
-		public string InvoicingContact_Civility { get; set; }
-		public string InvoicingContact_Name { get; set; }
-		public string InvoicingContact_FirstName { get; set; }
-		public string InvoicingContact_Email { get; set; }
-		public string InvoicingContact_Phone { get; set; }
-		public string InvoicingContact_CellPhone { get; set; }
-
-		#endregion
-
-		#region Informations de livraison
-
-		public string DeliveryAddress_Address1 { get; set; }
-		public string DeliveryAddress_City { get; set; }
-		public string DeliveryAddress_ZipCode { get; set; }
-		public string DeliveryContact_Civility { get; set; }
-		public string DeliveryContact_Name { get; set; }
-		public string DeliveryContact_FirstName { get; set; }
-		public string DeliveryContact_Email { get; set; }
-		public string DeliveryContact_Phone { get; set; }
-		public string DeliveryContact_CellPhone { get; set; }
-		#endregion
-
-		public int CustomerId { get; set; }
+		private int _customerId;
+		public int CustomerId
+		{
+			get => _customerId;
+			set
+			{
+				_customerId = value;
+				ClearErrors(nameof(CustomerId));
+				/*if (...)
+				{
+					AddError(nameof(CustomerId), "...");
+				}*/
+				OnPropertyChanged(nameof(CustomerId));
+			}
+		}
 
 		public IEnumerable<OrderLine> OrderLines { get; set; }
+
+
+		public int Id { get; set; }
+		public DateTime SysCreatedDate { get; set; }
+		public DateTime SysModifiedDate { get; set; }
+		public string CreatedUser { get; set; }
+		public string ModifiedUser { get; set; }
 
 		public OrderDataError(Order order = null)
 		{
 			if (order != null)
 			{
-				DocumentNumber = oder.DocumentNumber;
-				DocumentDate = oder.DocumentDate;
-				DeliveryDate = oder.DeliveryDate;
-				DocumentState = oder.DocumentState;
-				DiscountRate = oder.DiscountRate;
-				AmountVatExcluded = oder.AmountVatExcluded;
-				AmountVatExcludedWithDiscount = oder.AmountVatExcludedWithDiscount;
-				AmountVatIncluded = oder.AmountVatIncluded;
-				VatAmount = oder.VatAmount;
-				Notes = oder.Notes;
-				NotesClear = oder.NotesClear;
-				InvoicingAddress_Address1 = oder.InvoicingAddress_Address1;
-				InvoicingAddress_City = oder.InvoicingAddress_City;
-				InvoicingAddress_ZipCode = oder.InvoicingAddress_ZipCode;
-				InvoicingContact_Civility = oder.InvoicingContact_Civility;
-				InvoicingContact_Name = oder.InvoicingContact_Name;
-				InvoicingContact_FirstName = oder.InvoicingContact_FirstName;
-				InvoicingContact_Email = oder.InvoicingContact_Email;
-				InvoicingContact_Phone = oder.InvoicingContact_Phone;
-				InvoicingContact_CellPhone = oder.InvoicingContact_CellPhone;
-				DeliveryAddress_Address1 = oder.DeliveryAddress_Address1;
-				DeliveryAddress_City = oder.DeliveryAddress_City
-				DeliveryAddress_ZipCode = oder.DeliveryAddress_Zipcode;
-				DeliveryContact_Civility = order.DeliveryConcact_Civility;
-				DeliveryContact_Name = order.DeliveryConcact_Name;
-				DeliveryContact_FirstName = order.DeliveryConcact_FirstName;
-				DeliveryContact_Email = order.DeliveryConcact_Email;
-				DeliveryContact_Phone = order.DeliveryConcact_Phone;
-				DeliveryContact_CellPhone = order.DeliveryConcact_CellPhone;
+				DocumentNumber = order.DocumentNumber;
+				DocumentDate = order.DocumentDate;
+				DeliveryDate = order.DeliveryDate;
+				DocumentState = order.DocumentState;
+				DiscountRate = order.DiscountRate;
+				AmountVatExcluded = order.AmountVatExcluded;
+				AmountVatExcludedWithDiscount = order.AmountVatExcludedWithDiscount;
+				AmountVatIncluded = order.AmountVatIncluded;
+				VatAmount = order.VatAmount;
+				Notes = order.Notes;
+				NotesClear = order.NotesClear;
+				InvoicingAddress_Address1 = order.InvoicingAddress_Address1;
+				InvoicingAddress_City = order.InvoicingAddress_City;
+				InvoicingAddress_ZipCode = order.InvoicingAddress_ZipCode;
+				InvoicingContact_Civility = order.InvoicingContact_Civility;
+				InvoicingContact_Name = order.InvoicingContact_Name;
+				InvoicingContact_FirstName = order.InvoicingContact_FirstName;
+				InvoicingContact_Email = order.InvoicingContact_Email;
+				InvoicingContact_Phone = order.InvoicingContact_Phone;
+				InvoicingContact_CellPhone = order.InvoicingContact_CellPhone;
+				DeliveryAddress_Address1 = order.DeliveryAddress_Address1;
+				DeliveryAddress_City = order.DeliveryAddress_City;
+				DeliveryContact_Civility = order.DeliveryContact_Civility;
+				DeliveryContact_Name = order.DeliveryContact_Name;
+				DeliveryContact_FirstName = order.DeliveryContact_FirstName;
+				DeliveryContact_Email = order.DeliveryContact_Email;
+				DeliveryContact_Phone = order.DeliveryContact_Phone;
+				DeliveryContact_CellPhone = order.DeliveryContact_CellPhone;
+				Id = order.Id;
+				SysCreatedDate = order.SysCreatedDate;
+				SysModifiedDate = order.SysModifiedDate;
+				CreatedUser = order.CreatedUser;
+				ModifiedUser = order.ModifiedUser;
 			}
 		}
 	}

@@ -44,5 +44,7 @@ namespace STIVE.ViewModels
 		public ICommand CloseWindowCommand => new SaveElement(this, save: false, closeWindow: true);
 
 		public void CloseWindow(Window window) => window.Close();
+
+		public void ToDoAfterSave() { }
 	}
 }

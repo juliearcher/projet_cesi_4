@@ -21,7 +21,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(Code), "...");
 				}*/
-				OnPropertyChanged(Code);
+				OnPropertyChanged(nameof(Code));
 			}
 		}
 
@@ -37,7 +37,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(Caption), "...");
 				}*/
-				OnPropertyChanged(Caption);
+				OnPropertyChanged(nameof(Caption));
 			}
         }
 
@@ -53,7 +53,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(Description), "...");
 				}*/
-				OnPropertyChanged(Description);
+				OnPropertyChanged(nameof(Description));
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(ClearDescription), "...");
 				}*/
-				OnPropertyChanged(ClearDescription);
+				OnPropertyChanged(nameof(ClearDescription));
 			}
 		}
 
@@ -85,7 +85,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(Notes), "...");
 				}*/
-				OnPropertyChanged(Notes);
+				OnPropertyChanged(nameof(Notes));
 			}
 		}
 
@@ -101,12 +101,12 @@ namespace STIVE.Models
 				{
 					AddError(nameof(NotesClear), "...");
 				}*/
-				OnPropertyChanged(NotesClear);
+				OnPropertyChanged(nameof(NotesClear));
 			}
 		}
 
-		private string _realStock;
-		public string RealStock
+		private float _realStock;
+		public float RealStock
 		{
 			get => _realStock;
 			set
@@ -117,12 +117,12 @@ namespace STIVE.Models
 				{
 					AddError(nameof(RealStock), "...");
 				}*/
-				OnPropertyChanged(RealStock);
+				OnPropertyChanged(nameof(RealStock));
 			}
 		}
 
-		private string virtualStock;
-		public string VirtualStock
+		private float virtualStock;
+		public float VirtualStock
 		{
 			get => virtualStock;
 			set
@@ -133,12 +133,12 @@ namespace STIVE.Models
 				{
 					AddError(nameof(VirtualStock), "...");
 				}*/
-				OnPropertyChanged(VirtualStock);
+				OnPropertyChanged(nameof(VirtualStock));
 			}
 		}
 
-		private string _salePrice;
-		public string SalePrice
+		private decimal _salePrice;
+		public decimal SalePrice
 		{
 			get => _salePrice;
 			set
@@ -149,12 +149,12 @@ namespace STIVE.Models
 				{
 					AddError(nameof(SalePrice), "...");
 				}*/
-				OnPropertyChanged(SalePrice);
+				OnPropertyChanged(nameof(SalePrice));
 			}
 		}
 
-		private string _purchasePrice;
-		public string PurchasePrice
+		private decimal _purchasePrice;
+		public decimal PurchasePrice
 		{
 			get => _purchasePrice;
 			set
@@ -165,12 +165,12 @@ namespace STIVE.Models
 				{
 					AddError(nameof(PurchasePrice), "...");
 				}*/
-				OnPropertyChanged(PurchasePrice);
+				OnPropertyChanged(nameof(PurchasePrice));
 			}
 		}
 
-		private string _vat;
-		public string Vat
+		private float _vat;
+		public float Vat
 		{
 			get => _vat;
 			set
@@ -181,12 +181,12 @@ namespace STIVE.Models
 				{
 					AddError(nameof(Vat), "...");
 				}*/
-				OnPropertyChanged(Vat);
+				OnPropertyChanged(nameof(Vat));
 			}
 		}
 
-		private string _itemFamilyId;
-		public string ItemFamilyId
+		private int? _itemFamilyId;
+		public int? ItemFamilyId
 		{
 			get => _itemFamilyId;
 			set
@@ -197,12 +197,12 @@ namespace STIVE.Models
 				{
 					AddError(nameof(ItemFamilyId), "...");
 				}*/
-				OnPropertyChanged(ItemFamilyId);
+				OnPropertyChanged(nameof(ItemFamilyId));
 			}
 		}
 
-		private string _supplierId;
-		public string SupplierId
+		private int _supplierId;
+		public int SupplierId
 		{
 			get => _supplierId;
 			set
@@ -213,28 +213,15 @@ namespace STIVE.Models
 				{
 					AddError(nameof(SupplierId), "...");
 				}*/
-				OnPropertyChanged(SupplierId);
+				OnPropertyChanged(nameof(SupplierId));
 			}
 		}
 
-		public string Caption { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Description { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string ClearDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Notes { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string NotesClear { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public float RealStock { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public float VirtualStock { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public decimal SalePrice { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public decimal PurchasePrice { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public float Vat { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public int? ItemFamilyId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public int? SupplierId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-		public int Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public DateTime SysCreatedDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public DateTime SysModifiedDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string CreatedUser { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string ModifiedUser { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public int Id { get; set; }
+		public DateTime SysCreatedDate { get; set; }
+		public DateTime SysModifiedDate { get; set; }
+		public string CreatedUser { get; set; }
+		public string ModifiedUser { get; set; }
 
 		public ItemDataError(Item item = null)
 		{
@@ -253,6 +240,11 @@ namespace STIVE.Models
 				Vat = item.Vat;
 				ItemFamilyId = item.ItemFamilyId;
 				SupplierId = item.SupplierId;
+				Id = item.Id;
+				SysCreatedDate = item.SysCreatedDate;
+				SysModifiedDate = item.SysModifiedDate;
+				CreatedUser = item.CreatedUser;
+				ModifiedUser = item.ModifiedUser;
 			}
 		}
 	}

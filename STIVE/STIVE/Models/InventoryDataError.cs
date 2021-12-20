@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace STIVE.Models
 {
-	public class IventoryDataError : DataErrorModelBase, IItem
+	public class InventoryDataError : DataErrorModelBase, IInventory
 	{
-
-		private string _documentDate;
-		public string DocumentDate
+		private DateTime _documentDate;
+		public DateTime DocumentDate
 		{
 			get => _documentDate;
 			set
@@ -22,7 +21,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DocumentDate), "...");
 				}*/
-				OnPropertyChanged(DocumentDate);
+				OnPropertyChanged(nameof(DocumentDate));
 			}
 		}
 
@@ -38,12 +37,12 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DocumentNumber), "...");
 				}*/
-				OnPropertyChanged(DocumentNumber);
+				OnPropertyChanged(nameof(DocumentNumber));
 			}
 		}
 
-		private string _documentState;
-		public string DocumentState
+		private int _documentState;
+		public int DocumentState
 		{
 			get => _documentState;
 			set
@@ -54,7 +53,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(DocumentState), "...");
 				}*/
-				OnPropertyChanged(DocumentState);
+				OnPropertyChanged(nameof(DocumentState));
 			}
 		}
 
@@ -70,7 +69,7 @@ namespace STIVE.Models
 				{
 					AddError(nameof(Notes), "...");
 				}*/
-				OnPropertyChanged(Notes);
+				OnPropertyChanged(nameof(Notes));
 			}
 		}
 
@@ -86,18 +85,16 @@ namespace STIVE.Models
 				{
 					AddError(nameof(NotesClear), "...");
 				}*/
-				OnPropertyChanged(NotesClear);
+				OnPropertyChanged(nameof(NotesClear));
 			}
 		}
 
-
-		public DateTime DocumentDate { get; set; }
-		public string DocumentNumber { get; set; }
-		public int DocumentState { get; set; }
-
-		public string Notes { get; set; }
-		public string NotesClear { get; set; }
-		public IEnumerable<InventoryLine> InventoryLines { get; set; }
+		public IEnumerable<InventoryLine> InventoryLines { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public int Id { get; set; }
+		public DateTime SysCreatedDate { get; set; }
+		public DateTime SysModifiedDate { get; set; }
+		public string CreatedUser { get; set; }
+		public string ModifiedUser { get; set; }
 
 		public InventoryDataError(Inventory inventory = null)
 		{
@@ -108,8 +105,11 @@ namespace STIVE.Models
 				DocumentState = inventory.DocumentState;
 				Notes = inventory.Notes;
 				NotesClear = inventory.NotesClear;
-				
-
+				Id = inventory.Id;
+				SysCreatedDate = inventory.SysCreatedDate;
+				SysModifiedDate = inventory.SysModifiedDate;
+				CreatedUser = inventory.CreatedUser;
+				ModifiedUser = inventory.ModifiedUser;
 			}
 		}
 	}
