@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 namespace STIVE.Models
 {
 
-	public class OrderDataError : DataErrorModelBase, IOrder
+	public class PurchaseOrderDataError : DataErrorModelBase, IPurchaseOrder
 	{
 		private string _documentNumber;
 		public string DocumentNumber
@@ -332,182 +332,37 @@ namespace STIVE.Models
 			}
 		}
 
-		private string _deliveryAddress_Address1;
-		public string DeliveryAddress_Address1
+		private int _supplierId;
+		public int SupplierId
 		{
-			get => _deliveryAddress_Address1;
+			get => _supplierId;
 			set
 			{
-				_deliveryAddress_Address1 = value;
-				ClearErrors(nameof(DeliveryAddress_Address1));
+				_supplierId = value;
+				ClearErrors(nameof(SupplierId));
 				/*if (...)
 				{
-					AddError(nameof(DeliveryAddress_Address1), "...");
+					AddError(nameof(SupplierId), "...");
 				}*/
-				OnPropertyChanged(nameof(DeliveryAddress_Address1));
+				OnPropertyChanged(nameof(SupplierId));
 			}
 		}
 
-		private string _deliveryAddress_City;
-		public string DeliveryAddress_City
+		private IEnumerable<IPurchaseOrderLine> _purchasePurchaseOrderLines;
+		public IEnumerable<IPurchaseOrderLine> PurchaseOrderLines
 		{
-			get => _deliveryAddress_City;
+			get => _purchasePurchaseOrderLines;
 			set
 			{
-				_deliveryAddress_City = value;
-				ClearErrors(nameof(DeliveryAddress_City));
+				_purchasePurchaseOrderLines = value;
+				ClearErrors(nameof(PurchaseOrderLines));
 				/*if (...)
 				{
-					AddError(nameof(DeliveryAddress_City), "...");
+					AddError(nameof(PurchaseOrderLines), "...");
 				}*/
-				OnPropertyChanged(nameof(DeliveryAddress_City));
+				OnPropertyChanged(nameof(PurchaseOrderLines));
 			}
 		}
-
-		private string _deliveryAddress_ZipCode;
-		public string DeliveryAddress_ZipCode
-		{
-			get => _deliveryAddress_ZipCode;
-			set
-			{
-				_deliveryAddress_ZipCode = value;
-				ClearErrors(nameof(DeliveryAddress_ZipCode));
-				/*if (...)
-				{
-					AddError(nameof(DeliveryAddress_ZipCode), "...");
-				}*/
-				OnPropertyChanged(nameof(DeliveryAddress_ZipCode));
-			}
-		}
-
-		private string _deliveryContact_Civility;
-		public string DeliveryContact_Civility
-		{
-			get => _deliveryContact_Civility;
-			set
-			{
-				_deliveryContact_Civility = value;
-				ClearErrors(nameof(DeliveryContact_Civility));
-				/*if (...)
-				{
-					AddError(nameof(DeliveryContact_Civility), "...");
-				}*/
-				OnPropertyChanged(nameof(DeliveryContact_Civility));
-			}
-		}
-
-		private string _deliveryContact_Name;
-		public string DeliveryContact_Name
-		{
-			get => _deliveryContact_Name;
-			set
-			{
-				_deliveryContact_Name = value;
-				ClearErrors(nameof(DeliveryContact_Name));
-				/*if (...)
-				{
-					AddError(nameof(DeliveryContact_Name), "...");
-				}*/
-				OnPropertyChanged(nameof(DeliveryContact_Name));
-			}
-		}
-
-		private string _deliveryContact_FirstName;
-		public string DeliveryContact_FirstName
-		{
-			get => _deliveryContact_FirstName;
-			set
-			{
-				_deliveryContact_FirstName = value;
-				ClearErrors(nameof(DeliveryContact_FirstName));
-				/*if (...)
-				{
-					AddError(nameof(DeliveryContact_FirstName), "...");
-				}*/
-				OnPropertyChanged(nameof(DeliveryContact_FirstName));
-			}
-		}
-
-		private string _deliveryContact_Email;
-		public string DeliveryContact_Email
-		{
-			get => _deliveryContact_Email;
-			set
-			{
-				_deliveryContact_Email = value;
-				ClearErrors(nameof(DeliveryContact_Email));
-				/*if (...)
-				{
-					AddError(nameof(DeliveryContact_Email), "...");
-				}*/
-				OnPropertyChanged(nameof(DeliveryContact_Email));
-			}
-		}
-
-		private string _deliveryContact_Phone;
-		public string DeliveryContact_Phone
-		{
-			get => _deliveryContact_Phone;
-			set
-			{
-				_deliveryContact_Phone = value;
-				ClearErrors(nameof(DeliveryContact_Phone));
-				/*if (...)
-				{
-					AddError(nameof(DeliveryContact_Phone), "...");
-				}*/
-				OnPropertyChanged(nameof(DeliveryContact_Phone));
-			}
-		}
-
-		private string _deliveryContact_CellPhone;
-		public string DeliveryContact_CellPhone
-		{
-			get => _deliveryContact_CellPhone;
-			set
-			{
-				_deliveryContact_CellPhone = value;
-				ClearErrors(nameof(DeliveryContact_CellPhone));
-				/*if (...)
-				{
-					AddError(nameof(DeliveryContact_CellPhone), "...");
-				}*/
-				OnPropertyChanged(nameof(DeliveryContact_CellPhone));
-			}
-		}
-
-		private int _customerId;
-		public int CustomerId
-		{
-			get => _customerId;
-			set
-			{
-				_customerId = value;
-				ClearErrors(nameof(CustomerId));
-				/*if (...)
-				{
-					AddError(nameof(CustomerId), "...");
-				}*/
-				OnPropertyChanged(nameof(CustomerId));
-			}
-		}
-
-		private IEnumerable<IOrderLine> _orderLines;
-		public IEnumerable<IOrderLine> OrderLines
-		{
-			get => _orderLines;
-			set
-			{
-				_orderLines = value;
-				ClearErrors(nameof(OrderLines));
-				/*if (...)
-				{
-					AddError(nameof(OrderLines), "...");
-				}*/
-				OnPropertyChanged(nameof(OrderLines));
-			}
-		}
-
 
 		public int Id { get; set; }
 		public DateTime SysCreatedDate { get; set; }
@@ -515,7 +370,7 @@ namespace STIVE.Models
 		public string CreatedUser { get; set; }
 		public string ModifiedUser { get; set; }
 
-		public OrderDataError(Order order = null)
+		public PurchaseOrderDataError(PurchaseOrder order = null)
 		{
 			if (order != null)
 			{
@@ -539,15 +394,7 @@ namespace STIVE.Models
 				InvoicingContact_Email = order.InvoicingContact_Email;
 				InvoicingContact_Phone = order.InvoicingContact_Phone;
 				InvoicingContact_CellPhone = order.InvoicingContact_CellPhone;
-				DeliveryAddress_Address1 = order.DeliveryAddress_Address1;
-				DeliveryAddress_City = order.DeliveryAddress_City;
-				DeliveryContact_Civility = order.DeliveryContact_Civility;
-				DeliveryContact_Name = order.DeliveryContact_Name;
-				DeliveryContact_FirstName = order.DeliveryContact_FirstName;
-				DeliveryContact_Email = order.DeliveryContact_Email;
-				DeliveryContact_Phone = order.DeliveryContact_Phone;
-				DeliveryContact_CellPhone = order.DeliveryContact_CellPhone;
-				OrderLines = (IEnumerable<OrderLineDataError>)order.OrderLines;
+				PurchaseOrderLines = (IEnumerable<PurchaseOrderLineDataError>)order.PurchaseOrderLines;
 
 				Id = order.Id;
 				SysCreatedDate = order.SysCreatedDate;

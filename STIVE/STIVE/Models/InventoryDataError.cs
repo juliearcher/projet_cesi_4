@@ -89,7 +89,22 @@ namespace STIVE.Models
 			}
 		}
 
-		public IEnumerable<InventoryLine> InventoryLines { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		private IEnumerable<IInventoryLine> _inventoryLines;
+		public IEnumerable<IInventoryLine> InventoryLines
+		{
+			get => _inventoryLines;
+			set
+			{
+				_inventoryLines = value;
+				ClearErrors(nameof(InventoryLines));
+				/*if (...)
+				{
+					AddError(nameof(InventoryLines), "...");
+				}*/
+				OnPropertyChanged(nameof(InventoryLines));
+			}
+		}
+
 		public int Id { get; set; }
 		public DateTime SysCreatedDate { get; set; }
 		public DateTime SysModifiedDate { get; set; }
@@ -105,6 +120,7 @@ namespace STIVE.Models
 				DocumentState = inventory.DocumentState;
 				Notes = inventory.Notes;
 				NotesClear = inventory.NotesClear;
+				InventoryLines = (IEnumerable<InventoryLineDataError>)inventory.InventoryLines;
 				Id = inventory.Id;
 				SysCreatedDate = inventory.SysCreatedDate;
 				SysModifiedDate = inventory.SysModifiedDate;

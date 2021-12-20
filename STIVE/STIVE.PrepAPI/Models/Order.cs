@@ -49,6 +49,6 @@ namespace STIVE.PrepAPI.Models
 
 		public int CustomerId { get; set; }
 
-		public IEnumerable<OrderLine> OrderLines { get; set; }
+		public IEnumerable<IOrderLine> OrderLines { get; set; }
 	}
 }

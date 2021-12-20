@@ -34,6 +34,6 @@ namespace STIVE.PrepAPI.Models
 		#endregion
 
 		public int SupplierId { get; set; }
-		public IEnumerable<PurchaseOrderLine> PurchaseOrderLines { get; set; }
+		public IEnumerable<IPurchaseOrderLine> PurchaseOrderLines { get; set; }
 	}
 }
