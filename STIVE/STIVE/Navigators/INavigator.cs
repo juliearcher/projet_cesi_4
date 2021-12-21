@@ -21,7 +21,8 @@ namespace STIVE.Navigators
 
 	public enum FormViewType
 	{
-		CustomerForm
+		CustomerForm,
+		OrderForm
 	};
 
 	public interface INavigator

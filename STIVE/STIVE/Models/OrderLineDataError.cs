@@ -38,6 +38,24 @@ namespace STIVE.Models
 					AddError(nameof(DiscountRate), "...");
 				}*/
 				OnPropertyChanged(nameof(DiscountRate));
+				OnPropertyChanged(nameof(NetAmountWithDiscount));
+				OnPropertyChanged(nameof(NetAmountVatIncluded));
+			}
+		}
+
+		private string _caption;
+		public string Caption
+		{
+			get => _caption;
+			set
+			{
+				_caption = value;
+				/*ClearErrors(nameof(Caption));
+				if (...)
+				{
+					AddError(nameof(Caption), "...");
+				}*/
+				OnPropertyChanged(nameof(Caption));
 			}
 		}
 
@@ -86,6 +104,9 @@ namespace STIVE.Models
 					AddError(nameof(SalePrice), "...");
 				}*/
 				OnPropertyChanged(nameof(SalePrice));
+				OnPropertyChanged(nameof(NetAmount));
+				OnPropertyChanged(nameof(NetAmountWithDiscount));
+				OnPropertyChanged(nameof(NetAmountVatIncluded));
 			}
 		}
 
@@ -102,11 +123,12 @@ namespace STIVE.Models
 					AddError(nameof(Vat), "...");
 				}*/
 				OnPropertyChanged(nameof(Vat));
+				OnPropertyChanged(nameof(NetAmountVatIncluded));
 			}
 		}
 
-		private int? _itemId;
-		public int? ItemId
+		private int _itemId;
+		public int ItemId
 		{
 			get => _itemId;
 			set
@@ -134,7 +156,48 @@ namespace STIVE.Models
 					AddError(nameof(Quantity), "...");
 				}*/
 				OnPropertyChanged(nameof(Quantity));
+				OnPropertyChanged(nameof(NetAmount));
+				OnPropertyChanged(nameof(NetAmountWithDiscount));
+				OnPropertyChanged(nameof(NetAmountVatIncluded));
 			}
+		}
+
+		private Item _item;
+		public Item Item
+		{
+			get => _item;
+			set
+			{
+				_item = value;
+				if (_item! != null)
+				{
+					Caption = _item.Caption;
+					ClearDescription = _item.ClearDescription;
+					SalePrice = _item.SalePrice;
+					Vat = _item.Vat;
+				}
+				/*ClearErrors(nameof(Item));
+				if (...)
+				{
+					AddError(nameof(Item), "...");
+				}*/
+				OnPropertyChanged(nameof(Item));
+			}
+		}
+
+		public decimal NetAmount
+		{
+			get => Quantity * SalePrice;
+		}
+
+		public decimal NetAmountWithDiscount
+		{
+			get => (Quantity * SalePrice)*(decimal)((100 - DiscountRate)/100);
+		}
+
+		public decimal NetAmountVatIncluded
+		{
+			get => NetAmountWithDiscount + NetAmountWithDiscount * (decimal)(Vat/100);
 		}
 
 		public int Id { get; set; }

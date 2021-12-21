@@ -25,6 +25,12 @@
     <Compile Update="Controls\NavigationBar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\OrderForm\OrderFormLinesDataGrid.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\OrderForm\OrderFormInfos.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\OrderList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -40,7 +46,7 @@
     <Compile Update="Controls\SupplierList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\CustomerFormWindowView.xaml.cs">
+    <Compile Update="Views\Forms\CustomerFormWindowView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\CustomerTabView.xaml.cs">
@@ -53,6 +59,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ItemTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Forms\OrderFormWindowView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\OrderTabView.xaml.cs">
@@ -84,6 +93,12 @@
     <Page Update="Controls\NavigationBar.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Controls\OrderForm\OrderFormLinesDataGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\OrderForm\OrderFormInfos.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Controls\OrderList.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -102,7 +117,7 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\CustomerFormWindowView.xaml">
+    <Page Update="Views\Forms\CustomerFormWindowView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CustomerTabView.xaml">
@@ -115,6 +130,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ItemTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Forms\OrderFormWindowView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\OrderTabView.xaml">

@@ -15,6 +15,8 @@ namespace STIVE.Profiles
 		{
 			CreateMap<ApiModelBase, DataErrorModelBase>().ReverseMap();
 			CreateMap<Customer, CustomerDataError>().ReverseMap();
+			CreateMap<Order, OrderDataError>().ReverseMap();
+			CreateMap<OrderLine, OrderLineDataError>().ReverseMap();
 		}
 	}
 }

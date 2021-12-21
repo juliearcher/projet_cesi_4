@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +50,6 @@ namespace STIVE.PrepAPI.Models
 
 		public int CustomerId { get; set; }
 
-		public IEnumerable<IOrderLine> OrderLines { get; set; }
+		public IEnumerable<IOrderLine> OrderLines { get; set; } = new ObservableCollection<OrderLine>();
 	}
 }

@@ -20,7 +20,7 @@
         <GridViewColumn Header="Adresse de livraison" DisplayMemberBinding="{Binding DeliveryAddress_Address1}"/>
         <GridViewColumn Header="Code de livraison" DisplayMemberBinding="{Binding DeliveryAddress_ZipCode}"/>
         <GridViewColumn Header="Prenom du contact" DisplayMemberBinding="{Binding DeliveryContact_Name}"/>
-        <GridViewColumn Header="Nom du contact" DisplayMemberBinding="{Binding DeliveryContact_Firstname}"/>
+        <GridViewColumn Header="Nom du contact" DisplayMemberBinding="{Binding DeliveryContact_FirstName}"/>
         <GridViewColumn Header="Email du contact" DisplayMemberBinding="{Binding DeliveryContact_Email}"/>
 			</GridView>
 		</ListView.View>
