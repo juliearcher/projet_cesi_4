@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace API.Controllers
 {
@@ -46,7 +47,7 @@ namespace API.Controllers
 			// TODO check if infos are valid
 			var purchaseOrderModel = _mapper.Map<PurchaseOrder>(purchaseOrderCreateDto);
 			_unitOfWork.PurchaseOrderRepository.Add(purchaseOrderModel);
-			RemoveItemStock(purchaseOrderModel.PurchaseOrderLines, purchaseOrderModel.DocumentState);
+			UpdateItemStock(purchaseOrderModel.PurchaseOrderLines, purchaseOrderModel.DocumentState);
 			try
 			{
 				_unitOfWork.SaveChanges();
@@ -67,12 +68,13 @@ namespace API.Controllers
 			var purchaseOrder = _unitOfWork.PurchaseOrderRepository.GetSingle(id);
 			if (purchaseOrder == null)
 				return NotFound();
-			UpdateItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
+			if (purchaseOrder.DocumentState == (int)PurchaseOrder.PurchaseOrderState.Received)
+				return BadRequest(new { title = "Erreur", errors = "Commande déjà réceptionnée, impossible de modifier." });
 			_mapper.Map(purchaseOrderUpdateDto, purchaseOrder);
 			_unitOfWork.PurchaseOrderRepository.Update(purchaseOrder);
-			RemoveItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
 			try
 			{
+				UpdatePurchaseOrderLines(purchaseOrderUpdateDto.PurchaseOrderLines, id, purchaseOrder.DocumentState);
 				_unitOfWork.SaveChanges();
 			}
 			catch (Exception e)
@@ -80,6 +82,50 @@ namespace API.Controllers
 				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
 			}
 			return NoContent();
+		}
+
+		private void UpdatePurchaseOrderLines(IEnumerable<PurchaseOrderLineUpdateDto> purchaseOrderLineDtos, int purchaseOrderId, int state)
+		{
+			PurchaseOrderLine line;
+			PurchaseOrderLineUpdateDto line2;
+			int i;
+			List<PurchaseOrderLine> purchaseOrderLines = (List<PurchaseOrderLine>)(_unitOfWork.PurchaseOrderLineRepository.FindBy(purchaseOrderLine => purchaseOrderLine.PurchaseOrderId == purchaseOrderId).OrderBy(line => line.LineOrder))?.ToList();
+			purchaseOrderLineDtos = (List<PurchaseOrderLineUpdateDto>)purchaseOrderLineDtos.OrderBy(line => line.LineOrder)?.ToList();
+			if (purchaseOrderLineDtos == null)
+				purchaseOrderLineDtos = new List<PurchaseOrderLineUpdateDto>();
+			if (purchaseOrderLines == null)
+				purchaseOrderLines = new List<PurchaseOrderLine>();
+			RemoveItemStock(purchaseOrderLines, state);
+
+			for (i = 0; i < purchaseOrderLineDtos.Count() && i < purchaseOrderLines.Count(); ++i)
+			{
+				line = purchaseOrderLines.ElementAt(i);
+				line2 = purchaseOrderLineDtos.ElementAt(i);
+
+				_mapper.Map(purchaseOrderLineDtos.ElementAt(i), purchaseOrderLines.ElementAt(i));
+				purchaseOrderLines.ElementAt(i).LineOrder = i;
+			}
+			if (i < purchaseOrderLineDtos.Count())
+			{
+				for (; i < purchaseOrderLineDtos.Count(); ++i)
+				{
+					line = _mapper.Map<PurchaseOrderLine>(purchaseOrderLineDtos.ElementAt(i));
+					line.PurchaseOrderId = purchaseOrderId;
+					line.LineOrder = i;
+					line.CreatedUser = purchaseOrderLineDtos.ElementAt(i).ModifiedUser;
+					_unitOfWork.PurchaseOrderLineRepository.Add(line);
+					((List<PurchaseOrderLine>)purchaseOrderLines).Add(line);
+				}
+			}
+			else if (i < purchaseOrderLines.Count())
+			{
+				while (i < purchaseOrderLines.Count())
+				{
+					_unitOfWork.PurchaseOrderLineRepository.Delete(purchaseOrderLines.ElementAt(i));
+					((List<PurchaseOrderLine>)purchaseOrderLines).RemoveAt(i);
+				}
+			}
+			UpdateItemStock(purchaseOrderLines, state);
 		}
 
 		// PATCH api/purchaseOrders/{id}
@@ -90,14 +136,14 @@ namespace API.Controllers
 			var purchaseOrder = _unitOfWork.PurchaseOrderRepository.GetSingle(id);
 			if (purchaseOrder == null)
 				return NotFound();
-			UpdateItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
+			RemoveItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
 			var purchaseOrderUpdateDto = _mapper.Map<PurchaseOrderUpdateDto>(purchaseOrder);
 			patchDocument.ApplyTo(purchaseOrderUpdateDto, ModelState);
 			if (!TryValidateModel(purchaseOrderUpdateDto))
 				return ValidationProblem(ModelState);
 			_mapper.Map(purchaseOrderUpdateDto, purchaseOrder);
 			_unitOfWork.PurchaseOrderRepository.Update(purchaseOrder);
-			RemoveItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
+			UpdateItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
 			try
 			{
 				_unitOfWork.SaveChanges();
