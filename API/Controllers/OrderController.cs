@@ -137,16 +137,19 @@ namespace API.Controllers
 			var order = _unitOfWork.OrderRepository.GetSingle(id);
 			if (order == null)
 				return NotFound();
-			//UpdateItemStock(order.OrderLines, order.DocumentState);
+			if (order.DocumentState == (int)Order.OrderState.Delivered)
+				return BadRequest(new { title = "Erreur", errors = "Commande déjà livrée, impossible de modifier." });
+			List<OrderLine> orderLines = (List<OrderLine>)(_unitOfWork.OrderLineRepository.FindBy(orderLine => orderLine.OrderId == id).OrderBy(line => line.LineOrder))?.ToList();
+			UpdateItemStock(order.OrderLines, order.DocumentState);
 			var orderUpdateDto = _mapper.Map<OrderUpdateDto>(order);
 			patchDocument.ApplyTo(orderUpdateDto, ModelState);
 			if (!TryValidateModel(orderUpdateDto))
 				return ValidationProblem(ModelState);
 			_mapper.Map(orderUpdateDto, order);
 			_unitOfWork.OrderRepository.Update(order);
-			//RemoveItemStock(order.OrderLines, order.DocumentState);
 			try
 			{
+				RemoveItemStock(order.OrderLines, order.DocumentState);
 				_unitOfWork.SaveChanges();
 			}
 			catch (Exception e)
@@ -164,9 +167,13 @@ namespace API.Controllers
 			var order = _unitOfWork.OrderRepository.GetSingle(id);
 			if (order == null)
 				return NotFound();
+			if (order.DocumentState == (int)Order.OrderState.Delivered)
+				return BadRequest(new { title = "Erreur", errors = "Commande déjà livrée, impossible de supprimer." });
 			_unitOfWork.OrderRepository.Delete(order);
 			try
 			{
+				List<OrderLine> orderLines = (List<OrderLine>)(_unitOfWork.OrderLineRepository.FindBy(orderLine => orderLine.OrderId == id).OrderBy(line => line.LineOrder))?.ToList();
+				UpdateItemStock(orderLines, order.DocumentState);
 				_unitOfWork.SaveChanges();
 			}
 			catch (Exception e)
@@ -184,10 +191,9 @@ namespace API.Controllers
 			{
 				if (line.ItemId == null || line.Quantity <= 0) continue;
 				var item = _unitOfWork.ItemRepository.GetSingle((int)line.ItemId);
+				item.VirtualStock += line.Quantity;
 				if (state == (int)Order.OrderState.Delivered)
 					item.RealStock += line.Quantity;
-				else
-					item.VirtualStock += line.Quantity;
 				_unitOfWork.ItemRepository.Update(item);
 			}
 		}
@@ -199,10 +205,9 @@ namespace API.Controllers
 			{
 				if (line.ItemId == null || line.Quantity <= 0) continue;
 				var item = _unitOfWork.ItemRepository.GetSingle((int)line.ItemId);
+				item.VirtualStock -= line.Quantity;
 				if (state == (int)Order.OrderState.Delivered)
 					item.RealStock -= line.Quantity;
-				else
-					item.VirtualStock -= line.Quantity;
 				_unitOfWork.ItemRepository.Update(item);
 			}
 		}

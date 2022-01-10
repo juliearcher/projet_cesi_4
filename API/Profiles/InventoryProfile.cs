@@ -14,7 +14,7 @@ namespace API.Profiles
 			CreateMap<InventoryCreateDto, Inventory>();
 			// InventoryUpdateDto to Inventory
 			// For PUT and PATCH
-			CreateMap<InventoryUpdateDto, Inventory>();
+			CreateMap<InventoryUpdateDto, Inventory>().ForMember(elem => elem.InventoryLines, opt => opt.Ignore()); ;
 			// Inventory to InventoryUpdateDto
 			// For PATCH
 			CreateMap<Inventory, InventoryUpdateDto>();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace API.Controllers
 {
@@ -66,10 +67,15 @@ namespace API.Controllers
 			var inventory = _unitOfWork.InventoryRepository.GetSingle(id);
 			if (inventory == null)
 				return NotFound();
+			if (inventory.DocumentState == (int)Inventory.InventoryState.Validated)
+				return BadRequest(new { title = "Erreur", errors = "Inventaire déjà validé, impossible de modifier." });
 			_mapper.Map(inventoryUpdateDto, inventory);
 			_unitOfWork.InventoryRepository.Update(inventory);
 			try
 			{
+				UpdateInventoryLines(inventoryUpdateDto.InventoryLines, id);
+				if (inventory.DocumentState == (int)Inventory.InventoryState.Validated)
+					UpdateItemStock(id);
 				_unitOfWork.SaveChanges();
 			}
 			catch (Exception e)
@@ -77,6 +83,49 @@ namespace API.Controllers
 				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
 			}
 			return NoContent();
+		}
+
+		private void UpdateInventoryLines(IEnumerable<InventoryLineUpdateDto> inventoryLineDtos, int inventoryId)
+		{
+			InventoryLine line;
+			InventoryLineUpdateDto line2;
+			int i;
+			List<InventoryLine> inventoryLines = (List<InventoryLine>)(_unitOfWork.InventoryLineRepository.FindBy(inventoryLine => inventoryLine.InventoryId == inventoryId).OrderBy(line => line.LineOrder))?.ToList();
+			inventoryLineDtos = (List<InventoryLineUpdateDto>)inventoryLineDtos.OrderBy(line => line.LineOrder)?.ToList();
+			if (inventoryLineDtos == null)
+				inventoryLineDtos = new List<InventoryLineUpdateDto>();
+			if (inventoryLines == null)
+				inventoryLines = new List<InventoryLine>();
+
+			for (i = 0; i < inventoryLineDtos.Count() && i < inventoryLines.Count(); ++i)
+			{
+				line = inventoryLines.ElementAt(i);
+				line2 = inventoryLineDtos.ElementAt(i);
+
+				_mapper.Map(inventoryLineDtos.ElementAt(i), inventoryLines.ElementAt(i));
+				inventoryLines.ElementAt(i).LineOrder = i;
+			}
+			if (i < inventoryLineDtos.Count())
+			{
+				for (; i < inventoryLineDtos.Count(); ++i)
+				{
+					line = _mapper.Map<InventoryLine>(inventoryLineDtos.ElementAt(i));
+					line.InventoryId = inventoryId;
+					line.LineOrder = i;
+					line.CreatedUser = inventoryLineDtos.ElementAt(i).ModifiedUser;
+					_unitOfWork.InventoryLineRepository.Add(line);
+					((List<InventoryLine>)inventoryLines).Add(line);
+				}
+			}
+			else if (i < inventoryLines.Count())
+			{
+				while (i < inventoryLines.Count())
+				{
+					_unitOfWork.InventoryLineRepository.Delete(inventoryLines.ElementAt(i));
+					((List<InventoryLine>)inventoryLines).RemoveAt(i);
+
+				}
+			}
 		}
 
 		// PATCH api/inventories/{id}
@@ -87,11 +136,15 @@ namespace API.Controllers
 			var inventory = _unitOfWork.InventoryRepository.GetSingle(id);
 			if (inventory == null)
 				return NotFound();
+			if (inventory.DocumentState == (int)Inventory.InventoryState.Validated)
+				return BadRequest(new { title = "Erreur", errors = "Inventaire déjà validé, impossible de modifier." });
 			var inventoryUpdateDto = _mapper.Map<InventoryUpdateDto>(inventory);
 			patchDocument.ApplyTo(inventoryUpdateDto, ModelState);
 			if (!TryValidateModel(inventoryUpdateDto))
 				return ValidationProblem(ModelState);
 			_mapper.Map(inventoryUpdateDto, inventory);
+			if (inventory.DocumentState == (int)Inventory.InventoryState.Validated)
+				UpdateItemStock(id);
 			_unitOfWork.InventoryRepository.Update(inventory);
 			try
 			{
@@ -112,6 +165,8 @@ namespace API.Controllers
 			var inventory = _unitOfWork.InventoryRepository.GetSingle(id);
 			if (inventory == null)
 				return NotFound();
+			if (inventory.DocumentState == (int)Inventory.InventoryState.Validated)
+				return BadRequest(new { title = "Erreur", errors = "Inventaire déjà validé, impossible de supprimer." });
 			_unitOfWork.InventoryRepository.Delete(inventory);
 			try
 			{
@@ -122,6 +177,20 @@ namespace API.Controllers
 				return BadRequest(new {title = "Database error", errors = e.InnerException.Message });
 			}
 			return NoContent();
+		}
+
+		private void UpdateItemStock(int id)
+		{
+			List<InventoryLine> inventoryLines = (List<InventoryLine>)(_unitOfWork.InventoryLineRepository.FindBy(inventoryLine => inventoryLine.InventoryId == id).OrderBy(line => line.LineOrder))?.ToList();
+			if (inventoryLines == null)
+				return;
+			foreach (InventoryLine line in inventoryLines)
+			{
+				var item = _unitOfWork.ItemRepository.GetSingle((int)line.ItemId);
+				item.VirtualStock = line.NewStock;
+				item.RealStock = line.NewStock;
+				_unitOfWork.ItemRepository.Update(item);
+			}
 		}
 	}
 }

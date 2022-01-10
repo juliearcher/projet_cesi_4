@@ -136,6 +136,8 @@ namespace API.Controllers
 			var purchaseOrder = _unitOfWork.PurchaseOrderRepository.GetSingle(id);
 			if (purchaseOrder == null)
 				return NotFound();
+			if (purchaseOrder.DocumentState == (int)PurchaseOrder.PurchaseOrderState.Received)
+				return BadRequest(new { title = "Erreur", errors = "Commande déjà réceptionnée, impossible de modifier." });
 			RemoveItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
 			var purchaseOrderUpdateDto = _mapper.Map<PurchaseOrderUpdateDto>(purchaseOrder);
 			patchDocument.ApplyTo(purchaseOrderUpdateDto, ModelState);
@@ -163,9 +165,13 @@ namespace API.Controllers
 			var purchaseOrder = _unitOfWork.PurchaseOrderRepository.GetSingle(id);
 			if (purchaseOrder == null)
 				return NotFound();
+			if (purchaseOrder.DocumentState == (int)PurchaseOrder.PurchaseOrderState.Received)
+				return BadRequest(new { title = "Erreur", errors = "Commande déjà réceptionnée, impossible de supprimer." });
 			_unitOfWork.PurchaseOrderRepository.Delete(purchaseOrder);
 			try
 			{
+				List<PurchaseOrderLine> purchaseOrderLines = (List<PurchaseOrderLine>)(_unitOfWork.PurchaseOrderLineRepository.FindBy(orderLine => orderLine.PurchaseOrderId == id).OrderBy(line => line.LineOrder))?.ToList();
+				RemoveItemStock(purchaseOrderLines, purchaseOrder.DocumentState);
 				_unitOfWork.SaveChanges();
 			}
 			catch (Exception e)
@@ -180,10 +186,9 @@ namespace API.Controllers
 			{
 				if (line.ItemId == null || line.Quantity <= 0) continue;
 				var item = _unitOfWork.ItemRepository.GetSingle((int)line.ItemId);
+				item.VirtualStock += line.Quantity;
 				if (state == (int)Order.OrderState.Delivered)
 					item.RealStock += line.Quantity;
-				else
-					item.VirtualStock += line.Quantity;
 				_unitOfWork.ItemRepository.Update(item);
 			}
 		}
@@ -193,10 +198,9 @@ namespace API.Controllers
 			{
 				if (line.ItemId == null || line.Quantity <= 0) continue;
 				var item = _unitOfWork.ItemRepository.GetSingle((int)line.ItemId);
+				item.VirtualStock -= line.Quantity;
 				if (state == (int)PurchaseOrder.PurchaseOrderState.Received)
 					item.RealStock -= line.Quantity;
-				else
-					item.VirtualStock -= line.Quantity;
 				_unitOfWork.ItemRepository.Update(item);
 			}
 		}
