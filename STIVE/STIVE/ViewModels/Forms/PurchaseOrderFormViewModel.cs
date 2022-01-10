@@ -191,7 +191,6 @@ namespace STIVE.ViewModels
 				var newLine = new PurchaseOrderLineDataError();
 				newLine.PropertyChanged += _viewModel.LineChanged;
 				newLine.LineOrder = (_viewModel.NewElem as PurchaseOrderDataError).PurchaseOrderLines.Count();
-				var test = (_viewModel.NewElem as PurchaseOrderDataError).PurchaseOrderLines;
 				((_viewModel.NewElem as PurchaseOrderDataError).PurchaseOrderLines as ObservableCollection<PurchaseOrderLineDataError>).Add(newLine);
 			}
 		}

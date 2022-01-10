@@ -1,6 +1,7 @@
 ﻿using STIVE.PrepAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -120,13 +121,14 @@ namespace STIVE.Models
 				DocumentState = inventory.DocumentState;
 				Notes = inventory.Notes;
 				NotesClear = inventory.NotesClear;
-				InventoryLines = (IEnumerable<InventoryLineDataError>)inventory.InventoryLines;
 				Id = inventory.Id;
 				SysCreatedDate = inventory.SysCreatedDate;
 				SysModifiedDate = inventory.SysModifiedDate;
 				CreatedUser = inventory.CreatedUser;
 				ModifiedUser = inventory.ModifiedUser;
 			}
+			if (InventoryLines == null)
+				InventoryLines = new ObservableCollection<InventoryLineDataError>();
 		}
 	}
 }

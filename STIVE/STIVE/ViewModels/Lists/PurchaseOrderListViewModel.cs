@@ -77,6 +77,7 @@ namespace STIVE.ViewModels
 					await _vm.DeliverPurchaseOrder();
 					MessageBox.Show("Commande reçue");
 					((PurchaseOrder)_vm.SelectedItem).DocumentState = (int)IPurchaseOrder.PurchaseOrderState.Received;
+					_vm.LoadList();
 				}
 				catch (ApiException e)
 				{

@@ -57,6 +57,22 @@ namespace STIVE.Models
 			}
 		}
 
+		private float _oldStock;
+		public float OldStock
+		{
+			get => _oldStock;
+			set
+			{
+				_oldStock = value;
+				/*ClearErrors(nameof(OldStock));
+				if (...)
+				{
+					AddError(nameof(OldStock), "...");
+				}*/
+				OnPropertyChanged(nameof(OldStock));
+			}
+		}
+
 		private int _newStock;
 		public int NewStock
 		{
@@ -86,6 +102,28 @@ namespace STIVE.Models
 					AddError(nameof(ItemId), "...");
 				}*/
 				OnPropertyChanged(nameof(ItemId));
+			}
+		}
+
+		private Item _item;
+		public Item Item
+		{
+			get => _item;
+			set
+			{
+				_item = value;
+				if (_item! != null)
+				{
+					ClearDescription = _item.ClearDescription;
+					ItemId = value.Id;
+					OldStock = value.RealStock;
+				}
+				/*ClearErrors(nameof(Item));
+				if (...)
+				{
+					AddError(nameof(Item), "...");
+				}*/
+				OnPropertyChanged(nameof(Item));
 			}
 		}
 
