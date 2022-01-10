@@ -187,7 +187,7 @@ namespace API.Controllers
 			foreach (InventoryLine line in inventoryLines)
 			{
 				var item = _unitOfWork.ItemRepository.GetSingle((int)line.ItemId);
-				item.VirtualStock = line.NewStock;
+				item.VirtualStock = line.NewStock + item.VirtualStock - item.RealStock;
 				item.RealStock = line.NewStock;
 				_unitOfWork.ItemRepository.Update(item);
 			}
