@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
-
+using System.Collections.ObjectModel;
 
 namespace STIVE.Models
 {
@@ -290,7 +290,7 @@ namespace STIVE.Models
 			get => _invoicingContact_Email;
 			set
 			{
-				_invoicingContact_Civility = value;
+				_invoicingContact_Email = value;
 				ClearErrors(nameof(InvoicingContact_Email));
 				/*if (...)
 				{
@@ -364,6 +364,55 @@ namespace STIVE.Models
 			}
 		}
 
+		private decimal _netAmount;
+		public decimal NetAmount
+		{
+			get => _netAmount;
+			set
+			{
+				_netAmount = value;
+				ClearErrors(nameof(NetAmount));
+				/*if (...)
+				{
+					AddError(nameof(NetAmount), "...");
+				}*/
+				OnPropertyChanged(nameof(NetAmount));
+			}
+
+		}
+		private decimal _netAmountWithDiscount;
+		public decimal NetAmountWithDiscount
+		{
+			get => _netAmountWithDiscount;
+			set
+			{
+				_netAmountWithDiscount = value;
+				ClearErrors(nameof(NetAmountWithDiscount));
+				/*if (...)
+				{
+					AddError(nameof(NetAmountWithDiscount), "...");
+				}*/
+				OnPropertyChanged(nameof(NetAmountWithDiscount));
+			}
+
+		}
+		private decimal _netAmountVatIncluded;
+		public decimal NetAmountVatIncluded
+		{
+			get => _netAmountVatIncluded;
+			set
+			{
+				_netAmountVatIncluded = value;
+				ClearErrors(nameof(NetAmountVatIncluded));
+				/*if (...)
+				{
+					AddError(nameof(NetAmountVatIncluded), "...");
+				}*/
+				OnPropertyChanged(nameof(NetAmountVatIncluded));
+			}
+
+		}
+
 		public int Id { get; set; }
 		public DateTime SysCreatedDate { get; set; }
 		public DateTime SysModifiedDate { get; set; }
@@ -394,7 +443,7 @@ namespace STIVE.Models
 				InvoicingContact_Email = order.InvoicingContact_Email;
 				InvoicingContact_Phone = order.InvoicingContact_Phone;
 				InvoicingContact_CellPhone = order.InvoicingContact_CellPhone;
-				PurchaseOrderLines = (IEnumerable<PurchaseOrderLineDataError>)order.PurchaseOrderLines;
+				SupplierId = order.SupplierId;
 
 				Id = order.Id;
 				SysCreatedDate = order.SysCreatedDate;
@@ -402,6 +451,24 @@ namespace STIVE.Models
 				CreatedUser = order.CreatedUser;
 				ModifiedUser = order.ModifiedUser;
 			}
+			if (PurchaseOrderLines == null)
+				PurchaseOrderLines = new ObservableCollection<PurchaseOrderLineDataError>();
+		}
+
+		public void LineAmountsChanged()
+		{
+			decimal netAmount = 0;
+			decimal netAmountWithDiscount = 0;
+			decimal netAmountVatIncluded = 0;
+			foreach (PurchaseOrderLineDataError orderLine in PurchaseOrderLines)
+			{
+				netAmount += orderLine.NetAmount;
+				netAmountWithDiscount += orderLine.NetAmountWithDiscount;
+				netAmountVatIncluded += orderLine.NetAmountVatIncluded;
+			}
+			NetAmount = netAmount;
+			NetAmountWithDiscount = netAmountWithDiscount;
+			NetAmountVatIncluded = netAmountVatIncluded;
 		}
 	}
 }

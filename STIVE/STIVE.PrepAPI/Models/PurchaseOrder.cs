@@ -9,6 +9,8 @@ namespace STIVE.PrepAPI.Models
 {
 	public class PurchaseOrder : ApiModelBase, IPurchaseOrder
 	{
+		public bool IsValidated { get => DocumentState == (int)IPurchaseOrder.PurchaseOrderState.Received; }
+
 		public string DocumentNumber { get; set; }
 		public DateTime DocumentDate { get; set; }
 		public DateTime DeliveryDate { get; set; }

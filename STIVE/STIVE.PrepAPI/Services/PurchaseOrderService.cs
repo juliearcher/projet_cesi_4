@@ -1,7 +1,10 @@
-﻿using STIVE.PrepAPI.Models;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Newtonsoft.Json;
+using STIVE.PrepAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,6 +52,17 @@ namespace STIVE.PrepAPI.Services
 			using (StiveHttpClient client = new StiveHttpClient())
 			{
 				await client.CustomDeleteAsync("purchaseOrders/" + id);
+			}
+		}
+
+		public async Task SetPurchaseOrderToReceived(long id)
+		{
+			using (StiveHttpClient client = new StiveHttpClient())
+			{
+				var patchDoc = new JsonPatchDocument<PurchaseOrder>().Replace(o => o.DocumentState, (int)IPurchaseOrder.PurchaseOrderState.Received);
+
+				var content = new StringContent(JsonConvert.SerializeObject(patchDoc), Encoding.UTF8, "application/json-patch+json");
+				await client.CustomPatchAsync("purchaseOrders/" + id, content);
 			}
 		}
 	}

@@ -12,10 +12,11 @@
 				<GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}"/>
 				<GridViewColumn Header="Description courte" DisplayMemberBinding="{Binding Caption}"/>
 				<GridViewColumn Header="Description" DisplayMemberBinding="{Binding ClearDescription}"/>
-				<GridViewColumn Header="Stock" DisplayMemberBinding="{Binding RealStock}"/>
+				<GridViewColumn Header="Stock réel" DisplayMemberBinding="{Binding RealStock}"/>
+				<GridViewColumn Header="Stock virtuel" DisplayMemberBinding="{Binding VirtualStock}"/>
 				<GridViewColumn Header="Prix de vente" DisplayMemberBinding="{Binding SalePrice}"/>
-        <GridViewColumn Header="Prix d'achat" DisplayMemberBinding="{Binding PurchasePrice}"/>
-        <GridViewColumn Header="TVA" DisplayMemberBinding="{Binding Vat}"/>
+				<GridViewColumn Header="Prix d'achat" DisplayMemberBinding="{Binding PurchasePrice}"/>
+				<GridViewColumn Header="TVA" DisplayMemberBinding="{Binding Vat}"/>
 			</GridView>
 		</ListView.View>
 	</ListView>
