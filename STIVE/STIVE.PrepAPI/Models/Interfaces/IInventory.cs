@@ -8,6 +8,11 @@ namespace STIVE.PrepAPI.Models
 {
 	public interface IInventory : IApiModelBase
 	{
+		public enum InventoryState
+		{
+			InProgress,
+			Validated
+		}
 		public DateTime DocumentDate { get; set; }
 		public string DocumentNumber { get; set; }
 		public int DocumentState { get; set; }

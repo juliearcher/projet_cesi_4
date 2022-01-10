@@ -30,6 +30,7 @@ namespace STIVE
 		{
 			IServiceCollection services = new ServiceCollection();
 
+			#region API Services
 			services.AddSingleton<ICustomerService, CustomerService>();
 			services.AddSingleton<IInventoryService, InventoryService>();
 			services.AddSingleton<IItemFamilyService, ItemFamilyService>();
@@ -38,7 +39,9 @@ namespace STIVE
 			services.AddSingleton<IPurchaseOrderService, PurchaseOrderService>();
 			services.AddSingleton<ISupplierService, SupplierService>();
 			services.AddSingleton<IApiServicesCollection, ApiServicesCollection>();
+			#endregion
 
+			#region Tab ViewModelFactories
 			services.AddScoped<IViewModelTabFactory<CustomerTabViewModel>, CustomerTabViewModelFactory>();
 			services.AddScoped<IViewModelTabFactory<InventoryTabViewModel>, InventoryTabViewModelFactory>();
 			services.AddScoped<IViewModelTabFactory<ItemTabViewModel>, ItemTabViewModelFactory>();
@@ -46,7 +49,9 @@ namespace STIVE
 			services.AddScoped<IViewModelTabFactory<OrderTabViewModel>, OrderTabViewModelFactory>();
 			services.AddScoped<IViewModelTabFactory<PurchaseOrderTabViewModel>, PurchaseOrderTabViewModelFactory>();
 			services.AddScoped<IViewModelTabFactory<SupplierTabViewModel>, SupplierTabViewModelFactory>();
+			#endregion
 
+			#region List ViewModelFactories
 			services.AddScoped<IViewModelListFactory<CustomerListViewModel>, CustomerListViewModelFactory>();
 			services.AddScoped<IViewModelListFactory<InventoryListViewModel>, InventoryListViewModelFactory>();
 			services.AddScoped<IViewModelListFactory<ItemListViewModel>, ItemListViewModelFactory>();
@@ -54,9 +59,14 @@ namespace STIVE
 			services.AddScoped<IViewModelListFactory<OrderListViewModel>, OrderListViewModelFactory>();
 			services.AddScoped<IViewModelListFactory<PurchaseOrderListViewModel>, PurchaseOrderListViewModelFactory>();
 			services.AddScoped<IViewModelListFactory<SupplierListViewModel>, SupplierListViewModelFactory>();
+			#endregion
 
+			#region Form ViewModelFactories
 			services.AddScoped<IViewModelFormFactory<CustomerFormViewModel>, CustomerFormViewModelFactory>();
 			services.AddScoped<IViewModelFormFactory<OrderFormViewModel>, OrderFormViewModelFactory>();
+			services.AddScoped<IViewModelFormFactory<PurchaseOrderFormViewModel>, PurchaseOrderFormViewModelFactory>();
+			services.AddScoped<IViewModelFormFactory<InventoryFormViewModel>, InventoryFormViewModelFactory>();
+			#endregion
 
 			services.AddScoped<IViewModelAbstractFactory, ViewModelAbstractFactory>();
 

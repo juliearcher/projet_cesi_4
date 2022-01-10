@@ -13,7 +13,14 @@
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		<controls:AddUpdateDeleteButtons Grid.Row="0" DataContext="{Binding InventoryListViewModel}"/>
+		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="auto"/>
+			</Grid.ColumnDefinitions>
+			<controls:AddUpdateDeleteButtons Grid.Column="0" DataContext="{Binding InventoryListViewModel}"/>
+			<Button Grid.Column="1"  Content="Valider" Command="{Binding InventoryListViewModel.SetInventoryToValidated}"/>
+		</Grid>
 		<controls:SearchBox Grid.Row="1" DataContext="{Binding InventoryListViewModel}"/>
 		<controls:InventoryList Grid.Row="2" DataContext="{Binding InventoryListViewModel}"/>
 	</Grid>

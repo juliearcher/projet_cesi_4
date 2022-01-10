@@ -13,7 +13,14 @@
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		<controls:AddUpdateDeleteButtons Grid.Row="0" DataContext="{Binding PurchaseOrderListViewModel}"/>
+		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="auto"/>
+			</Grid.ColumnDefinitions>
+			<controls:AddUpdateDeleteButtons Grid.Column="0" DataContext="{Binding PurchaseOrderListViewModel}"/>
+			<Button Grid.Column="1"  Content="Valider" Command="{Binding PurchaseOrderListViewModel.SetCommandToDelivered}"/>
+		</Grid>
 		<controls:SearchBox Grid.Row="1" DataContext="{Binding PurchaseOrderListViewModel}"/>
 		<controls:PurchaseOrderList Grid.Row="2" DataContext="{Binding PurchaseOrderListViewModel}"/>
 	</Grid>

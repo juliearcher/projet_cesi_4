@@ -35,5 +35,13 @@
 		<DataTemplate DataType="{x:Type viewmodels:OrderFormViewModel}">
 			<views:OrderFormWindowView/>
 		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:PurchaseOrderFormViewModel}">
+			<views:PurchaseOrderFormWindowView/>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:InventoryFormViewModel}">
+			<views:InventoryFormWindowView/>
+		</DataTemplate>
+		
+		
 	</Application.Resources>
 </Application>

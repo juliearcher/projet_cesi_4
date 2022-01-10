@@ -138,14 +138,15 @@ namespace API.Controllers
 				return NotFound();
 			if (purchaseOrder.DocumentState == (int)PurchaseOrder.PurchaseOrderState.Received)
 				return BadRequest(new { title = "Erreur", errors = "Commande déjà réceptionnée, impossible de modifier." });
-			RemoveItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
+			List<PurchaseOrderLine> purchaseOrderLines = (List<PurchaseOrderLine>)(_unitOfWork.PurchaseOrderLineRepository.FindBy(purchaseOrderLine => purchaseOrderLine.PurchaseOrderId == id).OrderBy(line => line.LineOrder))?.ToList();
+			RemoveItemStock(purchaseOrderLines, purchaseOrder.DocumentState);
 			var purchaseOrderUpdateDto = _mapper.Map<PurchaseOrderUpdateDto>(purchaseOrder);
 			patchDocument.ApplyTo(purchaseOrderUpdateDto, ModelState);
 			if (!TryValidateModel(purchaseOrderUpdateDto))
 				return ValidationProblem(ModelState);
 			_mapper.Map(purchaseOrderUpdateDto, purchaseOrder);
 			_unitOfWork.PurchaseOrderRepository.Update(purchaseOrder);
-			UpdateItemStock(purchaseOrder.PurchaseOrderLines, purchaseOrder.DocumentState);
+			UpdateItemStock(purchaseOrderLines, purchaseOrder.DocumentState);
 			try
 			{
 				_unitOfWork.SaveChanges();

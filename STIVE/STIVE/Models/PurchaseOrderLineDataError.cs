@@ -38,6 +38,8 @@ namespace STIVE.Models
 					AddError(nameof(DiscountRate), "...");
 				}*/
 				OnPropertyChanged(nameof(DiscountRate));
+				OnPropertyChanged(nameof(NetAmountWithDiscount));
+				OnPropertyChanged(nameof(NetAmountVatIncluded));
 			}
 		}
 
@@ -86,6 +88,9 @@ namespace STIVE.Models
 					AddError(nameof(PurchasePrice), "...");
 				}*/
 				OnPropertyChanged(nameof(PurchasePrice));
+				OnPropertyChanged(nameof(NetAmount));
+				OnPropertyChanged(nameof(NetAmountWithDiscount));
+				OnPropertyChanged(nameof(NetAmountVatIncluded));
 			}
 		}
 
@@ -134,7 +139,48 @@ namespace STIVE.Models
 					AddError(nameof(Quantity), "...");
 				}*/
 				OnPropertyChanged(nameof(Quantity));
+				OnPropertyChanged(nameof(NetAmount));
+				OnPropertyChanged(nameof(NetAmountWithDiscount));
+				OnPropertyChanged(nameof(NetAmountVatIncluded));
 			}
+		}
+
+		private Item _item;
+		public Item Item
+		{
+			get => _item;
+			set
+			{
+				_item = value;
+				if (_item! != null)
+				{
+					ClearDescription = _item.ClearDescription;
+					PurchasePrice = _item.PurchasePrice;
+					Vat = _item.Vat;
+					ItemId = value.Id;
+				}
+				/*ClearErrors(nameof(Item));
+				if (...)
+				{
+					AddError(nameof(Item), "...");
+				}*/
+				OnPropertyChanged(nameof(Item));
+			}
+		}
+
+		public decimal NetAmount
+		{
+			get => Quantity * PurchasePrice;
+		}
+
+		public decimal NetAmountWithDiscount
+		{
+			get => (Quantity * PurchasePrice) * (decimal)((100 - DiscountRate) / 100);
+		}
+
+		public decimal NetAmountVatIncluded
+		{
+			get => NetAmountWithDiscount + NetAmountWithDiscount * (decimal)(Vat / 100);
 		}
 
 		public int Id { get; set; }

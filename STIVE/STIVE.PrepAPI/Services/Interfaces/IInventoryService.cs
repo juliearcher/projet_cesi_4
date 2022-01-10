@@ -14,5 +14,6 @@ namespace STIVE.PrepAPI.Services
 		Task<Inventory> CreateInventory(Inventory inventory);
 		Task UpdateInventory(Inventory inventory);
 		Task DeleteInventory(long id);
+		Task SetInventoryToValidated(long id);
 	}
 }

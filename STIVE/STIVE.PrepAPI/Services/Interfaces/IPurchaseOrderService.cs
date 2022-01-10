@@ -14,5 +14,6 @@ namespace STIVE.PrepAPI.Services
 		Task<PurchaseOrder> CreatePurchaseOrder(PurchaseOrder purchaseOrder);
 		Task UpdatePurchaseOrder(PurchaseOrder purchaseOrder);
 		Task DeletePurchaseOrder(long id);
+		Task SetPurchaseOrderToReceived(long id);
 	}
 }
