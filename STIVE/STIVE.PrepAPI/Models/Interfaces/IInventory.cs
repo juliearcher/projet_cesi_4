@@ -14,7 +14,7 @@ namespace STIVE.PrepAPI.Models
 
 		public string Notes { get; set; }
 		public string NotesClear { get; set; }
-		public IEnumerable<InventoryLine> InventoryLines { get; set; }
+		public IEnumerable<IInventoryLine> InventoryLines { get; set; }
 
 	}
 }

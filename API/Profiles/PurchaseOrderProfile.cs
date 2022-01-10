@@ -14,7 +14,7 @@ namespace API.Profiles
 			CreateMap<PurchaseOrderCreateDto, PurchaseOrder>();
 			// PurchaseOrderUpdateDto to PurchaseOrder
 			// For PUT and PATCH
-			CreateMap<PurchaseOrderUpdateDto, PurchaseOrder>();
+			CreateMap<PurchaseOrderUpdateDto, PurchaseOrder>().ForMember(elem => elem.PurchaseOrderLines, opt => opt.Ignore());
 			// PurchaseOrder to PurchaseOrderUpdateDto
 			// For PATCH
 			CreateMap<PurchaseOrder, PurchaseOrderUpdateDto>();

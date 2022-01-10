@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="STIVE.Controls.OrderFormInfos"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
+             xmlns:local="clr-namespace:STIVE.Controls"
+             mc:Ignorable="d">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<Grid Grid.Column="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<DockPanel Grid.Row="0">
+				<Label Content="Numéro du document :" DockPanel.Dock="Left" />
+				<TextBox Text="{Binding NewElem.DocumentNumber, UpdateSourceTrigger=PropertyChanged}" />
+			</DockPanel>
+			<DockPanel Grid.Row="1">
+				<Label Content="Date du document :" DockPanel.Dock="Left" />
+				<DatePicker SelectedDate="{Binding NewElem.DocumentDate, Mode=TwoWay}" DockPanel.Dock="Right"/>
+			</DockPanel>
+			<DockPanel Grid.Row="2">
+				<Label Content="Date de livraison :" DockPanel.Dock="Left" />
+				<DatePicker SelectedDate="{Binding NewElem.DeliveryDate, Mode=TwoWay}" DockPanel.Dock="Right"/>
+			</DockPanel>
+			<DockPanel Grid.Row="3">
+				<Label Content="Statut :" DockPanel.Dock="Left" />
+				<ComboBox ItemsSource="{Binding OrderStates}" SelectedValue="{Binding NewElem.DocumentState, Mode=TwoWay}"
+							  DisplayMemberPath="Value" SelectedValuePath="Key" DockPanel.Dock="Right" IsEnabled="False" />
+			</DockPanel>
+		</Grid>
+
+		<Grid Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<DockPanel Grid.Row="0">
+				<Label Content="Client :" DockPanel.Dock="Left" />
+				<syncfusion:SfMultiColumnDropDownControl ItemsSource="{Binding CustomerList}" DisplayMember="Name" ValueMember="Id" SelectedValue="{Binding NewElem.CustomerId, Mode=TwoWay}"
+															 DockPanel.Dock="Right" AutoGenerateColumns="false" AllowAutoComplete="true" AllowIncrementalFiltering="true"
+															 >
+					<syncfusion:SfMultiColumnDropDownControl.Columns>
+						<syncfusion:GridTextColumn MappingName="Code" />
+						<syncfusion:GridTextColumn MappingName="Name" />
+						<syncfusion:GridTextColumn MappingName="InvoicingAddress_Address1" />
+					</syncfusion:SfMultiColumnDropDownControl.Columns>
+				</syncfusion:SfMultiColumnDropDownControl>
+			</DockPanel>
+		</Grid>
+	</Grid>
+</UserControl>

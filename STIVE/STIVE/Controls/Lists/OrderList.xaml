@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="STIVE.Controls.OrderList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:STIVE.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+	<ListView ItemsSource="{Binding ElementsList}" SelectedItem="{Binding SelectedItem}" Tag="{Binding}">
+		<ListView.View>
+			<GridView>
+				<GridViewColumn Header="Code du document" DisplayMemberBinding="{Binding DocumentNumber}"/>
+				<GridViewColumn Header="Date du document" DisplayMemberBinding="{Binding DocumentDate, StringFormat=\{0:dd/MM/yyyy\}}"/>
+				<GridViewColumn Header="Date de livraison" DisplayMemberBinding="{Binding DeliveryDate, StringFormat=\{0:dd/MM/yyyy\}}"/>
+				<GridViewColumn Header="Livrée" >
+					<GridViewColumn.CellTemplate>
+						<DataTemplate>
+							<CheckBox IsChecked="{Binding IsValidated, Mode=OneWay}" IsEnabled="False"/>
+						</DataTemplate>
+					</GridViewColumn.CellTemplate>
+				</GridViewColumn>
+				<GridViewColumn Header="Prenom du contact" DisplayMemberBinding="{Binding DeliveryContact_Name}"/>
+				<GridViewColumn Header="Nom du contact" DisplayMemberBinding="{Binding DeliveryContact_FirstName}"/>
+				<GridViewColumn Header="Email du contact" DisplayMemberBinding="{Binding DeliveryContact_Email}"/>
+				<GridViewColumn Header="Adresse de facturation" DisplayMemberBinding="{Binding InvoicingAddress_Address1}"/>
+				<GridViewColumn Header="Ville" DisplayMemberBinding="{Binding InvoicingAddress_City}"/>
+				<GridViewColumn Header="Code Postal" DisplayMemberBinding="{Binding InvoicingAddress_ZipCode}"/>
+			</GridView>
+		</ListView.View>
+
+		<!--ListView.ContextMenu>
+			<ContextMenu>
+				<MenuItem Header="Valider"/>
+			</ContextMenu>
+		</ListView.ContextMenu-->
+	</ListView>
+</UserControl>

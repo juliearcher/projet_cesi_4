@@ -6,7 +6,13 @@
              xmlns:local="clr-namespace:STIVE.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-		<TextBlock Text="InventoryList" />
-	</Grid>
+  <ListView Grid.Row="1" ItemsSource="{Binding ElementsList}" SelectedItem="{Binding SelectedItem}">
+		<ListView.View>
+			<GridView>
+				<GridViewColumn Header="Date du document " DisplayMemberBinding="{Binding DocumentDate}"/>
+				<GridViewColumn Header="Numéro du document" DisplayMemberBinding="{Binding DocumentNumber}"/>
+				<GridViewColumn Header="Etat du document" DisplayMemberBinding="{Binding DocumentState}"/>
+			</GridView>
+		</ListView.View>
+	</ListView>
 </UserControl>

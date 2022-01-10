@@ -1,6 +1,7 @@
 using API.Dtos;
 using API.Models;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace API.Profiles
 {
@@ -14,7 +15,7 @@ namespace API.Profiles
 			CreateMap<OrderCreateDto, Order>();
 			// OrderUpdateDto to Order
 			// For PUT and PATCH
-			CreateMap<OrderUpdateDto, Order>();
+			CreateMap<OrderUpdateDto, Order>().ForMember(elem => elem.OrderLines, opt => opt.Ignore());
 			// Order to OrderUpdateDto
 			// For PATCH
 			CreateMap<Order, OrderUpdateDto>();

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace STIVE.Controls
 {
 	/// <summary>
-	/// Logique d'interaction pour OrderList.xaml
+	/// Logique d'interaction pour OrderFormLinesDataGrid.xaml
 	/// </summary>
-	public partial class OrderList : UserControl
+	public partial class OrderFormLinesDataGrid : UserControl
 	{
-		public OrderList()
+		public OrderFormLinesDataGrid()
 		{
 			InitializeComponent();
 		}

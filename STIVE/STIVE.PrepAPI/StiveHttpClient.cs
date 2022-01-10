@@ -19,7 +19,7 @@ namespace STIVE.PrepAPI
 		{
 			HttpResponseMessage response = await GetAsync(uri);
 			string jsonResponse = await response.Content.ReadAsStringAsync();
-			if (response.StatusCode != System.Net.HttpStatusCode.Created)
+			if (response.StatusCode != System.Net.HttpStatusCode.OK)
 			{
 				var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonResponse);
 				var errors = result.GetValueOrDefault("errors");
@@ -47,7 +47,19 @@ namespace STIVE.PrepAPI
 		{
 			StringContent content = new StringContent(JsonConvert.SerializeObject(elem), Encoding.UTF8, "application/json");
 			HttpResponseMessage response = await PutAsync(uri, content);
-			if (response.StatusCode != System.Net.HttpStatusCode.Created)
+			if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
+			{
+				string jsonResponse = await response.Content.ReadAsStringAsync();
+				var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonResponse);
+				var errors = result.GetValueOrDefault("errors");
+				throw new ApiException(result.GetValueOrDefault("title")?.ToString(), CleanString(errors.ToString()));
+			}
+		}
+
+		public async Task CustomPatchAsync(string uri, StringContent content)
+		{
+			HttpResponseMessage response = await PatchAsync(uri, content);
+			if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
 			{
 				string jsonResponse = await response.Content.ReadAsStringAsync();
 				var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonResponse);
@@ -59,7 +71,7 @@ namespace STIVE.PrepAPI
 		public async Task CustomDeleteAsync(string uri)
 		{
 			HttpResponseMessage response = await DeleteAsync(uri);
-			if (response.StatusCode != System.Net.HttpStatusCode.Created)
+			if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
 			{
 				string jsonResponse = await response.Content.ReadAsStringAsync();
 				var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonResponse);

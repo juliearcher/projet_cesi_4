@@ -22,6 +22,6 @@ namespace STIVE.PrepAPI.Models
 		public float Vat { get; set; }
 
 		public System.Nullable<int> ItemFamilyId { get; set; }
-		public System.Nullable<int> SupplierId { get; set; }
+		public int SupplierId { get; set; }
 	}
 }

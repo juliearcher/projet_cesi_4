@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace STIVE.PrepAPI.Models
 {
 	public class Order : ApiModelBase, IOrder
 	{
+		public bool IsValidated { get => DocumentState == (int)IOrder.OrderState.Delivered; }
+
 		public string DocumentNumber { get; set; }
 		public DateTime DocumentDate { get; set; }
 		public DateTime DeliveryDate { get; set; }
@@ -49,6 +52,6 @@ namespace STIVE.PrepAPI.Models
 
 		public int CustomerId { get; set; }
 
-		public IEnumerable<OrderLine> OrderLines { get; set; }
+		public IEnumerable<IOrderLine> OrderLines { get; set; } = new ObservableCollection<OrderLine>();
 	}
 }

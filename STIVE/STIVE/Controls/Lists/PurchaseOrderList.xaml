@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="STIVE.Controls.PurchaseOrderList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:STIVE.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+  <ListView Grid.Row="1" ItemsSource="{Binding ElementsList}" SelectedItem="{Binding SelectedItem}">
+		<ListView.View>
+			<GridView>
+				<GridViewColumn Header="Code du document" DisplayMemberBinding="{Binding DocumentNumber}"/>
+				<GridViewColumn Header="Date du document" DisplayMemberBinding="{Binding DocumentDate}"/>
+				<GridViewColumn Header="Date de livraison" DisplayMemberBinding="{Binding DeliveryDate}"/>
+				<GridViewColumn Header="Etat du document" DisplayMemberBinding="{Binding DocumentState}"/>
+				<GridViewColumn Header="Taux de réduction" DisplayMemberBinding="{Binding DiscountRate}"/>
+        <GridViewColumn Header="TVA" DisplayMemberBinding="{Binding VatAmount}"/>
+        <GridViewColumn Header="Adresse de facturation" DisplayMemberBinding="{Binding InvoicingAddress_Address1}"/>
+        <GridViewColumn Header="Code de facturation" DisplayMemberBinding="{Binding InvoicingAddress_ZipCode}"/>
+			</GridView>
+		</ListView.View>
+	</ListView>
+</UserControl>

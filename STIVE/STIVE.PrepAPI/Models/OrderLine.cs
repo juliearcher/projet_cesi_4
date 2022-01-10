@@ -14,7 +14,7 @@ namespace STIVE.PrepAPI.Models
 		public string ClearDescription { get; set; }
 		public decimal SalePrice { get; set; }
 		public float Vat { get; set; }
-		public System.Nullable<int> ItemId { get; set; }
+		public int ItemId { get; set; }
 		public int Quantity { get; set; }
 	}
 }

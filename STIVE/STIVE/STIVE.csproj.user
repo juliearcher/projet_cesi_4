@@ -10,25 +10,31 @@
     <Compile Update="Controls\AddUpdateDeleteButtons.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Controls\CustomerList.xaml.cs">
+    <Compile Update="Controls\Lists\CustomerList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Controls\InventoryList.xaml.cs">
+    <Compile Update="Controls\Lists\InventoryList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Controls\ItemFamilyList.xaml.cs">
+    <Compile Update="Controls\Lists\ItemFamilyList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Controls\ItemList.xaml.cs">
+    <Compile Update="Controls\Lists\ItemList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Controls\NavigationBar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Controls\OrderList.xaml.cs">
+    <Compile Update="Controls\OrderForm\OrderFormLinesDataGrid.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Controls\PurchaseOrderList.xaml.cs">
+    <Compile Update="Controls\OrderForm\OrderFormInfos.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\Lists\OrderList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\Lists\PurchaseOrderList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Controls\SaveAndCloseButtons.xaml.cs">
@@ -37,10 +43,10 @@
     <Compile Update="Controls\SearchBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Controls\SupplierList.xaml.cs">
+    <Compile Update="Controls\Lists\SupplierList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\CustomerFormWindowView.xaml.cs">
+    <Compile Update="Views\Forms\CustomerFormWindowView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\CustomerTabView.xaml.cs">
@@ -53,6 +59,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ItemTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Forms\OrderFormWindowView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\OrderTabView.xaml.cs">
@@ -69,25 +78,31 @@
     <Page Update="Controls\AddUpdateDeleteButtons.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\CustomerList.xaml">
+    <Page Update="Controls\Lists\CustomerList.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\InventoryList.xaml">
+    <Page Update="Controls\Lists\InventoryList.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\ItemFamilyList.xaml">
+    <Page Update="Controls\Lists\ItemFamilyList.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\ItemList.xaml">
+    <Page Update="Controls\Lists\ItemList.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Controls\NavigationBar.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\OrderList.xaml">
+    <Page Update="Controls\OrderForm\OrderFormLinesDataGrid.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\PurchaseOrderList.xaml">
+    <Page Update="Controls\OrderForm\OrderFormInfos.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\Lists\OrderList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\Lists\PurchaseOrderList.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Controls\SaveAndCloseButtons.xaml">
@@ -96,13 +111,13 @@
     <Page Update="Controls\SearchBox.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\SupplierList.xaml">
+    <Page Update="Controls\Lists\SupplierList.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\CustomerFormWindowView.xaml">
+    <Page Update="Views\Forms\CustomerFormWindowView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CustomerTabView.xaml">
@@ -115,6 +130,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ItemTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Forms\OrderFormWindowView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\OrderTabView.xaml">

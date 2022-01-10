@@ -14,5 +14,6 @@ namespace STIVE.PrepAPI.Services
 		Task<Order> CreateOrder(Order order);
 		Task UpdateOrder(Order order);
 		Task DeleteOrder(long id);
+		Task SetOrderToDelivered(long id);
 	}
 }

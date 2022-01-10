@@ -23,12 +23,6 @@ namespace API.Dtos
 		public string NotesClear { get; set; }
 
 		[Required]
-		public float RealStock { get; set; }
-
-		[Required]
-		public float VirtualStock { get; set; }
-
-		[Required]
 		public decimal SalePrice { get; set; }
 
 		[Required]

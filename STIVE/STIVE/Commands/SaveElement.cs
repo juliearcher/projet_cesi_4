@@ -44,6 +44,7 @@ namespace STIVE.Commands
 					try
 					{
 						await _viewModel.SendToAPI();
+						_viewModel.ToDoAfterSave();
 					}
 					catch(ApiException e)
 					{

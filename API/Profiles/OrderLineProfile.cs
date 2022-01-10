@@ -1,6 +1,7 @@
 using API.Dtos;
 using API.Models;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace API.Profiles
 {
