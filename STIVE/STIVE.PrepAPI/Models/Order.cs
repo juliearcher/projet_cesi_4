@@ -9,6 +9,8 @@ namespace STIVE.PrepAPI.Models
 {
 	public class Order : ApiModelBase, IOrder
 	{
+		public bool IsValidated { get => DocumentState == (int)IOrder.OrderState.Delivered; }
+
 		public string DocumentNumber { get; set; }
 		public DateTime DocumentDate { get; set; }
 		public DateTime DeliveryDate { get; set; }

@@ -8,6 +8,11 @@ namespace STIVE.PrepAPI.Models
 {
 	public interface IPurchaseOrder : IApiModelBase
 	{
+		public enum PurchaseOrderState
+		{
+			NotReceived,
+			Received
+		}
 		public string DocumentNumber { get; set; }
 		public DateTime DocumentDate { get; set; }
 		public DateTime DeliveryDate { get; set; }

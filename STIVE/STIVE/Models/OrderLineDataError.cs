@@ -175,6 +175,7 @@ namespace STIVE.Models
 					ClearDescription = _item.ClearDescription;
 					SalePrice = _item.SalePrice;
 					Vat = _item.Vat;
+					ItemId = value.Id;
 				}
 				/*ClearErrors(nameof(Item));
 				if (...)

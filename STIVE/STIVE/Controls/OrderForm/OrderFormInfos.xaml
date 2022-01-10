@@ -36,7 +36,7 @@
 			<DockPanel Grid.Row="3">
 				<Label Content="Statut :" DockPanel.Dock="Left" />
 				<ComboBox ItemsSource="{Binding OrderStates}" SelectedValue="{Binding NewElem.DocumentState, Mode=TwoWay}"
-							  DisplayMemberPath="Value" SelectedValuePath="Key" DockPanel.Dock="Right" />
+							  DisplayMemberPath="Value" SelectedValuePath="Key" DockPanel.Dock="Right" IsEnabled="False" />
 			</DockPanel>
 		</Grid>
 

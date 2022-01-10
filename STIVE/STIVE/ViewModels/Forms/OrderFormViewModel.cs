@@ -45,6 +45,20 @@ namespace STIVE.ViewModels
 			}
 		}
 
+		private bool _inProgress;
+		public bool InProgress
+		{
+			get
+			{
+				return _inProgress;
+			}
+			set
+			{
+				_inProgress = value;
+				OnPropertyChanged(nameof(InProgress));
+			}
+		}
+
 		public Dictionary<int, string> OrderStates { get; private set; }
 
 		public OrderFormViewModel(IApiServicesCollection apiServicesCollection, ListViewModelBase listViewModel, ApiModelBase elem, IMapper mapper)
@@ -52,6 +66,7 @@ namespace STIVE.ViewModels
 			_apiServicesCollection = apiServicesCollection;
 			ListViewModelBase = listViewModel;
 			_mapper = mapper;
+			_inProgress = true;
 			OrderStates = new Dictionary<int, string>();
 			OrderStates.Add((int)IOrder.OrderState.NotDelivered, "En cours de rédaction");
 			OrderStates.Add((int)IOrder.OrderState.Delivered, "Livré");
@@ -82,6 +97,7 @@ namespace STIVE.ViewModels
 					result.OrderLines = null;
 					NewElem = new OrderDataError(task.Result);
 					(NewElem as OrderDataError).OrderLines = _mapper.Map<ObservableCollection<OrderLineDataError>>(orderLines);
+					InProgress = task.Result.DocumentState == (int)IOrder.OrderState.NotDelivered;
 					LoadLists();
 				}
 			});
@@ -149,13 +165,92 @@ namespace STIVE.ViewModels
 
 		public override bool IsValid()
 		{
-			return false;
+			OrderDataError elem = NewElem as OrderDataError;
+			ICustomer customer = CustomerList.Where(c => c.Id == ((OrderDataError)NewElem).CustomerId).FirstOrDefault();
+			((OrderDataError)NewElem).CreatedUser = "admin";
+			((OrderDataError)NewElem).ModifiedUser = "admin";
+			((OrderDataError)NewElem).DeliveryAddress_City = customer.DeliveryAddress_City;
+			((OrderDataError)NewElem).InvoicingAddress_City = customer.InvoicingAddress_City;
+			((OrderDataError)NewElem).DeliveryAddress_ZipCode = customer.DeliveryAddress_ZipCode;
+			((OrderDataError)NewElem).InvoicingAddress_ZipCode = customer.InvoicingAddress_ZipCode;
+			((OrderDataError)NewElem).DeliveryAddress_Address1 = customer.DeliveryAddress_Address1;
+			((OrderDataError)NewElem).InvoicingAddress_Address1 = customer.InvoicingAddress_Address1;
+			((OrderDataError)NewElem).DeliveryContact_Email = customer.DeliveryContact_Email;
+			foreach (OrderLineDataError line in (NewElem as OrderDataError).OrderLines)
+			{
+				line.CreatedUser = "admin";
+				line.ModifiedUser = "admin";
+			}
+			return (true);
 		}
 
-		public override Task SendToAPI()
+		public override async Task SendToAPI()
 		{
-			//
-			return null;
+			if (_mode == EditMode.CREATE)
+			{
+				Order newOrder = await _apiServicesCollection.OrderService.CreateOrder(_mapper.Map<Order>(NewElem));
+				_oldElem = newOrder;
+				_mode = EditMode.UPDATE;
+			}
+			else
+			{
+				await _apiServicesCollection.OrderService.UpdateOrder(_mapper.Map<Order>(NewElem));
+			}
+		}
+
+		public override async void ToDoAfterSave()
+		{
+			List<PurchaseOrder> purchaseOrders = new List<PurchaseOrder>();
+			foreach (OrderLineDataError line in (NewElem as OrderDataError).OrderLines)
+			{
+				Item item = line.Item;
+				if (item != null && (item.RealStock - line.Quantity < 0 || item.VirtualStock - line.Quantity < 0))
+				{
+					var result = MessageBox.Show("Voulez vous faire une commande fournisseur pour l'article " +
+						item.Caption + " ?\nStock réel = " + item.RealStock + "\nStock virtuel = " + item.VirtualStock,
+						"Attention", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+					if (result == MessageBoxResult.Yes)
+					{
+						var purchaseOrder = purchaseOrders.Where(po => po.SupplierId == item.SupplierId).FirstOrDefault();
+						if (purchaseOrder == null)
+						{
+							DateTime today = DateTime.Today;
+							purchaseOrder = new PurchaseOrder
+							{
+								DocumentNumber = "CF" + today.ToString("yyddMMHHmmss"),
+								DocumentDate = today,
+								DeliveryDate = today.AddDays(7),
+								DocumentState = (int)IPurchaseOrder.PurchaseOrderState.NotReceived,
+								SupplierId = item.SupplierId,
+								PurchaseOrderLines = new List<PurchaseOrderLine>(),
+								InvoicingAddress_Address1 = "To complete",
+								InvoicingAddress_City = "To complete",
+								InvoicingAddress_ZipCode = "0000000",
+								CreatedUser = "admin",
+								ModifiedUser = "admin"
+							};
+							purchaseOrders.Add(purchaseOrder);
+						}
+						int Real = (int)item.RealStock - line.Quantity;
+						int Virtual = (int)item.VirtualStock - line.Quantity;
+
+						((List<PurchaseOrderLine>)purchaseOrder.PurchaseOrderLines).Add(new PurchaseOrderLine
+						{
+							LineOrder = purchaseOrder.PurchaseOrderLines.Count(),
+							Description = item.Description,
+							ClearDescription = item.ClearDescription,
+							PurchasePrice = item.PurchasePrice,
+							Vat = item.Vat,
+							ItemId = item.Id,
+							Quantity = Real < Virtual ? -Real : -Virtual,
+							CreatedUser = "admin",
+							ModifiedUser = "admin"
+						});
+					}
+				}
+			}
+			foreach (PurchaseOrder po in purchaseOrders)
+				await _apiServicesCollection.PurchaseOrderService.CreatePurchaseOrder(po);
 		}
 	}
 }

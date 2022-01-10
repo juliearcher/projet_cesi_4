@@ -17,20 +17,20 @@
 			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
 
-		<controls:SaveAndCloseButtons Grid.Row="0"/>
+		<controls:SaveAndCloseButtons Grid.Row="0" />
 
-		<controls:OrderFormInfos Grid.Row="1"/>
+		<controls:OrderFormInfos Grid.Row="1" IsEnabled="{Binding InProgress}" />
 
-		<Grid Grid.Row="2" >
+		<Grid Grid.Row="2"  IsEnabled="{Binding InProgress}" >
 				<Grid.RowDefinitions>
 					<RowDefinition Height="auto"/>
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 
-				<Button Grid.Row="0" Command="{Binding AddNewLine}" Content="Ajouter" />
+				<Button Grid.Row="0" Command="{Binding AddNewLine}" Content="Ajouter"  IsEnabled="{Binding InProgress}"/>
 				<controls:OrderFormLinesDataGrid Grid.Row="1"/>
 			</Grid>
-			
+
 		<Grid Grid.Row="3">
 			<StackPanel Orientation="Horizontal">
 				<DockPanel>

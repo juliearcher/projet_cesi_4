@@ -56,6 +56,18 @@ namespace STIVE.PrepAPI
 			}
 		}
 
+		public async Task CustomPatchAsync(string uri, StringContent content)
+		{
+			HttpResponseMessage response = await PatchAsync(uri, content);
+			if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
+			{
+				string jsonResponse = await response.Content.ReadAsStringAsync();
+				var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonResponse);
+				var errors = result.GetValueOrDefault("errors");
+				throw new ApiException(result.GetValueOrDefault("title")?.ToString(), CleanString(errors.ToString()));
+			}
+		}
+
 		public async Task CustomDeleteAsync(string uri)
 		{
 			HttpResponseMessage response = await DeleteAsync(uri);

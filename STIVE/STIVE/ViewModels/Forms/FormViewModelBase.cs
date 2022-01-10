@@ -45,6 +45,6 @@ namespace STIVE.ViewModels
 
 		public void CloseWindow(Window window) => window.Close();
 
-		public void ToDoAfterSave() { }
+		public virtual void ToDoAfterSave() { }
 	}
 }
