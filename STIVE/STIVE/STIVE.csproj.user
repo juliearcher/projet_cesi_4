@@ -67,6 +67,9 @@
     <Compile Update="Views\ItemFamilyTabView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Forms\ItemFormWindowView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ItemTabView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -148,6 +151,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ItemFamilyTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Forms\ItemFormWindowView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ItemTabView.xaml">

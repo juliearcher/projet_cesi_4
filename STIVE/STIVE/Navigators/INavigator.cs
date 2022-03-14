@@ -24,7 +24,8 @@ namespace STIVE.Navigators
 		CustomerForm,
 		OrderForm,
 		PurchaseOrderForm,
-		InventoryForm
+		InventoryForm,
+		ItemForm
 	};
 
 	public interface INavigator
