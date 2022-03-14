@@ -49,6 +49,8 @@ namespace STIVE.Commands
 				window.Content = _viewModel.ViewModelFactory.CreateFormViewModel(_viewModel, FormViewType.PurchaseOrderForm, _mode == Mode.CREATE ? null : _viewModel.SelectedItem);
 			else if (_viewModel is InventoryListViewModel)
 				window.Content = _viewModel.ViewModelFactory.CreateFormViewModel(_viewModel, FormViewType.InventoryForm, _mode == Mode.CREATE ? null : _viewModel.SelectedItem);
+			else if (_viewModel is ItemListViewModel)
+				window.Content = _viewModel.ViewModelFactory.CreateFormViewModel(_viewModel, FormViewType.ItemForm, _mode == Mode.CREATE ? null : _viewModel.SelectedItem);
 			else
 				return;
 			window.Show();

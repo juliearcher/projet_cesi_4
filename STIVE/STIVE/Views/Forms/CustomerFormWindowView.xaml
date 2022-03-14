@@ -52,7 +52,7 @@
 
 			<DockPanel Grid.Row="4">
 				<Label Content="Notes : " DockPanel.Dock="Left" />
-				<TextBox MinLines="3" Text="{Binding NewElem.Notes, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+				<TextBox MinLines="3" Text="{Binding NewElem.NotesClear, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
 			</DockPanel>
 
 			<DockPanel Grid.Row="5">

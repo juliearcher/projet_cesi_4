@@ -24,9 +24,10 @@ namespace STIVE.ViewModels.Factories
 		private IViewModelFormFactory<OrderFormViewModel> _orderFormViewModel;
 		private IViewModelFormFactory<PurchaseOrderFormViewModel> _purchaseOrderFormViewModel;
 		private IViewModelFormFactory<InventoryFormViewModel> _inventoryFormViewModel;
+		private IViewModelFormFactory<ItemFormViewModel> _itemFormViewModel;
 
 
-		public ViewModelAbstractFactory(IViewModelTabFactory<CustomerTabViewModel> customerTabViewModel, IViewModelTabFactory<SupplierTabViewModel> supplierTabViewModel, IViewModelFormFactory<CustomerFormViewModel> customerFormViewModel, IViewModelTabFactory<InventoryTabViewModel> inventoryTabViewModel, IViewModelTabFactory<ItemFamilyTabViewModel> itemFamilyTabViewModel, IViewModelTabFactory<OrderTabViewModel> orderTabViewModel, IViewModelTabFactory<PurchaseOrderTabViewModel> purchaseOrderTabViewModel, IViewModelTabFactory<ItemTabViewModel> itemTabViewModel, IViewModelFormFactory<OrderFormViewModel> orderFormViewModel, IViewModelFormFactory<PurchaseOrderFormViewModel> purchaseOrderFormViewModel, IViewModelFormFactory<InventoryFormViewModel> inventoryFormViewModel)
+		public ViewModelAbstractFactory(IViewModelTabFactory<CustomerTabViewModel> customerTabViewModel, IViewModelTabFactory<SupplierTabViewModel> supplierTabViewModel, IViewModelFormFactory<CustomerFormViewModel> customerFormViewModel, IViewModelTabFactory<InventoryTabViewModel> inventoryTabViewModel, IViewModelTabFactory<ItemFamilyTabViewModel> itemFamilyTabViewModel, IViewModelTabFactory<OrderTabViewModel> orderTabViewModel, IViewModelTabFactory<PurchaseOrderTabViewModel> purchaseOrderTabViewModel, IViewModelTabFactory<ItemTabViewModel> itemTabViewModel, IViewModelFormFactory<OrderFormViewModel> orderFormViewModel, IViewModelFormFactory<PurchaseOrderFormViewModel> purchaseOrderFormViewModel, IViewModelFormFactory<InventoryFormViewModel> inventoryFormViewModel, IViewModelFormFactory<ItemFormViewModel> itemFormViewModel)
 		{
 			_customerTabViewModel = customerTabViewModel;
 			_supplierTabViewModel = supplierTabViewModel;
@@ -39,6 +40,7 @@ namespace STIVE.ViewModels.Factories
 			_orderFormViewModel = orderFormViewModel;
 			_purchaseOrderFormViewModel = purchaseOrderFormViewModel;
 			_inventoryFormViewModel = inventoryFormViewModel;
+			_itemFormViewModel = itemFormViewModel;
 		}
 
 		public FormViewModelBase CreateFormViewModel(ListViewModelBase viewmodel, FormViewType viewType, ApiModelBase elem)
@@ -53,6 +55,8 @@ namespace STIVE.ViewModels.Factories
 					return _purchaseOrderFormViewModel.CreateViewModel(viewmodel, elem);
 				case FormViewType.InventoryForm:
 					return _inventoryFormViewModel.CreateViewModel(viewmodel, elem);
+				case FormViewType.ItemForm:
+					return _itemFormViewModel.CreateViewModel(viewmodel, elem);
 				default:
 					throw new ArgumentException("Invalid ViewType : .", "viewType");
 			}
