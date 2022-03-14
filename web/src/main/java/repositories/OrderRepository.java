@@ -7,8 +7,11 @@ import beans.Order;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 import utils.SetCertificatePath;
 
 public class OrderRepository {
@@ -34,5 +37,17 @@ public class OrderRepository {
             System.out.println(ex.getMessage());
         }
 		return orders;
+	}
+	
+	public Boolean createOrder(Order order) {
+		try {
+			Response response = client.target(baseUri)
+                    .request(MediaType.APPLICATION_JSON)
+                    .post(Entity.entity(order, MediaType.APPLICATION_JSON), Response.class);
+			return response.getStatus() == Status.CREATED.getStatusCode();
+        } catch (WebApplicationException ex) {
+            System.out.println(ex.getMessage());
+        }
+		return false;
 	}
 }
