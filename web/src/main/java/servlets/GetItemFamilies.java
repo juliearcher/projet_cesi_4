@@ -5,14 +5,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import repositories.CustomerRepository;
 import repositories.ItemFamilyRepository;
 import repositories.ItemRepository;
+import repositories.OrderRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import beans.Customer;
 import beans.Item;
 import beans.ItemFamily;
+import beans.Order;
 
 /**
  * Servlet implementation class GetItemFamilies
@@ -21,6 +25,8 @@ public class GetItemFamilies extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final ItemFamilyRepository itemFamilyRepository;
 	private final ItemRepository itemRepository;
+	private final OrderRepository orderRepository;
+	private final CustomerRepository customerRepository;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -29,6 +35,8 @@ public class GetItemFamilies extends HttpServlet {
         super();
         itemFamilyRepository = new ItemFamilyRepository();
         itemRepository = new ItemRepository();
+        orderRepository = new OrderRepository();
+        customerRepository = new CustomerRepository();
         // TODO Auto-generated constructor stub
     }
 
@@ -40,6 +48,10 @@ public class GetItemFamilies extends HttpServlet {
 		request.setAttribute("itemFamilies", itemFamilies);
 		ArrayList<Item> items = itemRepository.getAllItems();
 		request.setAttribute("items", items);
+		ArrayList<Order> orders = orderRepository.getAllOrders();
+		request.setAttribute("orders", orders);
+		ArrayList<Customer> customers = customerRepository.getAllCustomers();
+		request.setAttribute("customers", customers);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 	}
 

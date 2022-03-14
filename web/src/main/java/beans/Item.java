@@ -24,7 +24,7 @@ public class Item {
 	
 	public Item(int id, Timestamp sysCreatedDate, Timestamp sysModifiedDate, String code, String caption,
 			String clearDescription, String notes, float realStock, BigDecimal salePrice, int itemFamilyId,
-			String itemFamily, int supplierId, String supplier) {
+			int supplierId) {
 		this.id = id;
 		this.sysCreatedDate = sysCreatedDate;
 		this.sysModifiedDate = sysModifiedDate;
@@ -35,9 +35,7 @@ public class Item {
 		this.realStock = realStock;
 		this.salePrice = salePrice;
 		this.itemFamilyId = itemFamilyId;
-		ItemFamily = itemFamily;
 		this.supplierId = supplierId;
-		Supplier = supplier;
 	}
 	
 	public int getId() {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="5.0">
- <servlet>
+  <servlet>
     <description></description>
     <display-name>GetItemFamilies</display-name>
     <servlet-name>GetItemFamilies</servlet-name>
@@ -9,7 +9,6 @@
   <servlet-mapping>
     <servlet-name>GetItemFamilies</servlet-name>
     <url-pattern>/getItemFamilies</url-pattern>
-    <url-pattern></url-pattern>
   </servlet-mapping>
   <display-name>STIVE</display-name>
   <welcome-file-list>
@@ -20,4 +19,34 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Home</display-name>
+    <servlet-name>Home</servlet-name>
+    <servlet-class>servlets.Home</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Home</servlet-name>
+    <url-pattern></url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Catalog</display-name>
+    <servlet-name>Catalog</servlet-name>
+    <servlet-class>servlets.Catalog</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Catalog</servlet-name>
+    <url-pattern>/catalog</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Cart</display-name>
+    <servlet-name>Cart</servlet-name>
+    <servlet-class>servlets.Cart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Cart</servlet-name>
+    <url-pattern>/cart</url-pattern>
+  </servlet-mapping>
 </web-app>
