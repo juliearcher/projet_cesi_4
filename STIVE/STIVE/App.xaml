@@ -47,6 +47,9 @@
 		<DataTemplate DataType="{x:Type viewmodels:ItemFamilyFormViewModel}">
 			<views:ItemFamilyFormWindowView/>
 		</DataTemplate>
+		<DataTemplate DataType="{x:Type viewmodels:SupplierFormViewModel}">
+			<views:SupplierFormWindowView/>
+		</DataTemplate>
 		
 		
 	</Application.Resources>

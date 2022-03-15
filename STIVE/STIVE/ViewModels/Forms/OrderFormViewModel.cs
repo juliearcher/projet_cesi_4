@@ -200,6 +200,7 @@ namespace STIVE.ViewModels
 		public override async void ToDoAfterSave()
 		{
 			List<PurchaseOrder> purchaseOrders = new List<PurchaseOrder>();
+			int count = 0;
 			foreach (OrderLineDataError line in (NewElem as OrderDataError).OrderLines)
 			{
 				Item item = line.Item;
@@ -216,7 +217,7 @@ namespace STIVE.ViewModels
 							DateTime today = DateTime.Today;
 							purchaseOrder = new PurchaseOrder
 							{
-								DocumentNumber = "CF" + today.ToString("yyddMMHHmmss"),
+								DocumentNumber = "CF" + today.ToString("yyddMMHHmmss") + count++,
 								DocumentDate = today,
 								DeliveryDate = today.AddDays(7),
 								DocumentState = (int)IPurchaseOrder.PurchaseOrderState.NotReceived,

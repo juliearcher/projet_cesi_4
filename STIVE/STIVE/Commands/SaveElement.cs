@@ -49,6 +49,7 @@ namespace STIVE.Commands
 					catch(ApiException e)
 					{
 						MessageBox.Show(e.Message, e.Title);
+						return;
 					}
 					_viewModel.ListViewModelBase.LoadList();
 				}
