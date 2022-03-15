@@ -20,6 +20,7 @@ namespace STIVE.Profiles
 			CreateMap<PurchaseOrder, PurchaseOrderDataError>().ReverseMap();
 			CreateMap<PurchaseOrderLine, PurchaseOrderLineDataError>().ReverseMap();
 			CreateMap<Item, ItemDataError>().ReverseMap();
+			CreateMap<ItemFamily, ItemFamilyDataError>().ReverseMap();
 			CreateMap<Inventory, InventoryDataError>().ReverseMap();
 			CreateMap<InventoryLine, InventoryLineDataError>().ReverseMap();
 		}

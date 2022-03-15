@@ -21,15 +21,9 @@
 				<RowDefinition Height="auto"/>
 				<RowDefinition Height="auto"/>
 				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			<TextBlock Grid.Row="0" Text="Formulaire nouveau client" FontWeight="Bold" FontSize="18"
+			<TextBlock Grid.Row="0" Text="Formulaire nouvel article" FontWeight="Bold" FontSize="18"
                    HorizontalAlignment="Center" VerticalAlignment="Center" />
 			<controls:SaveAndCloseButtons Grid.Row="0"/>
 			<DockPanel Grid.Row="1">
