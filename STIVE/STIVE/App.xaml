@@ -5,55 +5,61 @@
 			 xmlns:viewmodels="clr-namespace:STIVE.ViewModels"
 			 xmlns:views="clr-namespace:STIVE.Views">
 	<Application.Resources>
-		<!-- Link Views to their ViewModel -->
-		<DataTemplate DataType="{x:Type viewmodels:CustomerTabViewModel}">
-			<views:CustomerTabView/>
-		</DataTemplate>
-		<DataTemplate DataType="{x:Type viewmodels:InventoryTabViewModel}">
-			<views:InventoryTabView/>
-		</DataTemplate>
-		<DataTemplate DataType="{x:Type viewmodels:ItemTabViewModel}">
-			<views:ItemTabView/>
-		</DataTemplate>
-		<DataTemplate DataType="{x:Type viewmodels:ItemFamilyTabViewModel}">
-			<views:ItemFamilyTabView/>
-		</DataTemplate>
-		<DataTemplate DataType="{x:Type viewmodels:OrderTabViewModel}">
-			<views:OrderTabView/>
-		</DataTemplate>
-		<DataTemplate DataType="{x:Type viewmodels:PurchaseOrderTabViewModel}">
-			<views:PurchaseOrderTabView/>
-		</DataTemplate>
-		<DataTemplate DataType="{x:Type viewmodels:SupplierTabViewModel}">
-			<views:SupplierTabView/>
-		</DataTemplate>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Styles/Common.xaml" />
+				<ResourceDictionary Source="Styles/NavigationBar.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+
+			<!-- Link Views to their ViewModel -->
+			<DataTemplate DataType="{x:Type viewmodels:CustomerTabViewModel}">
+				<views:CustomerTabView/>
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:InventoryTabViewModel}">
+				<views:InventoryTabView/>
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:ItemTabViewModel}">
+				<views:ItemTabView/>
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:ItemFamilyTabViewModel}">
+				<views:ItemFamilyTabView/>
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:OrderTabViewModel}">
+				<views:OrderTabView/>
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:PurchaseOrderTabViewModel}">
+				<views:PurchaseOrderTabView/>
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:SupplierTabViewModel}">
+				<views:SupplierTabView/>
+			</DataTemplate>
 		
 		
-		<DataTemplate DataType="{x:Type viewmodels:CustomerFormViewModel}">
-			<views:CustomerFormWindowView/>
-		</DataTemplate>
-		<DataTemplate DataType="{x:Type viewmodels:OrderFormViewModel}">
-			<views:OrderFormWindowView/>
-		</DataTemplate>
-		<DataTemplate DataType="{x:Type viewmodels:PurchaseOrderFormViewModel}">
-			<views:PurchaseOrderFormWindowView/>
-		</DataTemplate>
-		<DataTemplate DataType="{x:Type viewmodels:InventoryFormViewModel}">
-			<views:InventoryFormWindowView/>
-		</DataTemplate>
-		<DataTemplate DataType="{x:Type viewmodels:ItemFormViewModel}">
-			<views:ItemFormWindowView/>
-		</DataTemplate>
-		<DataTemplate DataType="{x:Type viewmodels:ItemFamilyFormViewModel}">
-			<views:ItemFamilyFormWindowView/>
-		</DataTemplate>
-		<DataTemplate DataType="{x:Type viewmodels:SupplierFormViewModel}">
-			<views:SupplierFormWindowView/>
-		</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:CustomerFormViewModel}">
+				<views:CustomerFormWindowView/>
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:OrderFormViewModel}">
+				<views:OrderFormWindowView/>
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:PurchaseOrderFormViewModel}">
+				<views:PurchaseOrderFormWindowView/>
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:InventoryFormViewModel}">
+				<views:InventoryFormWindowView/>
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:ItemFormViewModel}">
+				<views:ItemFormWindowView/>
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:ItemFamilyFormViewModel}">
+				<views:ItemFamilyFormWindowView/>
+			</DataTemplate>
+			<DataTemplate DataType="{x:Type viewmodels:SupplierFormViewModel}">
+				<views:SupplierFormWindowView/>
+			</DataTemplate>
 
-		<DataTemplate DataType="{x:Type viewmodels:AdminPasswordWindowViewModel}">
-			<views:AdminPasswordPrompt/>
-		</DataTemplate>
-
+			<DataTemplate DataType="{x:Type viewmodels:AdminPasswordWindowViewModel}">
+				<views:AdminPasswordPrompt/>
+			</DataTemplate>
+		</ResourceDictionary>
 	</Application.Resources>
 </Application>

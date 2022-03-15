@@ -159,6 +159,12 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Styles\Common.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\NavigationBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\AdminPasswordPrompt.xaml">
       <SubType>Designer</SubType>
     </Page>
