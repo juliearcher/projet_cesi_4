@@ -20,12 +20,9 @@
 						</DataTemplate>
 					</GridViewColumn.CellTemplate>
 				</GridViewColumn>
-				<GridViewColumn Header="Prenom du contact" DisplayMemberBinding="{Binding DeliveryContact_Name}"/>
-				<GridViewColumn Header="Nom du contact" DisplayMemberBinding="{Binding DeliveryContact_FirstName}"/>
-				<GridViewColumn Header="Email du contact" DisplayMemberBinding="{Binding DeliveryContact_Email}"/>
-				<GridViewColumn Header="Adresse de facturation" DisplayMemberBinding="{Binding InvoicingAddress_Address1}"/>
-				<GridViewColumn Header="Ville" DisplayMemberBinding="{Binding InvoicingAddress_City}"/>
-				<GridViewColumn Header="Code Postal" DisplayMemberBinding="{Binding InvoicingAddress_ZipCode}"/>
+				<GridViewColumn Header="Adresse (facturation)" DisplayMemberBinding="{Binding InvoicingAddress_Address1}"/>
+				<GridViewColumn Header="Ville (facturation)" DisplayMemberBinding="{Binding InvoicingAddress_City}"/>
+				<GridViewColumn Header="Code Postal (facturation)" DisplayMemberBinding="{Binding InvoicingAddress_ZipCode}"/>
 			</GridView>
 		</ListView.View>
 
