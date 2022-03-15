@@ -23,7 +23,7 @@
 			<td><c:out value="${ item.clearDescription }" /></td>
 			<td><c:out value="${ item.salePrice }" /></td>
 			<td><input type="text" name="quantity${ item.id }" /></td>
-			<td><button type="submit" name="itemId" value="${ item.id }">Add item to cart</button></td>
+			<td><button type="submit" name="itemId" value="${ item.id }">Ajouter</button></td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -43,7 +43,6 @@ $(document).ready(function(){
 $('form#form1').submit(function (event) {
 	var form = $('#form1');
 	form.preventDefault();
-	event.preventDefault();
     $.ajax({
     	type: form.attr('method'),
     	url: form.attr('action'),

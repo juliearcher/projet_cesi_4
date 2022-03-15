@@ -44,6 +44,10 @@ public class OrderRepository {
 			Response response = client.target(baseUri)
                     .request(MediaType.APPLICATION_JSON)
                     .post(Entity.entity(order, MediaType.APPLICATION_JSON), Response.class);
+			if (response.getStatus() != Status.CREATED.getStatusCode()) {
+			    System.out.println( response.getStatus() );
+			    System.out.println( response.readEntity( String.class ) );
+			}
 			return response.getStatus() == Status.CREATED.getStatusCode();
         } catch (WebApplicationException ex) {
             System.out.println(ex.getMessage());

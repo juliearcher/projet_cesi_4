@@ -48,21 +48,29 @@ public class AddItemToCart extends HttpServlet {
 		}
 		String itemId = request.getParameter("itemId");
 		String quantity = request.getParameter("quantity"+itemId);
-		if (itemId == null || quantity == null)
+		if (itemId == null || quantity == null || quantity.length() == 0) {
+			response.sendRedirect(request.getContextPath() + "/cart");
 			return;
+		}
 		Item item = itemRepository.getItemById(itemId);
-		if (item == null)
+		if (item == null) {
+			response.sendRedirect(request.getContextPath() + "/cart");
 			return;
+		}
 		OrderLine line = null;
 		for (OrderLine orderLine : order.orderLines) {
 			if (orderLine.getItemId() == item.getId())
 				line = orderLine;
 		}
 		if (line == null)
-			order.orderLines.add(new OrderLine(order.orderLines.size() + 1, 0, item.getClearDescription(),
+			order.orderLines.add(new OrderLine(order.orderLines.size() + 1, 0, item.getCaption(), item.getClearDescription(),
 				item.getSalePrice(), item.getVat(), item.getId(), Integer.parseInt(quantity)));
 		else
-			line.setQuantity(line.getQuantity() + 1);
+			line.setQuantity(Integer.parseInt(quantity));
+		order.setAmountVatExcluded(order.getAmountVatExcludedWithDiscount() + item.getSalePrice() * (double)Integer.parseInt(quantity));
+		order.setAmountVatExcludedWithDiscount(order.getAmountVatExcluded());
+		order.setVatAmount(order.getVatAmount() + (item.getSalePrice() * (double)Integer.parseInt(quantity))*0.2);
+		order.setAmountVatIncluded(order.getAmountVatExcluded() + order.getVatAmount());
 		session.setAttribute("order", order);
 		response.sendRedirect(request.getContextPath() + "/cart");
 	}
