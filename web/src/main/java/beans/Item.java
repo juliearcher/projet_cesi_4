@@ -13,6 +13,7 @@ public class Item {
 	private String notes;
 	private float realStock;
 	private BigDecimal salePrice;
+	private float vat;
 	private int itemFamilyId;
 	private String ItemFamily;
 	private int supplierId;
@@ -23,7 +24,7 @@ public class Item {
 	}
 	
 	public Item(int id, Timestamp sysCreatedDate, Timestamp sysModifiedDate, String code, String caption,
-			String clearDescription, String notes, float realStock, BigDecimal salePrice, int itemFamilyId,
+			String clearDescription, String notes, float realStock, BigDecimal salePrice, float vat, int itemFamilyId,
 			int supplierId) {
 		this.id = id;
 		this.sysCreatedDate = sysCreatedDate;
@@ -34,6 +35,7 @@ public class Item {
 		this.notes = notes;
 		this.realStock = realStock;
 		this.salePrice = salePrice;
+		this.vat = vat;
 		this.itemFamilyId = itemFamilyId;
 		this.supplierId = supplierId;
 	}
@@ -115,5 +117,13 @@ public class Item {
 	}
 	public void setSupplier(String supplier) {
 		Supplier = supplier;
+	}
+
+	public float getVat() {
+		return vat;
+	}
+
+	public void setVat(float vat) {
+		this.vat = vat;
 	}
 }

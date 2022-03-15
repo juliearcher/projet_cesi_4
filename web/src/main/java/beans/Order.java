@@ -14,6 +14,8 @@ public class Order {
 	private int id;
 	private Timestamp sysCreatedDate;
 	private Timestamp sysModifiedDate;
+	private String createdUser = "web client";
+	private String modifiedUser = "web client";
 
 	private String documentNumber;
 	private Timestamp documentDate;

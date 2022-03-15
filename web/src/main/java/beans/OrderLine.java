@@ -8,6 +8,8 @@ public class OrderLine {
 	private int id;
 	private Timestamp sysCreatedDate;
 	private Timestamp sysModifiedDate;
+	private String createdUser = "web client";
+	private String modifiedUser = "web client";
 	
 	private int orderId;
 	private int lineOrder;
@@ -40,7 +42,17 @@ public class OrderLine {
 		this.itemId = itemId;
 		this.quantity = quantity;
 	}
-
+	
+	public OrderLine(int lineOrder, float discountRate, String clearDescription, BigDecimal salePrice, float vat, int itemId, int quantity) {
+		this.lineOrder = lineOrder;
+		this.discountRate = discountRate;
+		this.clearDescription = clearDescription;
+		this.salePrice = salePrice;
+		this.vat = vat;
+		this.itemId = itemId;
+		this.quantity = quantity;
+	}
+	
 	public int getId() {
 		return id;
 	}

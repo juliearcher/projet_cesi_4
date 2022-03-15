@@ -35,4 +35,17 @@ public class ItemRepository {
         }
 		return items;
 	}
+	
+	public Item getItemById(String id) {
+		Item item = null;
+		try {
+			item = client.target(baseUri).path(id)
+                    .request(MediaType.APPLICATION_JSON)
+                    .get(new GenericType<Item>() {
+            });
+        } catch (WebApplicationException ex) {
+            System.out.println(ex.getMessage());
+        }
+		return item;
+	}
 }

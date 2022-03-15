@@ -5,7 +5,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
+
+import beans.Order;
 
 /**
  * Servlet implementation class Cart
@@ -25,6 +29,11 @@ public class Cart extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		Order order = (Order) session.getAttribute("order");
+		if (order != null) {
+			System.out.println("hoho : " + order.orderLines.size() + "lignes");
+		}
 		this.getServletContext().getRequestDispatcher("/WEB-INF/cart.jsp").forward(request, response);
 	}
 

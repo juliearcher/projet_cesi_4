@@ -55,4 +55,14 @@
     <servlet-name>Cart</servlet-name>
     <url-pattern>/cart</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddItemToCart</display-name>
+    <servlet-name>AddItemToCart</servlet-name>
+    <servlet-class>servlets.AddItemToCart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddItemToCart</servlet-name>
+    <url-pattern>/addItemToCart</url-pattern>
+  </servlet-mapping>
 </web-app>
