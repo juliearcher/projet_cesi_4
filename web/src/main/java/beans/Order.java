@@ -1,7 +1,5 @@
 package beans;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Order {
@@ -12,21 +10,21 @@ public class Order {
 	}
 
 	private int id;
-	private Timestamp sysCreatedDate;
-	private Timestamp sysModifiedDate;
+	private String sysCreatedDate;
+	private String sysModifiedDate;
 	private String createdUser = "web client";
 	private String modifiedUser = "web client";
 
 	private String documentNumber;
-	private Timestamp documentDate;
-	private Timestamp deliveryDate;
+	private String documentDate;
+	private String deliveryDate;
 	private int documentState;
 	private float discountRate;
 
-	private BigDecimal amountVatExcluded;
-	private BigDecimal amountVatExcludedWithDiscount;
-	private BigDecimal amountVatIncluded;
-	private BigDecimal vatAmount;
+	private double amountVatExcluded = 0;
+	private double amountVatExcludedWithDiscount = 0;
+	private double amountVatIncluded = 0;
+	private double vatAmount = 0;
 
 	private String notesClear;
 
@@ -59,10 +57,10 @@ public class Order {
 		
 	}
 
-	public Order(int id, Timestamp sysCreatedDate, Timestamp sysModifiedDate, String documentNumber,
-			Timestamp documentDate, Timestamp deliveryDate, int documentState, float discountRate,
-			BigDecimal amountVatExcluded, BigDecimal amountVatExcludedWithDiscount, BigDecimal amountVatIncluded,
-			BigDecimal vatAmount, String notesClear, String invoicingAddress_Address1, String invoicingAddress_City,
+	public Order(int id, String sysCreatedDate, String sysModifiedDate, String documentNumber,
+			String documentDate, String deliveryDate, int documentState, float discountRate,
+			double amountVatExcluded, double amountVatExcludedWithDiscount, double amountVatIncluded,
+			double vatAmount, String notesClear, String invoicingAddress_Address1, String invoicingAddress_City,
 			String invoicingAddress_ZipCode, String invoicingContact_Civility, String invoicingContact_Name,
 			String invoicingContact_FirstName, String invoicingContact_Email, String invoicingContact_Phone,
 			String invoicingContact_CellPhone, String deliveryAddress_Address1, String deliveryAddress_City,
@@ -112,19 +110,19 @@ public class Order {
 		this.id = id;
 	}
 
-	public Timestamp getSysCreatedDate() {
+	public String getSysCreatedDate() {
 		return sysCreatedDate;
 	}
 
-	public void setSysCreatedDate(Timestamp sysCreatedDate) {
+	public void setSysCreatedDate(String sysCreatedDate) {
 		this.sysCreatedDate = sysCreatedDate;
 	}
 
-	public Timestamp getSysModifiedDate() {
+	public String getSysModifiedDate() {
 		return sysModifiedDate;
 	}
 
-	public void setSysModifiedDate(Timestamp sysModifiedDate) {
+	public void setSysModifiedDate(String sysModifiedDate) {
 		this.sysModifiedDate = sysModifiedDate;
 	}
 
@@ -136,19 +134,19 @@ public class Order {
 		this.documentNumber = documentNumber;
 	}
 
-	public Timestamp getDocumentDate() {
+	public String getDocumentDate() {
 		return documentDate;
 	}
 
-	public void setDocumentDate(Timestamp documentDate) {
+	public void setDocumentDate(String documentDate) {
 		this.documentDate = documentDate;
 	}
 
-	public Timestamp getDeliveryDate() {
+	public String getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setDeliveryDate(Timestamp deliveryDate) {
+	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
@@ -168,35 +166,35 @@ public class Order {
 		this.discountRate = discountRate;
 	}
 
-	public BigDecimal getAmountVatExcluded() {
+	public double getAmountVatExcluded() {
 		return amountVatExcluded;
 	}
 
-	public void setAmountVatExcluded(BigDecimal amountVatExcluded) {
+	public void setAmountVatExcluded(double amountVatExcluded) {
 		this.amountVatExcluded = amountVatExcluded;
 	}
 
-	public BigDecimal getAmountVatExcludedWithDiscount() {
+	public double getAmountVatExcludedWithDiscount() {
 		return amountVatExcludedWithDiscount;
 	}
 
-	public void setAmountVatExcludedWithDiscount(BigDecimal amountVatExcludedWithDiscount) {
+	public void setAmountVatExcludedWithDiscount(double amountVatExcludedWithDiscount) {
 		this.amountVatExcludedWithDiscount = amountVatExcludedWithDiscount;
 	}
 
-	public BigDecimal getAmountVatIncluded() {
+	public double getAmountVatIncluded() {
 		return amountVatIncluded;
 	}
 
-	public void setAmountVatIncluded(BigDecimal amountVatIncluded) {
+	public void setAmountVatIncluded(double amountVatIncluded) {
 		this.amountVatIncluded = amountVatIncluded;
 	}
 
-	public BigDecimal getVatAmount() {
+	public double getVatAmount() {
 		return vatAmount;
 	}
 
-	public void setVatAmount(BigDecimal vatAmount) {
+	public void setVatAmount(double vatAmount) {
 		this.vatAmount = vatAmount;
 	}
 
@@ -374,5 +372,13 @@ public class Order {
 
 	public void setOrderLines(ArrayList<OrderLine> orderLines) {
 		this.orderLines = orderLines;
+	}
+
+	public String getCreatedUser() {
+		return createdUser;
+	}
+
+	public String getModifiedUser() {
+		return modifiedUser;
 	}
 }

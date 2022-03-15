@@ -1,6 +1,5 @@
 package beans;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class Item {
@@ -12,7 +11,7 @@ public class Item {
 	private String clearDescription;
 	private String notes;
 	private float realStock;
-	private BigDecimal salePrice;
+	private double salePrice;
 	private float vat;
 	private int itemFamilyId;
 	private String ItemFamily;
@@ -24,7 +23,7 @@ public class Item {
 	}
 	
 	public Item(int id, Timestamp sysCreatedDate, Timestamp sysModifiedDate, String code, String caption,
-			String clearDescription, String notes, float realStock, BigDecimal salePrice, float vat, int itemFamilyId,
+			String clearDescription, String notes, float realStock, double salePrice, float vat, int itemFamilyId,
 			int supplierId) {
 		this.id = id;
 		this.sysCreatedDate = sysCreatedDate;
@@ -88,10 +87,10 @@ public class Item {
 	public void setRealStock(float realStock) {
 		this.realStock = realStock;
 	}
-	public BigDecimal getSalePrice() {
+	public double getSalePrice() {
 		return salePrice;
 	}
-	public void setSalePrice(BigDecimal salePrice) {
+	public void setSalePrice(double salePrice) {
 		this.salePrice = salePrice;
 	}
 	public int getItemFamilyId() {

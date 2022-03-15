@@ -1,6 +1,5 @@
 package beans;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class OrderLine {
@@ -14,9 +13,10 @@ public class OrderLine {
 	private int orderId;
 	private int lineOrder;
 	private float discountRate;
+	private String caption;
 	private String clearDescription;
 	
-	private BigDecimal salePrice;
+	private double salePrice;
 	private float vat;
 
 	private int itemId;
@@ -29,7 +29,7 @@ public class OrderLine {
 	}
 
 	public OrderLine(int id, Timestamp sysCreatedDate, Timestamp sysModifiedDate, int orderId, int lineOrder,
-			float discountRate, String clearDescription, BigDecimal salePrice, float vat, int itemId, int quantity) {
+			float discountRate, String clearDescription, double salePrice, float vat, int itemId, int quantity) {
 		this.id = id;
 		this.sysCreatedDate = sysCreatedDate;
 		this.sysModifiedDate = sysModifiedDate;
@@ -43,9 +43,10 @@ public class OrderLine {
 		this.quantity = quantity;
 	}
 	
-	public OrderLine(int lineOrder, float discountRate, String clearDescription, BigDecimal salePrice, float vat, int itemId, int quantity) {
+	public OrderLine(int lineOrder, float discountRate, String caption, String clearDescription, double salePrice, float vat, int itemId, int quantity) {
 		this.lineOrder = lineOrder;
 		this.discountRate = discountRate;
+		this.caption = caption;
 		this.clearDescription = clearDescription;
 		this.salePrice = salePrice;
 		this.vat = vat;
@@ -109,11 +110,11 @@ public class OrderLine {
 		this.clearDescription = clearDescription;
 	}
 
-	public BigDecimal getSalePrice() {
+	public double getSalePrice() {
 		return salePrice;
 	}
 
-	public void setSalePrice(BigDecimal salePrice) {
+	public void setSalePrice(double salePrice) {
 		this.salePrice = salePrice;
 	}
 
@@ -147,6 +148,22 @@ public class OrderLine {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getCaption() {
+		return caption;
+	}
+
+	public void setCaption(String caption) {
+		this.caption = caption;
+	}
+
+	public String getCreatedUser() {
+		return createdUser;
+	}
+
+	public String getModifiedUser() {
+		return modifiedUser;
 	}
 	
 }

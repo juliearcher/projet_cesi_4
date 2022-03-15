@@ -35,4 +35,15 @@ public class CustomerRepository {
         }
 		return customers;
 	}
+	
+	public Customer getWebCustomer() {
+		ArrayList<Customer> customers = getAllCustomers();
+		Customer customer = null;
+		
+		for (Customer elem : customers) {
+			if (customer == null || elem.getName().contains("site web"))
+				customer = elem;
+		}
+		return customer;
+	}
 }
