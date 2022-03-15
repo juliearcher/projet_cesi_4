@@ -21,15 +21,9 @@
 				<RowDefinition Height="auto"/>
 				<RowDefinition Height="auto"/>
 				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			<TextBlock Grid.Row="0" Text="Formulaire nouveau client" FontWeight="Bold" FontSize="18"
+			<TextBlock Grid.Row="0" Text="Formulaire nouvel article" FontWeight="Bold" FontSize="18"
                    HorizontalAlignment="Center" VerticalAlignment="Center" />
 			<controls:SaveAndCloseButtons Grid.Row="0"/>
 			<DockPanel Grid.Row="1">
@@ -53,7 +47,7 @@
 			</DockPanel>
 			<DockPanel Grid.Row="5">
 				<Label Content="Famille :" DockPanel.Dock="Left" />
-				<syncfusion:SfMultiColumnDropDownControl ItemsSource="{Binding ItemFamilyList}" DisplayMember="Code" ValueMember="Id" SelectedValue="{Binding NewElem.ItemFamilyId, Mode=TwoWay}"
+				<syncfusion:SfMultiColumnDropDownControl ItemsSource="{Binding ItemFamilyList}" DisplayMember="Designation" ValueMember="Id" SelectedValue="{Binding NewElem.ItemFamilyId, Mode=TwoWay}"
 															 DockPanel.Dock="Right" AutoGenerateColumns="false" AllowAutoComplete="true" AllowIncrementalFiltering="true"
 															 >
 					<syncfusion:SfMultiColumnDropDownControl.Columns>
@@ -64,28 +58,28 @@
 			</DockPanel>
 			<DockPanel Grid.Row="6">
 				<Label Content="Fournisseur :" DockPanel.Dock="Left" />
-				<syncfusion:SfMultiColumnDropDownControl ItemsSource="{Binding SupplierList}" DisplayMember="Code" ValueMember="Id" SelectedValue="{Binding NewElem.SupplierId, Mode=TwoWay}"
+				<syncfusion:SfMultiColumnDropDownControl ItemsSource="{Binding SupplierList}" DisplayMember="Name" ValueMember="Id" SelectedValue="{Binding NewElem.SupplierId, Mode=TwoWay}"
 															 DockPanel.Dock="Right" AutoGenerateColumns="false" AllowAutoComplete="true" AllowIncrementalFiltering="true"
 															 >
 					<syncfusion:SfMultiColumnDropDownControl.Columns>
 						<syncfusion:GridTextColumn MappingName="Code" />
 						<syncfusion:GridTextColumn MappingName="Name" />
+						<syncfusion:GridTextColumn MappingName="Notes" />
 					</syncfusion:SfMultiColumnDropDownControl.Columns>
 				</syncfusion:SfMultiColumnDropDownControl>
 			</DockPanel>
 			<DockPanel Grid.Row="7">
 				<Label Content="Prix de vente : " DockPanel.Dock="Left" />
-				<TextBox  Text="{Binding NewElem.SalePrice, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+				<TextBox  Text="{Binding NewElem.SalePrice, UpdateSourceTrigger=LostFocus}" DockPanel.Dock="Right" />
 			</DockPanel>
 			<DockPanel Grid.Row="8">
 				<Label Content="Prix d'achat : " DockPanel.Dock="Left" />
-				<TextBox  Text="{Binding NewElem.PurchasePrice, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" />
+				<TextBox  Text="{Binding NewElem.PurchasePrice, UpdateSourceTrigger=LostFocus}" DockPanel.Dock="Right" />
 			</DockPanel>
 			<DockPanel Grid.Row="9">
 				<Label Content="TVA : " DockPanel.Dock="Left" />
-				<TextBox  Text="{Binding NewElem.Vat, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"  />
+				<TextBox  Text="{Binding NewElem.Vat, UpdateSourceTrigger=LostFocus}" DockPanel.Dock="Right"  />
 			</DockPanel>
-
 		</Grid>
 	</ScrollViewer>
 </UserControl>

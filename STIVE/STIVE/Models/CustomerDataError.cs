@@ -41,7 +41,7 @@ namespace STIVE.Models
 			{
 				_name = value;
 				ClearErrors(nameof(Name));
-				if (_name == null || _code?.Trim().Length == 0)
+				if (_name == null || _name?.Trim().Length == 0)
 				{
 					AddError(nameof(Name), "Champ obligatoire");
 				}
@@ -112,7 +112,7 @@ namespace STIVE.Models
 				if (_invoicingAddress_Address1 == null || _invoicingAddress_Address1?.Trim().Length == 0)
 				{
 					AddError(nameof(InvoicingAddress_Address1), "Champ obligatoire");
-				} else if (useRegex(_invoicingAddress_Address1, false) == false) {
+				} else if (useRegex(_invoicingAddress_Address1, true) == false) {
 					AddError(nameof(InvoicingAddress_Address1), "Ce champ ne peux pas contenir de nombre");
 				}
 				OnPropertyChanged(nameof(InvoicingAddress_Address1));
@@ -156,7 +156,7 @@ namespace STIVE.Models
 				if (InvoicingAddress_ZipCode == null || InvoicingAddress_ZipCode?.Trim().Length == 0)
 				{
 					AddError(nameof(InvoicingAddress_ZipCode), "Champ obligatoire");
-				} //else if () { }
+				}
 				OnPropertyChanged(nameof(InvoicingAddress_ZipCode));
 			}
 		}
@@ -448,11 +448,11 @@ namespace STIVE.Models
 
 		public static bool useRegex(String input, bool digits)
 		{
-			string pattern = "[a-zA-Z]+\\s+";
-			string pattern2 = "[a-zA-Z]+\\s+[0-9]+";
+			string pattern = "^[a-zA-Z\\s]+";
+			string pattern2 = "^[a-zA-Z0-9\\s]+";
 			Match m;
 
-			if (input == null)
+			if (input == null || input.Length == 0)
 				return true;
 
 			if (digits == true)

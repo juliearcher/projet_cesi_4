@@ -7,6 +7,9 @@
 		xmlns:controls="clr-namespace:STIVE.Controls"
         mc:Ignorable="d"
         Title="STIVE" Height="450" Width="800">
+	<Window.InputBindings>
+		<KeyBinding Gesture="Alt+Shift+A" Command="{Binding ChangeAdminStatus}"/>
+	</Window.InputBindings>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />

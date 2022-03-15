@@ -49,11 +49,14 @@ namespace STIVE.Commands
 					catch(ApiException e)
 					{
 						MessageBox.Show(e.Message, e.Title);
+						return;
 					}
 					_viewModel.ListViewModelBase.LoadList();
 				}
 				if (parameter is Window && _closeWindow)
 					_viewModel.CloseWindow((Window)parameter);
+				else
+					MessageBox.Show("Sauvegardé");
 			}
 			catch (Exception e)
 			{

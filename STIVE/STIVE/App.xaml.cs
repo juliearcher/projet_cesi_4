@@ -67,6 +67,8 @@ namespace STIVE
 			services.AddScoped<IViewModelFormFactory<PurchaseOrderFormViewModel>, PurchaseOrderFormViewModelFactory>();
 			services.AddScoped<IViewModelFormFactory<InventoryFormViewModel>, InventoryFormViewModelFactory>();
 			services.AddScoped<IViewModelFormFactory<ItemFormViewModel>, ItemFormViewModelFactory>();
+			services.AddScoped<IViewModelFormFactory<ItemFamilyFormViewModel>, ItemFamilyFormViewModelFactory>();
+			services.AddScoped<IViewModelFormFactory<SupplierFormViewModel>, SupplierFormViewModelFactory>();
 			#endregion
 
 			services.AddScoped<IViewModelAbstractFactory, ViewModelAbstractFactory>();

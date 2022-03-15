@@ -83,7 +83,6 @@ namespace API.Dtos
 		public string DeliveryContact_Name { get; set; }
 		[MaxLength(256)]
 		public string DeliveryContact_FirstName { get; set; }
-		[Required]
 		[MaxLength(256)]
 		public string DeliveryContact_Email { get; set; }
 		[MaxLength(16)]

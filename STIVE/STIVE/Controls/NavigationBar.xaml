@@ -9,39 +9,37 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 	
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="auto"/>
-		</Grid.RowDefinitions>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
+	<Grid  Background="{StaticResource SecondaryBrush}">
+		<Grid.Resources>
+			<Style TargetType="RadioButton" BasedOn="{StaticResource NavButton}"/>
+		</Grid.Resources>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
 
-			<RadioButton Grid.Column="0" Content="Clients"
+		<RadioButton Grid.Column="0" Content="Clients"
 						 Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.CustomerTab}"/>
-			<RadioButton Grid.Column="1" Content="Commandes client"
+		<RadioButton Grid.Column="1" Content="Commandes client"
 						  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.OrderTab}"/>
 
-			<RadioButton Grid.Column="3" Content="Articles"
+		<RadioButton Grid.Column="3" Content="Articles"
 						 Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.ItemTab}"/>
-			<RadioButton Grid.Column="4" Content="Familles Article"
+		<RadioButton Grid.Column="4" Content="Familles Article"
 						 Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.ItemFamilyTab}"/>
-			<RadioButton Grid.Column="5" Content="Inventaires"
+		<RadioButton Grid.Column="5" Content="Inventaires"
 						 Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.InventoryTab}"/>
 
-			<RadioButton Grid.Column="7" Content="Fournisseurs"
+		<RadioButton Grid.Column="7" Content="Fournisseurs"
 						 Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.SupplierTab}"/>
-			<RadioButton Grid.Column="8" Content="Commandes fournisseur"
+		<RadioButton Grid.Column="8" Content="Commandes fournisseur"
 						 Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.PurchaseOrderTab}"/>
-		</Grid>
 	</Grid>
 </UserControl>
