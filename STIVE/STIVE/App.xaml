@@ -50,7 +50,10 @@
 		<DataTemplate DataType="{x:Type viewmodels:SupplierFormViewModel}">
 			<views:SupplierFormWindowView/>
 		</DataTemplate>
-		
-		
+
+		<DataTemplate DataType="{x:Type viewmodels:AdminPasswordWindowViewModel}">
+			<views:AdminPasswordPrompt/>
+		</DataTemplate>
+
 	</Application.Resources>
 </Application>
