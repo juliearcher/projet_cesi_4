@@ -7,8 +7,7 @@
 <table class="table table-striped table-sm">
 	<thead>
 	   <tr>
-	     <th scope="col">Code</th>
-	     <th scope="col">Libellé</th>
+	     <th scope="col">Libelle</th>
 	     <th scope="col">Description</th>
 	     <th scope="col">Prix de vente</th>
 	     <th></th>
@@ -18,12 +17,11 @@
 	<tbody id="itemListBody">
 		<c:forEach items="${ items }" var="item">
 			<tr>
-			<td><c:out value="${ item.code }" /></td>
-			<td><c:out value="${ item.caption }" /></td>
+			<td class="name"><c:out value="${ item.caption }" /></td>
 			<td><c:out value="${ item.clearDescription }" /></td>
-			<td><c:out value="${ item.salePrice }" /></td>
-			<td><input type="text" name="quantity${ item.id }" /></td>
-			<td><button type="submit" name="itemId" value="${ item.id }">Ajouter</button></td>
+			<td><c:out value="${ item.salePrice }" />&#8364</td>
+			<td><input class="quantity" type="number" name="quantity${ item.id }" /></td>
+			<td><button type="submit" name="itemId" value="${ item.id }"><img class="cart-img" src="https://img.myloview.fr/images/shopping-cart-icon-symbol-simple-shape-web-store-button-flat-online-shop-sign-vector-illustration-image-isolated-on-white-background-700-188862304.jpg" alt="cart"></button></td>
 			</tr>
 		</c:forEach>
 	</tbody>
