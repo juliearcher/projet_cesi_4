@@ -46,15 +46,25 @@ public class AddItemToCart extends HttpServlet {
 		if (order == null) {
 			order = new Order();
 		}
-		String itemID = request.getParameter("itemId");
-		String quantity = request.getParameter("quantity");
-		
-		Item item = itemRepository.getItemById(itemID);
-		if (item == null || quantity == null)
+		String itemId = request.getParameter("itemId");
+		String quantity = request.getParameter("quantity"+itemId);
+		if (itemId == null || quantity == null)
 			return;
-		order.orderLines.add(new OrderLine(order.orderLines.size() + 1, 0, item.getClearDescription(),
+		Item item = itemRepository.getItemById(itemId);
+		if (item == null)
+			return;
+		OrderLine line = null;
+		for (OrderLine orderLine : order.orderLines) {
+			if (orderLine.getItemId() == item.getId())
+				line = orderLine;
+		}
+		if (line == null)
+			order.orderLines.add(new OrderLine(order.orderLines.size() + 1, 0, item.getClearDescription(),
 				item.getSalePrice(), item.getVat(), item.getId(), Integer.parseInt(quantity)));
+		else
+			line.setQuantity(line.getQuantity() + 1);
 		session.setAttribute("order", order);
+		response.sendRedirect(request.getContextPath() + "/cart");
 	}
 
 }
