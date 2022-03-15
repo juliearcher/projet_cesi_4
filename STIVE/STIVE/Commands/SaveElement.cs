@@ -54,6 +54,8 @@ namespace STIVE.Commands
 				}
 				if (parameter is Window && _closeWindow)
 					_viewModel.CloseWindow((Window)parameter);
+				else
+					MessageBox.Show("Sauvegardé");
 			}
 			catch (Exception e)
 			{

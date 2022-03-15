@@ -25,6 +25,22 @@ namespace STIVE.Models
 			}
 		}
 
+		private string _caption;
+		public string Caption
+		{
+			get => _caption;
+			set
+			{
+				_caption = value;
+				/*ClearErrors(nameof(Caption));
+				if (...)
+				{
+					AddError(nameof(Caption), "...");
+				}*/
+				OnPropertyChanged(nameof(Caption));
+			}
+		}
+
 		private string _description;
 		public string Description
 		{
@@ -114,6 +130,7 @@ namespace STIVE.Models
 				_item = value;
 				if (_item! != null)
 				{
+					Caption = _item.Caption;
 					ClearDescription = _item.ClearDescription;
 					ItemId = value.Id;
 					OldStock = value.RealStock;
