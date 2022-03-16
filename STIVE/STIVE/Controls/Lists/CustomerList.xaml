@@ -14,6 +14,9 @@
 				<GridViewColumn Header="Nom (facturation)" DisplayMemberBinding="{Binding InvoicingContact_Name}"/>
 				<GridViewColumn Header="Prénom (facturation)" DisplayMemberBinding="{Binding InvoicingContact_FirstName}"/>
 				<GridViewColumn Header="E-mail (facturation)" DisplayMemberBinding="{Binding InvoicingContact_Email}"/>
+				<GridViewColumn Header="Adresse (facturation)" DisplayMemberBinding="{Binding InvoicingAddress_Address1}"/>
+				<GridViewColumn Header="Ville (facturation)" DisplayMemberBinding="{Binding InvoicingAddress_City}"/>
+				<GridViewColumn Header="Code Postal (facturation)" DisplayMemberBinding="{Binding InvoicingAddress_ZipCode}"/>
 			</GridView>
 		</ListView.View>
 	</ListView>
