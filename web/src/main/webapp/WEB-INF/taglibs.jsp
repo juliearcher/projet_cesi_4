@@ -7,6 +7,45 @@
 	<meta charset="UTF-8">
 	<title>Site STIVE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		.article-container{
+			display: flex;
+			justify-content: space-between;
+			width :100%;
+			padding:10px;
+			align-items: center;
+		}
+		.article-item{
+			display: flex;
+			align-items: center;
+		}
+		.name-description{
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			width: 75%;
+		}
+		.name{
+			font-weight: bold;
+			font-size: 16px;
+			text-decoration: underline;
+		}
+		.price{
+			min-width: 40px;
+			text-align: center;
+
+		}
+		.quantity{
+			width: 50px;
+		}
+		.cart-img{
+			width: 20px;
+			height: auto;
+		}
+		.button{
+			border: none
+		}
+	</style>
 </head>
 
 <%@ include file="navigationBar.jsp" %>
